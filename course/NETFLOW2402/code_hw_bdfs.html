@@ -1,0 +1,151 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>coding assignment 2: BFS&amp;DFS</title>
+	<base href="http://ilin.iim.ncku.edu.tw/course/NETFLOW2202/" target="content" />
+	<link href="../../ilin/ilin1.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1049.0" style="background-color: rgb(217, 217, 243); background-image: url(&quot;../../gif/blbk1.gif&quot;); cursor: auto;">
+<div align="left">
+<table align="center" border="0" width="560">
+	<tbody>
+		<tr>
+			<th>
+			<table border="0" width="100%">
+				<tbody>
+					<tr>
+						<td width="100">&nbsp;</td>
+						<td>
+						<table align="center" border="1" width="166">
+							<tbody>
+								<tr align="center" bgcolor="#ffc0cb" valign="center">
+									<th align="center" nowrap="nowrap" valign="center">
+									<p><font size="+1">2nd coding assignment</font><br />
+									<font color="#FF0000">Due 03/20&nbsp;(Mon) 14:00</font></p>
+									</th>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+						<td width="100">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr /></th>
+		</tr>
+		<tr>
+			<td align="center">
+			<table align="center" border="0" width="100%">
+				<tbody>
+					<tr>
+						<td rowspan="9" valign="top">
+						<p>You are asked to write a program that can</p>
+
+						<ul>
+							<li>read a network file (with a format similar to <a href="https://www.dropbox.com/s/0xiv4i3nt0k7yky/test1.sp?dl=0">test1.sp</a> )</li>
+							<li>ask the user to input a source node (s) and a sink node (t)</li>
+							<li>print out all the reachable nodes from s by the BFS labeling order, and the distance label associated with each reachable node from s</li>
+							<li>print out all the paths and their lengths from s to t, based on the idea of DFS; mark a shortest path with &quot;*&quot;.</li>
+						</ul>
+
+						<p>Screen Input: <font color="#0000FF"><strong>network filename</strong></font> (e.g. <a href="https://www.dropbox.com/s/0xiv4i3nt0k7yky/test1.sp?dl=0">test1.sp</a>), <font color="#0000FF"><strong>s</strong></font> (source node), <font color="#0000FF"><strong>t</strong></font> (sink node)<br />
+						Screen Output: (1) all the reachable nodes and their distance labels from s by the BFS labeling order (2) all the paths from s to t</p>
+
+						<p>example: suppose your code is named bdfs1, then when you execute bdfs1, you should see:</p>
+
+						<blockquote>
+						<p><strong><font color="#FF0000">Please input network filename: </font></strong>(then you input, say, test1.sp)<br />
+						<font color="#FF0000"><strong>Please input a source node:</strong></font> (then you input, say, 2)<br />
+						<font color="#FF0000"><strong>Please input a sink node:</strong></font> (then you input, say, 6)</p>
+						</blockquote>
+
+						<p>then you should see the output like</p>
+
+						<blockquote>
+						<p><strong><font color="#FF0000">BFS: 2[0] 3[1] 4[1] 5[2] 6[2]<br />
+						2-&gt;6: 4paths<br />
+						*[2]: 2-4-6<br />
+						[3]: 2-3-4-6<br />
+						[4]: 2-3-5-4-6<br />
+						[3]: 2-3-5-6</font></strong></p>
+						</blockquote>
+
+						<p>The first line printouts the indices of the reachable nodes from s in BFS ordering with [ ] storing its associated distance label. In this example, we know the minimum # arcs from node 2 to node 6 is 2. Note that the BFS ordering is not unique, since it depends on the ordering of the arc adjacency list.<br />
+						The second line printouts total # paths connecting s and t. Then starting from the third line, you should print out each such path from 2 to 6, with [ ] storing the length of the path. In this example, the shortest path from 2 to 6 is 2-4-6 with 2 arcs (i.e. [2]). Note that there may be more than one shortest path, and you should mark * for each of them.</p>
+
+						<p>Likewise, if you input s=3, t=6, it should output 3[0] 5[1] 4[1] 6[2]; 3-&gt;6: 3 paths; *[2]: 3-4-6, [3]: 3-5-4-6, *[2]: 3-5-6;<br />
+						if you input s=4, t=6, it should output 4[0] 6[1]; 4-&gt;6: 1 path; *[1]: 4-6;<br />
+						if you input s=3, t=1, it should output 3[0] 5[1] 4[1] 6[2]; 3-&gt;1: 0 path;<br />
+						if you input s=1, t=3, it should output 1[0] 2[1] 3[1] 4[2] 5[2] 6[3]; 1-&gt;3: 2 paths; *[1] 1-2, [2] 1-2-3;</p>
+
+						<p><font color="red">!!Special Notice!!</font></p>
+
+						<ol>
+							<li>Please use a data structure similar to the <b>FORWARD STAR</b> (or <b>FORWARD AND REVERSE Star</b>) introduced in the textbook to store your network.</li>
+						</ol>
+
+						<p>What&#39;s difficult in this assignment may be</p>
+
+						<ol>
+							<li>how you define your data structure (you may require some structures such as a path that stores a total number of arcs in that path and the arc index of that path). Dynamically allocating memory is required to solve this problem (e.g. you do not know how many paths connect s &amp; t in advance).</li>
+							<li>how you apply the DFS idea to generate all paths. This is the key and MOST DIFFICULT part, and I suggest you try to write down your pseudo-code first, apply your pseudo code manually by drawing pictures, after you are certain what you are doing, then implement your pseudo code.</li>
+							<li>how you design your data structure: You HAVE TO use something similar to the <b>FORWARD STAR</b> (or <b>FORWARD AND REVERSE Star</b>) In C (or C++), you may have to define a structure for nodes and arcs. You may use an array instead of a pointer to record FirstArc[i] &amp; CurrentArc[i], if you feel using a pointer is troublesome.</li>
+						</ol>
+
+						<p>I assure you that this assignment will consume much of your time, so please DO SPEND YOUR TIME WELL.</p>
+
+						<p>&nbsp;</p>
+
+						<hr />About turn-in the code electronically:
+						<p>&nbsp;</p>
+
+						<ol>
+							<li>you have to create a directory named <font color="#0000FF"><strong>r3890123_hw2</strong></font> (where you should replace r3890123 to be your student id), then put your code(s) into that directory, then go up one level, zip the whole directory by<br />
+							<font color="#0000FF"><strong>zip -r r3890123_hw2.zip r3890123_hw2</strong></font><br />
+							then upload that zip file to our class website.</li>
+							<li>Note that any late turn-in after <font color="#FF0000">03/20&nbsp;at 14:00 </font>will not be allowed.</li>
+						</ol>
+
+						<p>About turn-in the paper version:</p>
+
+						<ol>
+							<li>your code should have <font color="#FF0000">detailed comments</font> in the beginning. See <a href="./programming.html#sample_comment">here</a> for details.</li>
+						</ol>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr /></td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center">[Syllabus][Grading rules][<a href="programming.html">Programming rules</a>][Course materials]</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center">[Course Main Page]</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</body>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

@@ -1,0 +1,162 @@
+<HTML><HEAD><TITLE>coding assignment : DLU &amp; efficiency comparison</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=big5">
+<base target="content" href="https://dl.dropbox.com/u/11385565/www/course/NETFLOW1702/">
+<link href="../../webfiles/ilin1.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {
+	color: #FF0000;
+	font-weight: bold;
+}
+-->
+</style>
+</HEAD>
+<BODY bgcolor="#D9D9F3" background="../../webfiles/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><p><FONT size=+1>4th 
+                            coding assignment</FONT><br>
+                            <font color="#FF0000">Due 06/13 (Mon) 14:00</font></p>
+                        </TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE>
+          <I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I> 
+          <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=9 vAlign=top><p>This assignment asks you to implement 
+                    and test six ALL-ALL shortest path codes: <strong>DIKH, DIKD, BF, PAPE, </strong><strong>Floyd-Warshall (algebraic &amp; graphic)</strong>. <br>
+                    Each student is assigned 
+                    to use one network generator for testing about 96 or 100 cases. 
+                    For each case and each algorithm, you should record the following 
+                    two parameters :<strong><font color="#FF0000">(1) running 
+                    time</font></strong> obtained by the given function mytimer 
+                    <font color="#FF0000"> <strong>(2) total number of nontrivial 
+                    triple comparisons</strong></font>. That is, you should record 
+                    6*(# cases) data, where 6 means 6 algorithms (DIKH, DIKD, BF, PAPE, FWA, FWG), and # cases means the total number of randomly generated networks. Each student has to make plots or tables 
+                    on their computational results. </p>
+                  <p>The report not only has to contain the plots/tables of your 
+                    results, but also include discussion about why the results 
+                    are shown as tested. The student sand network generators are 
+                    assigned as follows:</p>
+                  <ul>
+                    <li>1謝慧華 : <font color="#FF0000">spgrid X Y seed -cl</font>10000 
+                      <font color="#FF0000">-cm</font>1000 <font color="#FF0000">-il</font>c_max 
+                      <font color="#FF0000">-im</font>c_min<br>
+                      X: 10, 20, 40, 80; Y: 10, 20, 40, 80; seed: 1, 10, 100; 
+                      (c_min,c_max): (1, 1000), (1000, 10000), (1, 1000000) 共 4x4x3x3=144個 cases</li>
+                    <li>2鄭富元   : <font color="#FF0000">sprand n m seed -ll</font>c_max 
+                      <font color="#FF0000">-lm</font>c_min<br>
+                      n: 100, 400, 800, 1600, 3200, 6400; m: 4*n, 16*n, n*(n-1)/4; seed: 1, 10, 100; (c_min,c_max): (1, 1000), (1000, 
+                      10000), (1, 1000000) 共 6x3x3x3=162個 cases </li>
+                    <li> 3方冠權 :<font color="#FF0000"> spacyc n m seed -ll</font>c_max <font color="#FF0000">-lm</font>c_min<br>
+n: 100, 400, 800, 1600, 3200, 6400; m: 4*n, 16*n, n*(n-1)/4; seed: 1, 10, 100; (c_min,c_max): (1, 1000), (1000, 10000), (1, 1000000) 共 6x3x3x3=162個 cases:</li>
+                    <li>  4歐柏寬 : <font color="#FF0000"> spflower name n1 n2 d2 c1_min c1_max c2_min c2_max is_sym seed<br>
+                      </font>(n1, n2): (100, 100), (500, 100), (500, 500), (1000, 200), (1000, 1000); d2: 5, 10; (c1_min=c2_min,c1_max=c2_max): (1, 1000), (1000, 10000), (1, 1000000); is_sym: 0, 1; seed: 1, 10, 100;  <br>
+                      共 5x2x3x2x3=180個 cases </li>
+                    <li>5洪筱昀 : <font color="#FF0000">spweb2 name x y c1min c1max c2min c2max rmin rmax seed<br>
+                      </font>x: 10, 100, 1000; y: 10, 50, 100; (c1min,c1max)=(1,1000), (1000,10000);  (c2min,c2max)=(1,1000), (1000,10000); (r_min, r_max)=(0.1,1); seed: 1, 10, 100, 1000 共 3x3x2x2x1x4=154個 cases</li>
+ 
+                  </ul>
+                  <P align=left>In summary, this is what you should do:</P>
+                  <ol>
+                    <li>finish 6 ALL-ALL shortest path codes: DIKH, DIKD, BF, PAPE, FWA, FWG. Your codes should be able to let the user 
+                      define the total number of iteration <font color="#FF0000"><strong>n_it 
+                      </strong></font>(i.e. n_loop) so that it can reset the input 
+                      and rerun the all pairs shortest paths for <font color="#FF0000"><strong>n_it 
+                      </strong></font>times in case the running time is too short.</li>
+                    <li>run all cases for all the 6 codes, record the computational 
+                      time using mytimer() and total number of triple comparisons. 
+                      (!Note! : if you find the mytimer() gives a very small number 
+                      due to the small size of the network, you should adjust 
+                      the <font color="#FF0000"><strong>n_it </strong></font>so 
+                      that the running time is measurable.)</li>
+                    <li>you should analyze the results of your computational tests 
+                      and discuss the tendancy you observe from the results. For 
+                      example, you may write a little about why which specific 
+                      algorithm perform better or worse in which case,...etc. 
+                      <strong>Also, you should state the environment of your experiments 
+                      (e.g. CPU type, RAM size, HD size, OS type, Compiler version...etc)</strong></li>
+                    <li>you should create a folder named as <font color="#0000FF"><strong>r3890123_HW4 </strong></font>in which you put all the cases ou have 
+                      tested in a folder named as <strong>inputs</strong>, put 
+                      your codes and your reports (written using .doc or whatever 
+                      text format) in a folder named as <strong>reports</strong>, 
+                      compressed the folder of <font color="#0000FF"><strong>r3890123_HW4</strong></font> to 
+                      be <font color="#0000FF"><strong>r3890123_HW4.zip or r3890123_HW4.rar</strong></font><strong>,</strong> 
+                      and then upload the compressed file to the iteach server. 
+                      (<font color="#FF0000">case檔案因為可能會太大[譬如超過1MB]，所以<strong><u>不用</u></strong>一併上傳，不過你若有使用任何batch 
+                      script技巧，必須將batch script一併附上</font>)</li>
+                    <li>you should print out the report and turn in by<span class="style1"> 6/13 Mon 
+                      14:00 [e] 14:15[p]</span>. </li>
+                  </ol>
+                  <p>What's difficult in this assignment may be </p>
+                  <ol>
+                    <li>how to implement FWG</li>
+                    <li>how to do the n_it (i.e. n_loop): note that you should 
+                      include the <u>reset</u> the main procedures inside the 
+                      while loop of the n_it</li>
+                    <li>how to write the batch script: you have to do everything 
+                      in command line. So, you should create some text file, say, 
+                      kkk.bat, which contains the commands you are going to execute, 
+                      and then <strong>chmod 777 kkk.bat</strong> so that whenever 
+                      you execute kkk.bat it will execute all the commands one 
+                      by one.</li>
+                  </ol>
+                  <p><strong><a name="suggestion"></a>Supplment material:</strong></p>
+                  <ol>
+                    <li><strong>mytimer()</strong> : to return a time tag. please 
+                      use related files in this <a href="../DS1401/check_time.c">example 
+                      file</a></li>
+                    <li><a href="batch_example.rar">example files</a> for the 
+                      batch script: contains <u>fake</u> <font color="#FF0000">dij1.c</font>,<font color="#FF0000">dlu1.c</font>, 
+                      <font color="#FF0000">flwa1.c</font>, <font color="#FF0000">bf1.c</font>, 
+                      and a batch script <font color="#FF0000">do_spgrid</font></li>
+                    <li>random network generator: 
+                      <ol>
+                        <li><a href="netflow_splib.rar">netflow_splib.rar</a> 
+                          : contains <font color="#FF0000">spgrid</font>, <font color="#FF0000">sprand</font>, 
+                          <font color="#FF0000">spacyc</font></li>
+                        <li><a href="sp_ilin.zip">sp_ilin.zip</a>: contains <font color="#FF0000">spcomp</font>, 
+                          <font color="#FF0000">spsun</font>, <font color="#FF0000">spweb</font>, 
+                          <font color="#FF0000">spweb2</font>, <font color="#FF0000">spflower</font> </li>
+                      </ol>
+                    </li>
+                </ol></TD>
+              </TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+            </TBODY>
+          </TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../NETFLOW0502/index.html">Syllabus</a>][<a href="../NETFLOW0502/rules.html">Grading 
+            rules</a>][<a href="../NETFLOW0502/programming.html">Programming rules</a>][<a href="../NETFLOW0502/material.html">Course 
+            materials</a>]</DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../../course">Course Main Page</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

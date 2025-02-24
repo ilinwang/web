@@ -1,0 +1,168 @@
+<html>
+<head>
+	<title>coding assignment 1: read Network</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="http://ilin.iim.ncku.edu.tw/course/NETFLOW2202/" target="content" />
+	<link href="../../ilin/ilin1.css" rel="stylesheet" type="text/css" />
+</head>
+<body background="../../gif/blbk1.gif" bgcolor="#D9D9F3" data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1049.0" style="cursor: auto;">
+<div align="left">
+<table align="center" border="0" width="560">
+	<tbody>
+		<tr>
+			<th>
+			<table border="0" width="100%">
+				<tbody>
+					<tr>
+						<td width="100">&nbsp;</td>
+						<td>
+						<table align="center" border="1" width="166">
+							<tbody>
+								<tr align="middle" bgcolor="#ffc0cb" valign="center">
+									<th align="middle" nowrap="nowrap" valign="center">
+									<p><font size="+1">1st coding assigment</font><br />
+									<font color="#FF0000">Due 2022/03/06&nbsp;(Mon) 14:00</font></p>
+									</th>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+						<td width="100">
+						<div align="right">&nbsp;</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr /></th>
+		</tr>
+		<tr>
+			<td align="center">
+			<table align="center" border="0" width="100%">
+				<tbody>
+					<tr>
+						<td rowspan="9" valign="top">
+						<p>You are asked to write a program that can</p>
+
+						<ul>
+							<li>Read a network file with a format similar to <a href="https://www.dropbox.com/s/0xiv4i3nt0k7yky/test1.sp?dl=0">test1.sp</a> and <a href="https://www.dropbox.com/s/m45fgynbxcjdrii/test2.sp?dl=0">test2.sp</a></li>
+							<li>According to the dimension of the network (e.g. n=1000, m=10000), your code should <font color="#FF00FF"><strong>dynamically allocate memory</strong></font> to store information for n nodes and m arcs, as well as their satellite data (e.g. length of an arc).</li>
+							<li>Ask the user to input a node index,
+							<ul>
+								<li>if the node does not exist, print a warning message</li>
+								<li>else print out all arcs (and their lengths) connecting with the node<br />
+								(assuming there is no isolated node)</li>
+							</ul>
+							</li>
+						</ul>
+
+						<p>Screen Input: <font color="#0000FF"><strong>network filename</strong></font> (e.g. <a href="https://www.dropbox.com/s/0xiv4i3nt0k7yky/test1.sp?dl=0">test1.sp</a>), <font color="#0000FF"><strong>s</strong></font> (source node)<br />
+						Screen Output: all arcs and their lengths connecting with s</p>
+
+						<p>example: suppose your executable file is named as hw1, then when you execute hw1, you should see:</p>
+
+						<blockquote>
+						<p><strong><font color="#FF0000">Please input network filename: </font></strong>(then you input, say, test1.sp)<br />
+						<font color="#FF0000"><strong>Please input a source node:</strong></font> (then you input, say, 2)</p>
+						</blockquote>
+
+						<p>then you should see the output like</p>
+
+						<blockquote>
+						<p><strong><font color="#FF0000">arc[1]: 1-2 : 6.00<br />
+						arc[3]: 2-3 : 2.00<br />
+						arc[4]: 2-4 : 2.00</font></strong></p>
+						</blockquote>
+
+						<p>Likewise, if you input source node as node 3, it should output</p>
+
+						<blockquote>
+						<p><strong><font color="#FF0000">arc[2]: 1-3 : 4.00<br />
+						arc[3]: 2-3 : 2.00<br />
+						arc[5]: 3-4 : 1.00<br />
+						arc[6]: 3-5 : 2.00 </font></strong></p>
+						</blockquote>
+
+						<p>if you input source=7, it should output</p>
+
+						<blockquote>
+						<p><strong><font color="#FF0000">!!Warning!!: node 7 does not exist</font></strong></p>
+						</blockquote>
+
+						<p>What&#39;s difficult in this assignment may be</p>
+
+						<ol>
+							<li>how you read the network file: you have to know how to skip comment lines and how to read specific numbers from specific lines starting with specific characters</li>
+							<li>how you design your data structure &amp; dynamic memory allocation:<br />
+							In this first assignment, I suggest you use an n x n adjacency matrix to store arcs. In particular, according to the n and m you have read, you should
+							<ol>
+								<li>Suppose <strong>*L</strong> is a pointer to an array of real numbers.<br />
+								Dynamically allocate memory for n x n real numbers (you should use pointers) to L, so that L[a][b] (i.e. *(L+(a-1)*n+b-1)) represents the length of the arc from node a-1 to node b-1.</li>
+								<li>The n x n array may be initialized to a big number, say, <strong>M</strong> which is defined at the beginning of your code to be, say, 10000.<br />
+								When you read the arc data line by line, take test1.sp for example,
+								<pre>
+a	2	3	2.0</pre>
+								your code should know that this is the 3rd arc, from node 2 to node 3, with length 2.0. In other words, L[1][2]=2.0 (i.e. *(L+(2-1)*6+(3-1))=2.0).<br />
+								After you have finished reading all these arcs, if you check L[1][4], it should be M which is 10000, since there exists no arc from node 2 to node 5 in test1.sp</li>
+								<li>The above is just a hint to tell you how you can record an arc length using an n x n array. To record the index for an arc, you may use a similar technique by dynamically allocating another n x n integer array pointing to, say, *A, so that A[1][2]=3 (i.e. *(A+(2-1)*6+(3-1))=3) to indicate that the arc from node 2 to node 3 has index 3. (you may just initialize A to be 0 in the beginning)</li>
+							</ol>
+							</li>
+							<li><u>I insist that you should dynamically allocate memory</u>. If you finish this code by declaring 2-dimensional arrays of a large fixed size, you should get very few points.</li>
+							<li>Although I suggest you use an adjacency matrix for this assignment, if you wish, you may also try to use the adjacency linked list or whatever similar structure. Remember, <u>your code should be compiled and run in unix environment</u>.</li>
+						</ol>
+
+						<p>This assignment is just the beginning to give you some flavor of coding network algorithms. Later in this semester, you will have to do&nbsp;many&nbsp;more complicated coding assignments based on the experience you learn from this assignment.</p>
+
+						<p>&nbsp;</p>
+
+						<hr />About turn-in the code electronically:
+						<ol>
+							<li>you have to create a directory named <font color="#0000FF"><strong>r3890123_hw1</strong></font> (where you should replace r3890123 to be your student id), then put your code(s) into that directory, then go up one level, zip the whole directory by<br />
+							<font color="#0000FF"><strong>zip -r r3890123_hw1.zip r3890123_hw1</strong></font><br />
+							then upload that zip file to our class website (i.e. moodle website).</li>
+							<li>Note that any late turn-in after <font color="#FF0000">03/06&nbsp;at 14:00 </font>will not be allowed. So, please turn it in as early as possible. Thanks.</li>
+						</ol>
+
+						<p>About turn-in the paper version:</p>
+
+						<ol>
+							<li>your code should have <font color="#FF0000">detailed comments</font> in the beginning. See <a href="https://www.dropbox.com/s/y86zjuwmkv5wd94/programming.html?dl=0">here</a> for details.</li>
+						</ol>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr /></td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center">[Syllabus][Grading rules][Programming rules][Course materials]</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center">[Course Main Page]</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></body>
+</html>

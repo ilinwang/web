@@ -1,0 +1,166 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>coding assignment 3: Dijkstra</title>
+	<base href="http://ilin.iim.ncku.edu.tw/course/NETFLOW2202/" target="content" />
+	<link href="../../ilin/ilin1.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1049.0" style="background-color: rgb(217, 217, 243); background-image: url(&quot;../../gif/blbk1.gif&quot;); cursor: auto;">
+<div align="left">
+<table align="center" border="0" width="560">
+	<tbody>
+          <tr>
+            <th>
+              <table width="100%" border="0">
+                <tbody>
+                  <tr>
+                    <td width="100">&nbsp;</td>
+                    <td>
+                      <table width="166" border="1" align="center">
+                        <tbody>
+                          <tr valign="center" bgcolor="#ffc0cb" align="center">
+                            <th valign="center" nowrap="nowrap" align="center">
+                              <p><font size="+1">3rd coding assigment</font><br>
+                                <font color="#FF0000">Due 04/10 (Mon) 14:00</font></p>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td width="100"> <br>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <i><font face="Arial, Helvetica, sans-serif" size="-1" color="#006400"></font></i>
+              <hr> </th>
+          </tr>
+          <tr>
+            <td align="center">
+              <table width="100%" border="0" align="center">
+                <tbody>
+                  <tr>
+                    <td rowspan="9" valign="top">
+                      <p>You are asked to write <strong>2</strong> programs
+                        which can</p>
+                      <ul>
+                        <li>read the following network file: <a href="https://www.dropbox.com/s/0xiv4i3nt0k7yky/test1.sp?dl=0">test1.sp</a>
+                        </li>
+                        <li>1st program (spheap1): use Dijkstra's binary heap
+                          implementation</li>
+                        <li>2nd program (spdial1): use Dijkstra's Dial's
+                          implementation</li>
+                        <li>both programs allow the user to input a source node
+                          index s, then output a shortest path with its length
+                          from s to all the other nodes.(i.e. a 1-ALL shortest
+                          path problem)</li>
+                      </ul>
+                      <p>Screen Input: <font color="#0000FF"><strong>network
+                            filename</strong></font> (e.g. <a href="https://www.dropbox.com/s/0xiv4i3nt0k7yky/test1.sp?dl=0">test1.sp</a>),
+                        <font color="#0000FF"><strong>s</strong></font> (source
+                        node)<br>
+                        Screen Output: for each other node, printout a shortest
+                        path with its length from s</p>
+                      <p>example: suppose your code is named as spheap1(&amp;
+                        spdial1), then when you execute spheap1(&amp; spdial1),
+                        you should see:</p>
+                      <blockquote>
+                        <p><strong><font color="#FF0000">Please input network
+                              filename: </font></strong>(then you input, say,
+                          test1.sp)<br>
+                          <font color="#FF0000"><strong>Please input a source
+                              node:</strong></font> (then you input, say, 2)</p>
+                      </blockquote>
+                      <p>then you should see the output like</p>
+                      <blockquote>
+                        <p><strong><font color="#FF0000">2-&gt;1: [can not
+                              reach]<br>
+                              2-&gt;3: [2] 3&lt;-2<br>
+                              2-&gt;4: [2] 4&lt;-2<br>
+                              2-&gt;5: [4] 5&lt;-3&lt;-2<br>
+                              2-&gt;6: [7] 6&lt;-5&lt;-3&lt;-2</font></strong></p>
+                      </blockquote>
+                      <p>Likewise, if you input source node as node 3, it should
+                        output </p>
+                      <blockquote>
+                        <p><strong><font color="#FF0000">3-&gt;1: [can not
+                              reach]<br>
+                              3-&gt;2: [can not reach]<br>
+                              3-&gt;4: [1] 4&lt;-3<br>
+                              3-&gt;5: [2] 5&lt;-3<br>
+                              3-&gt;6: [5] 6&lt;-5&lt;-3</font></strong></p>
+                      </blockquote>
+                      <p>What's difficult in this assignment may be </p>
+                      <ol>
+                        <li>how to do binary heap operations <strong>(textbook
+                            page 115)</strong>:<br>
+                          Basically we need a min-heap data structure, and we
+                          need to "create-heap", "find-min", and "delete-min"
+                          heap operations. So you may had better read some data
+                          structure or algorithm books about how to implement a
+                          binary min-heap and its operations.</li>
+                        <li>how to do Dial's bucket <strong>(page 113 &amp; MIT
+                            animation slides)</strong>: <br>
+                          you should first understand how Dial's implementation
+                          works. I suggest you to read MIT's slides first. Since
+                          Dial's bucket corresponds to integer lengths, you will
+                          have to change your code so that each arc length is an
+                          integer instead of real number. Dial's implementation
+                          should be easier than the binary min-heap
+                          implementation.</li>
+                      </ol>
+                      <hr> About turn-in the code electronically:
+                      <p></p>
+                      <ol>
+                        <li>you have to create a directory named <font color="#0000FF"><strong>r3890123_hw3</strong></font>
+                          (where you should replace r3890123 to be your student
+                          id), then put </li>
+                        <ol>
+                          <li>your code(s) into that directory, then go up one
+                            level, zip the whole directory by<br>
+                            <font color="#0000FF"><strong>zip -r
+                                r3890123_hw3.zip r3890123_hw3</strong></font><br>
+                            then upload that zip file to our class website.</li>
+                        </ol>
+                        <li>Note that any late turn-in after <font color="#FF0000">04/10
+                            14:00 </font>will not be allowed. So, please
+                          turn-in as early as possible. Thanks.</li>
+                      </ol>
+                      <ol>
+                      </ol>
+                    </td>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                  <tr>
+                  </tr>
+                </tbody>
+              </table>
+              <hr> </td>
+          </tr>
+          <tr>
+            <td>
+ 			<div align="center">[Syllabus][Grading rules][<a href="programming.html">Programming rules</a>][Course materials]</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+			<div align="center">[Course Main Page]</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

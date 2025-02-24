@@ -1,0 +1,111 @@
+<HTML><HEAD><TITLE>coding assignment DLU</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=big5">
+<base target="content" href="https://dl.dropbox.com/u/11385565/www/course/NETFLOW1702/">
+<link href="../../webfiles/ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../../webfiles/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><p><FONT size=+1>5th 
+                            coding assignment</FONT><br>
+                            <font color="#FF0000">Due 05/19 (Thu) 08:00</font></p>
+                          </TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE>
+          <I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I> 
+          <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=9 vAlign=top><p>You are asked to write <strong>1</strong>program 
+                    which can</p>
+                  <ul>
+                    <li>read a network file with format like <a href="test2.sp">test2.sp</a> 
+                    </li>
+                    <li>read an OD file with format similar to <a href="od1.txt">od1.txt</a> 
+                      (the first line represents total # of requested OD paris 
+                      as represented in the remaining lines) </li>
+                    <li>ask the user to choose algorithms to apply (1) DLU1 (2) 
+                      DLU2 (either (1) or (2))</li>
+                    <li>if (1) is choosen, it performs algorithm DLU1, which first 
+                      calculates i<sub>0</sub>,j<sub>0</sub> and k<sub>0</sub>, 
+                      then perform A_LU, Acyclic_LU, and Reverse_LU. Finally it 
+                      prints out the shortest path length for each requested OD 
+                      pair (no need to trace the path)</li>
+                    <li>if (2) is choosen, it performs algorithm DLU2, which performs 
+                      A_LU and Get_P for each requested OD pair. Finally it prints 
+                      out the shortest path (need tracing the entire path) together 
+                      with its length for each requested OD pair.</li>
+                  </ul>
+                  <p>Screen Input: <font color="#0000FF"><strong>network filename</strong></font> 
+                    (e.g. <a href="test1.sp">test2.sp</a>), <font color="#0000FF"><strong>requested 
+                    od filename</strong></font> (e.g. <a href="od1.txt">od1.txt</a>)<br>
+                    Screen Output: <br>
+                    1.if DLU1 is chosen, you have to print out the shortest path 
+                    length for each requested OD pair<br>
+                    2.if DLU2 is chosen, you have to print out the entire shortest 
+                    path (i.e. tracing the entire path) together with its length 
+                    for each requested OD pair</p>
+                  <p>Problems you may encounter:</p>
+                  <p>1.if there exists no path from a requested Origin node to 
+                    a requested Destination node, you should print out things 
+                    like [there exists no such path]</p>
+                  <p>2.how do you make sure your answers are correct? You may 
+                    use the Floyd-Warshall algorithm that you have written last 
+                    time to verify the results.</p>
+                  <p><strong>Special Notice:</strong></p>
+                  <p><font color="#006600">It is your responsibility to check 
+                    whether your algorithms work correctly or not. To do so, as 
+                    suggested, you may use Floyd-Warshall algorithm to check the 
+                    correctness of your answer. If you fail to do so and turn-in 
+                    a buggy code which gives wrong answers, your grade will be 
+                    discounted.</font></p>
+                  <p> 
+                  <hr>
+                  About turn-in the code electronically:</p> <ol>
+                    <li>you have to create a directory named <font color="#0000FF"><strong>r3890123_hw5</strong></font> 
+                      (where you should replace r3890123 to be your student id), 
+                      then put your code(s) into that directory, then go up one 
+                      level, zip the whole directory by<br>
+                      <font color="#0000FF"><strong>zip -r r3890123_hw5.zip r3890123_hw5</strong></font><br>
+                      then upload that zip file to our class website.</li>
+                    <li><strong>!!Note that any late turn-in after <font color="#FF0000">05/19 
+                      8:00 </font>will not be allowed. !!</strong></li>
+                  </ol>
+                  </TD>
+              </TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+            </TBODY>
+          </TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../NETFLOW1702/index.html">Syllabus</a>][<a href="../NETFLOW1702/rules.html">Grading 
+            rules</a>][<a href="../NETFLOW1702/programming.html">Programming rules</a>][<a href="../NETFLOW1702/material.html">Course 
+            materials</a>]</DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../../course">Course Main Page</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

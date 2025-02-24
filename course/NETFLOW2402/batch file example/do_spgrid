@@ -1,0 +1,13 @@
+./bin/spgrid 10 10 3 -cl10000 -cm1000 -il1000 -im1 > ./inputs/spgrid_10_10_3_10000_1000_1000_1.sp
+./dij1  ./inputs/spgrid_10_10_3_10000_1000_1000_1.sp > ./results/spgrid_10_10_3_10000_1000_1000_1.txt
+./bf1  ./inputs/spgrid_10_10_3_10000_1000_1000_1.sp >> ./results/spgrid_10_10_3_10000_1000_1000_1.txt
+./dlu1 ./inputs/spgrid_10_10_3_10000_1000_1000_1.sp >> ./results/spgrid_10_10_3_10000_1000_1000_1.txt
+./flwa1 ./inputs/spgrid_10_10_3_10000_1000_1000_1.sp >> ./results/spgrid_10_10_3_10000_1000_1000_1.txt
+rm -f ./inputs/spgrid_10_10_3_10000_1000_1000_1.sp
+
+./bin/spgrid 20 20 4 -cl10000 -cm1000 -il1000 -im1 > ./inputs/spgrid_20_20_3_10000_1000_1000_1.sp
+./dij1  ./inputs/spgrid_20_20_3_10000_1000_1000_1.sp > ./results/spgrid_20_20_3_10000_1000_1000_1.txt
+./bf1 ./inputs/spgrid_20_20_3_10000_1000_1000_1.sp >> ./results/spgrid_20_20_3_10000_1000_1000_1.txt
+./dlu1  ./inputs/spgrid_20_20_3_10000_1000_1000_1.sp >> ./results/spgrid_20_20_3_10000_1000_1000_1.txt
+./flwa1  ./inputs/spgrid_20_20_3_10000_1000_1000_1.sp >> ./results/spgrid_20_20_3_10000_1000_1000_1.txt
+rm -f ./inputs/spgrid_20_20_3_10000_1000_1000_1.sp

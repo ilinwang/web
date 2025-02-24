@@ -1,0 +1,211 @@
+<html>
+<head>
+	<title>course material</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="http://ilin.iim.ncku.edu.tw/course/NETFLOW2202/" target="content" />
+	<link href="../../ilin/ilin1.css" rel="stylesheet" type="text/css" />
+</head>
+<body background="../../gif/blbk1.gif" bgcolor="#D9D9F3" data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1049.0" style="cursor: auto;">
+<div align="left">
+<table align="center" border="0" width="560">
+	<tbody>
+		<tr>
+			<th>
+			<table border="0" width="100%">
+				<tbody>
+					<tr>
+						<td width="100">&nbsp;</td>
+						<td>
+						<table align="center" border="1" width="166">
+							<tbody>
+								<tr align="middle" bgcolor="#ffc0cb" valign="center">
+									<th align="middle" bgcolor="#ffc0cb" nowrap="nowrap" valign="center"><font size="+1">Programming Requirements<br />
+									updated at <font color="#FF0000">10/02/23</font> </font></th>
+								</tr>
+							</tbody>
+						</table>
+						</td>
+						<td width="100">
+						<div align="right">&nbsp;</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr /></th>
+		</tr>
+		<tr>
+			<td align="center">
+			<table align="center" border="0" width="100%">
+				<tbody>
+					<tr>
+						<td rowspan="9" valign="top">
+						<p><strong>General programming requirements for this course</strong></p>
+
+						<ul>
+							<li>Several programming assignments will be given</li>
+							<li>You should use C or C++ to program (if not, ask me for permission)</li>
+							<li>Whatever editing/debugging software you use to program, you <u>have to make sure your codes can run on Unix environments</u> such as <a href="http://www.cygwin.com/" target="_blank">cygwin</a>, Sun (school&#39;s UNIX account), Linux, or BSD system</li>
+						</ul>
+
+						<p><strong>What to turn in for programming assignments:</strong></p>
+
+						<ul>
+							<li>Source code: You should turn in the&nbsp;<strong>electronic version</strong></li>
+						</ul>
+
+						<p><strong>How to do electronic turn in for programming assignments:</strong></p>
+
+						<ul>
+							<li>Your codes have to be put in a directory named <font color="#0000FF"><strong>rXXXX_YY</strong></font> where <font color="#0000FF"><strong>rXXXX</strong></font> is your student ID and <font color="#0000FF"><strong>YY</strong></font> is the name for the assignment (which will be announced later). For example,&nbsp;<font color="#0000FF"><strong>r3890123_hw1</strong></font> is the directory for homework #1 by a student with ID r3890123.</li>
+							<li>Then you have to zip the directory in UNIX<br />
+							e.g. <font color="#FF0000"><strong>zip -r r3890123_hw1.zip r3890123_hw1</strong></font> which will zip the directory <font color="#FF0000"><strong> r3890123_hw1</strong></font>into a file named <font color="#FF0000"><strong>r3890123_hw1.zip</strong></font></li>
+							<li>Then you go to the <a href="http://moodle.ncku.edu.tw" target="_blank">moodle class web</a> to submit the zipped file before the deadline<br />
+							<font color="#FF0000"><strong>!!Note!!</strong></font> if you are late for the deadline, you will <font color="#FF0000"><strong>NOT</strong></font> be able to submit your codes, and thus you will get <font color="#FF0000"><strong>NO</strong></font> grades!! So, I suggest you submit the file at least 30min before the deadline.</li>
+							<li>Any late homework will <font color="#FF0000"><strong>NOT</strong></font> be graded, except very rare cases for very special reasons.</li>
+						</ul>
+
+						<p><strong><a name="sample_comment"></a>What you should do in your source code: </strong></p>
+
+						<ul>
+							<li>All of your codes should be in a directory named by the above rules</li>
+							<li>At the beginning of each of your codes, you should write detailed info about that codes, a C/C++ example will be like the following
+							<table border="1">
+								<tbody>
+									<tr>
+										<td bgcolor="#99FFFF">
+										<pre>
+/*
+<font color="#FF0000">   This code can be compiled and run ok.
+</font>or<font color="#FF0000"> This code can be compiled, but when I run it with input such as ....
+     it will give the wrong output such as ....
+</font>or <font color="#FF0000">This code can NOT be compiled, it has the following errors:....
+</font>
+   This is to convert the algorithm output into excel txt format
+   
+   usage:
+     convt_out1  xxx  yyy
+     where xxx is the algorithm output filename, e.g. real_cases.txt
+           yyy is the excel txt format filename
+  
+   input file:
+     xxx
+	   
+   output files:
+     yyy_t.txt  : records the alg time
+     yyy_n.txt  : records the alg n_tricomp
+     yyy_normal_t.txt : normalized alg time
+     yyy_normal_n.txt : normalized alg n_tricomp
+	   
+   compile:
+     gcc -o convt_out1 convt_out1.c
+   
+<font color="#FF0000">   pseudocode:
+   QUICKSORT(A,p,r)
+   ------
+   if p&lt;r
+     then q=PARTITON(A,p,r);
+          QUICKSORT(A,p,q-1);
+          QUICKSORT(A,q+1,r);
+   ------
+   PARTITION(A,p,r)
+   ------
+   x=A[r];
+   i=p-1;
+   for j=p to r-1
+      if A[j]&lt;=x
+         i=i+1;  swap(A[i],A[j]);
+   swap(A[i+1],A[r])
+   return i+1;
+   ------</font>
+ 
+   coded by I-Lin Wang, ID: r38921234, email: wangilin@mail.ncku.edu.tw
+   date: 2004.02.23
+*/</pre>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							In particular, your code has to include detailed <font color="#990000">English</font> comments [20%] such as
+
+							<ul>
+								<li><font color="#FF0000"><strong>whether your code can compile/run or not, if NOT, what&#39;s wrong ..etc.[2%] </strong></font></li>
+								<li><font color="#990000">purpose: </font>explain<font color="#990000"> </font>what this code is used for [2%]</li>
+								<li><font color="#990000">usage</font>: how to execute this code [2%]</li>
+								<li><font color="#990000">input/output file</font>: list any input/output files required [2%]</li>
+								<li><font color="#990000">compile</font>: how to compile this code [2%]</li>
+								<li><font color="#FF0000"><strong>pseudo-code:</strong></font> <font color="#FF0000"><strong>briefly illustrate the procedures of your codes [8%]</strong></font></li>
+								<li><font color="#990000">who/when</font>: list who wrote this code and when is it done [2%]</li>
+							</ul>
+							</li>
+							<li>Inside the code, you should add <font color="#990000">English</font> comments so that it is easily readable (understandable) [You may add Chinese comments as you wish, but even so, you should also add English ones.]</li>
+						</ul>
+
+						<p><strong>General rules about how your programming assignment is graded:</strong></p>
+
+						<ul>
+							<li><font color="#FF0000">基本分(30%)</font>。只要你的程式足以表現你已費了足夠的精神﹐不論是否能跑﹐就可以得到基本分數。必要的條件是程式必須能通過編譯器（compiler）﹐而且必需具備相當齊全的基本架構。</li>
+							<li><font color="#FF0000">正確性(25%)</font>。程式是否能正確地執行所應具備的基本功能。</li>
+							<li><font color="#FF0000">程式架構(15%)</font>。是否適當地將整個程式分成多個函數、函數的分工是否恰當、函數的參數是否恰當、程式是否模組化、函數裡的指令使用是否恰當。有些題目會指定函數的架構。是否依指示設計函數亦列入本項計分。</li>
+							<li><font color="#FF0000">完整的comment 說明(20%)</font>。請依照<a href="programming.html#sample_comment" target="_self">這裡</a>的指示來寫你程式的<u>英文</u>comment.</li>
+							<li><font color="#FF0000">可讀性(10%)</font>。是否有良好的<u>英文</u>註解、變數與函數命名是否具可讀性。</li>
+							<li><font color="#FF0000">抄襲(-100%)</font>。只要你抄襲程式被抓包，不但該次分數為0分，而且你還會得到該次分數的負分，而且還會被告知系辦公室與學校，可能記過，下場十分悲慘，最好不要以身試法。反之即使你程式寫不正確，但只要按照上面給分方式，通常仍會獲得50%以上的分數，不無小補。</li>
+						</ul>
+
+						<p><strong>More about codes running in Unix environments:</strong></p>
+
+						<ul>
+							<li>If you use Visual C++ for coding after you are done, you should put everything in a UNIX environment, and compile your codes there, to make sure your codes DO compile/run in a UNIX environment.</li>
+							<li>A convenient UNIX environment for you is your school UNIX account, which is on a Sun machine (or Linux?). See <a href="http://cc.ncku.edu.tw/files/11-1255-3313.php" target="_blank">http://cc.ncku.edu.tw/files/11-1255-3313.php</a> for details. If you use this account to compile/run your codes, you have to <a href="telnet://tcf.ncku.edu.tw/">telnet</a> to the server and do everything on a terminal window, which may not be too convenient.</li>
+							<li>If you want to compile on your own machine, you may
+							<ul>
+								<li>install <a href="http://www.cygwin.com" target="_blank">cygwin</a> on Windows, which may occupy 500MB of your HD. It provides a unix-like environment on your Windows. (I have packed a basic cygwin package, see <a href="./material.html#cygwin_basic">here</a> for details)</li>
+								<li>install Linux or FreeBSD. The computers in our department have installed RedHat Linux which is convenient for you to do programming.</li>
+							</ul>
+							</li>
+							<li>Reasons for these unix-compatible requirements:
+							<ul>
+								<li>I don&#39;t want you to call some built-in functions that Visual C++ or other compiler offers. Instead, I want you to code the functions from the scratch by yourself.</li>
+								<li>I hope each student is at least NOT afraid of the UNIX environment, and at least learns to do things such as telnet, ftp, compiling codes, editing codes, and some basic commands manually. It will help you in the future.</li>
+							</ul>
+							</li>
+							<li>If you are not familiar with some UNIX commands, ask your friends/classmates, or come to ask TA or me.</li>
+						</ul>
+						</td>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+					<tr>
+					</tr>
+				</tbody>
+			</table>
+
+			<hr /></td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center">[Syllabus][Grading rules][<a href="programming.html">Programming rules</a>][Report format][Course materials]</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div align="center">[Course Main Page]</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</body>
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

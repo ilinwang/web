@@ -1,0 +1,136 @@
+<HTML><HEAD><TITLE>coding assignment : network simplex</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=big5">
+<base target="content" href="http://140.116.53.114/ilin/course/NETFLOW0302/">
+<link href="../../webfiles/ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../../webfiles/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><p><FONT size=+1>6th 
+                            coding assigment</FONT><br>
+                            <font color="#FF0000">Due 07/16 (Wed) 14:10</font></p>
+                          </TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE>
+          <I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I> 
+          <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=9 vAlign=top><p>You are asked to write a program 
+                    which can</p>
+                  <ul>
+                    <li>read the following network file: <a href="mcf1.net">mcf1.net</a> 
+                    </li>
+                    <li>then, use network simplex algorithm <strong>(Chap 11)</strong> 
+                      to solve the problem.</li>
+                  </ul>
+                  <p>Screen Input: <font color="#0000FF"><strong>network filename</strong></font> 
+                    (e.g. <a href="mcf1.net">mcf1.net</a>), <font color="#0000FF"><strong>s</strong></font> 
+                    (source node)<br>
+                    Screen Output: optimal primal objective value, optimal dual 
+                    objective value</p>
+                  <p>example: suppose your code is named as netsimplex1, then 
+                    when you execute netsimplex1, you should see:</p>
+                  <blockquote> 
+                    <p><strong><font color="#FF0000">Please input network filename: 
+                      </font></strong>(then you should input mcf1.net)</p>
+                  </blockquote>
+                  <p>then you should see the output like</p>
+                  <blockquote> 
+                    <p><strong><font color="#FF0000">optimal (primal, dual) objective: 
+                      </font></strong>(then you should output 92, 92)<strong></strong></p>
+                  </blockquote>
+                  <p>Note that thre may be more than 1 supply/demand node, and 
+                    you will not know how many in advance, until you finish reading 
+                    those lines begins with &quot;n&quot;. Since this input is 
+                    different from the shortest path one, you may have to spend 
+                    time thinking how to dynamically read those supply/demand 
+                    data.</p>
+                  <p>What's difficult in this assignment may be </p>
+                  <ol>
+                    <li>you will have to modify your data structure used for solving 
+                      the shortest path problem.</li>
+                    <li>you need to understand each step of network simpelx algorithm: 
+                      <ol>
+                        <li>how to get an initial Basic Feasible Solution (a spanning 
+                          tree) </li>
+                        <li>how to identify a pivot-in nontree arc</li>
+                        <li>how to identify the negative cycle and compute flows 
+                          along cycle</li>
+                        <li>how to update node potentials</li>
+                      </ol>
+                    </li>
+                  </ol>
+                  <p><strong><a name="suggestion"></a>New Guidance:</strong></p>
+                  <p><font color="#006600">Since everyone considers this assignment 
+                    to be too hard, I have decided to give a sample network simplex 
+                    C code for anyone's reference. What I ask you to do is:</font></p>
+                  <ol>
+                    <li><font color="#006600">you should write down detailed pseudo 
+                      code about each procedures</font></li>
+                    <li><font color="#006600">you should try to write your own 
+                      code by referencing this sample code. Copying is not allowed. 
+                      You should use your own way to implement this assignment. 
+                      You may mimid the sample code but you should not copy it 
+                      directly.</font></li>
+                    <li><font color="#006600">the sample code contains procedures 
+                      to measure the practical running time which you may just 
+                      skip in your code. You should study this sample code and 
+                      know which part is useful and which part is not.</font></li>
+                  </ol>
+                  <p><strong>Sample network simplex code: <a href="netsimplex1.c">netsimplex1.c</a></strong></p>
+                  <p> 
+                  <hr>
+                  About turn-in the code electronically:</p> <ol>
+                    <li>you have to create a directory named <font color="#0000FF"><strong>r3890123_hw6</strong></font> 
+                      (where you should replace r3890123 to be your student id), 
+                      then put your code(s) into that directory, then go up one 
+                      level, zip the whole directory by<br>
+                      <font color="#0000FF"><strong>zip -r r3890123_hw6.zip r3890123_hw6</strong></font><br>
+                      then upload that zip file to our class website.</li>
+                    <li>Note that any late turn-in after <font color="#FF0000">07/16 
+                      14:10 </font>will not be allowed. If you turn it in late 
+                      for few hrs before <font color="#FF0000">07/17 14:10</font>, 
+                      you will only get <font color="#FF0000">70%</font> of your 
+                      grades. Any late turn-in <font color="#FF0000">after 07/17 
+                      14:10 will NOT be graded</font>. So, please turn-in as early 
+                      as possible. Thanks.</li>
+                  </ol>
+                  <p>&nbsp;</p></TD>
+              </TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+            </TBODY>
+          </TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../NETFLOW0302/index.html">Syllabus</a>][<a href="../NETFLOW0302/rules.html">Grading 
+            rules</a>][<a href="../NETFLOW0302/programming.html">Programming rules</a>][<a href="../NETFLOW0302/material.html">Course 
+            materials</a>]</DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../../course">Course Main Page</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

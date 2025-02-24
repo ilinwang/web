@@ -1,0 +1,164 @@
+<HTML><HEAD><TITLE>coding assignment b: bellman-ford &amp; floyd-warshall</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=big5">
+<base target="content" href="https://dl.dropbox.com/u/11385565/www/course/NETFLOW1702/">
+<link href="../../webfiles/ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../../webfiles/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><p><FONT size=+1>4th 
+                            coding assignment</FONT><br>
+                            <font color="#FF0000">Due 05/25 (Mon) 9:00</font></p>
+                          </TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE>
+          <I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I> 
+          <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=9 vAlign=top><p>You are asked to write <strong>2</strong> 
+                    programs which can</p>
+                  <ul>
+                    <li>read the following network file: <a href="test1.sp">test1.sp</a> 
+                    </li>
+                    <li>1st program (spbf1): use Bellman-Ford implementation <strong>(page 
+                      141.142)</strong></li>
+                    <li>2nd program (spfw1): use Floyd-Warshall's implementation 
+                      <strong>(page 147.148)</strong></li>
+                    <li>both programs allow the user to input a source node index 
+                      s, then output a shortest path with its length from s to 
+                      all the other nodes.(i.e. a 1-ALL shortest path problem), 
+                      together with a number showing how much time it takes to 
+                      run the main part of the program</li>
+                    <li>you should generate at least 1 test problem from each 
+                      of the following random network generators: (uncompress 
+                      <a href="netflow_splib.rar">netflow_splib.rar</a>; in the 
+                      folder netflow_splib, keyin &quot;<strong>make gens</strong>&quot;, 
+                      then follow instructions in the folder netflow_splib/doc 
+                      to learn how to use these generators) 
+                      <ul>
+                        <li>spgrid : generate a random grid network</li>
+                        <li>sprand : generate a random network</li>
+                        <li>spacyc : generate a random acyclic network</li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <p>Screen Input: <font color="#0000FF"><strong>network filename</strong></font> 
+                    (e.g. <a href="test1.sp">test1.sp</a>), <font color="#0000FF"><strong>s</strong></font> 
+                    (source node)<br>
+                    Screen Output: for each other node, printout a shortest path 
+                    with its length from s; in the last line, printout the time 
+                    it takes to run your code</p>
+                  <p>example: suppose your code is named as spbf1(&amp; spfw1), 
+                    then when you execute spbf1(&amp; spfw1), you should see:</p>
+                  <blockquote> 
+                    <p><strong><font color="#FF0000">Please input network filename: 
+                      </font></strong>(then you input, say, test1.sp)<br>
+                      <font color="#FF0000"><strong>Please input a source node:</strong></font> 
+                      (then you input, say, 2)</p>
+                  </blockquote>
+                  <p>then you should see the output like</p>
+                  <blockquote> 
+                    <p><strong><font color="#FF0000">2-&gt;1: [can not reach]<br>
+                      2-&gt;3: [2] 3&lt;-2<br>
+                      2-&gt;4: [2] 4&lt;-2<br>
+                      2-&gt;5: [4] 5&lt;-3&lt;-2<br>
+                      2-&gt;6: [7] 6&lt;-5&lt;-3&lt;-2<br>
+                      time: 2343.22</font></strong></p>
+                  </blockquote>
+                  <p>Likewise, if you input source node as node 3, it should output 
+                  </p>
+                  <blockquote> 
+                    <p><strong><font color="#FF0000">3-&gt;1: [can not reach]<br>
+                      3-&gt;2: [can not reach]<br>
+                      3-&gt;4: [1] 4&lt;-3<br>
+                      3-&gt;5: [2] 5&lt;-3<br>
+                      3-&gt;6: [5] 6&lt;-5&lt;-3<br>
+                      time: 146.16</font></strong></p>
+                  </blockquote>
+                  <p>Note that I do not know what the unit of time is (it is not 
+                    sec or mili-sec). If you know what its unit is, please lte 
+                    me know. Anyway, you may just use it as a measure for the 
+                    practical efficiency of codes. </p>
+                  <p>What's difficult in this assignment may be </p>
+                  <ol>
+                    <li>how to do Queue operations : (for Bellman-Ford label-correcting 
+                      algorithm) <br>
+                      this should be no problem for you since you have done BFS 
+                      before. Take a closer look at page 142, then you should 
+                      be able to do it.</li>
+                    <li>how to trace route : (Floyd-Warshall algorithm)<br>
+                      Floyd-Warshall algorithm is very easy to implement (at most 
+                      5-min as I said). What may consume some of your time is 
+                      how you trace route by the nxn predecessor matrix. This 
+                      should also not be hard.</li>
+                  </ol>
+                  <p><strong><a name="suggestion"></a>Supplment material:</strong></p>
+                  <ol>
+                    <li><strong>mytimer()</strong> : to return a time tag. please 
+                      use related files in this <a href="../DS1401/check_time.c">example 
+                      file</a></li>
+                    <li><a href="netflow_splib.rar">netflow_splib.rar :</a> you 
+                      may need some time to leaern how to use these network generators</li>
+                  </ol>
+                  <p><strong>Special Notice:</strong></p>
+                  <p><font color="#006600">Ok, now you should have known how to 
+                    measure the time spent on smoe procedures/steps. I will ask 
+                    you to do some experiments to measuring the time spent in 
+                    solving some given network using ALL the shortest path codes 
+                    you write (i.e. Dijkstra's binary heap, Bellman-Ford, and 
+                    Floyd-Warshall). This will be part of next coding assignment. 
+                    <br>
+                    Therefore, if you used a very stupid way to implemtn Dijkstra's 
+                    algorithm or Bellman-Ford algorithm, you may try to fix it 
+                    so that it becomes more efficient.</font></p>
+                  <p> 
+                  <hr>
+                  About turn-in the code electronically:</p> <ol>
+                    <li>you have to create a directory named <font color="#0000FF"><strong>r3890123_hw4</strong></font> 
+                      (where you should replace r3890123 to be your student id), 
+                      then put your code(s) into that directory, then go up one 
+                      level, zip the whole directory by<br>
+                      <font color="#0000FF"><strong>zip -r r3890123_hw4.zip r3890123_hw4</strong></font><br>
+                      then upload that zip file to our class website.</li>
+                    <li><strong>!!Note that any late turn-in after <font color="#FF0000">05/25 
+                      9:00 </font>will not be allowed. !!</strong></li>
+                  </ol>
+                  <p>&nbsp;</p></TD>
+              </TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+              <TR></TR>
+            </TBODY>
+          </TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../NETFLOW1702/index.html">Syllabus</a>][<a href="../NETFLOW1702/rules.html">Grading 
+            rules</a>][<a href="../NETFLOW1702/programming.html">Programming rules</a>][<a href="../NETFLOW1702/material.html">Course 
+            materials</a>]</DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="../../course">Course Main Page</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>
