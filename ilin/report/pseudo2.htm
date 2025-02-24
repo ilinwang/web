@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Stupid Method</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<H2 ALIGN=CENTER><FONT SIZE=+3>Stupid Method</FONT><FONT SIZE=+2>:</FONT>
+</H2>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P>Given Demand Matrix D, Network G, 
+
+<P>one link has m(i,j) fibers, each fiber can let w wavelengths pass through
+it.<BR>
+
+
+<P><B>Constraints</B>: 
+
+<UL>
+<LI>every fiber can have w<SUB>l</SUB> wavelength, 1&lt;=w<SUB>l</SUB>&lt;=8
+</LI>
+
+<LI>in each fiber, every wavelength must be different with each other </LI>
+</UL>
+
+<P><B>Stupid Method:</B> 
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD>Sort d<SUB>ij</SUB> in descending order 
+Loops of scanning each d<SUB>ij</SUB> in descending order: 
+
+<UL>
+<B>for</B> each d<SUB>ij</SUB> 
+
+<UL>
+<B>findSP</B>(w<SUB>i</SUB>=1, d<SUB>ij</SUB>) 
+</UL>
+</UL>
+
+<OL>
+<OL>
+<B>if</B> return yes, <B>then</B> end current loop, <B>goto</B> next
+d<SUB>ij</SUB> 
+
+<B>else</B> 
+
+<OL>
+w<SUB>i</SUB>++ 
+</OL>
+
+<B>findSP</B>(w<SUB>i</SUB>, d<SUB>ij</SUB>) 
+</OL>
+</OL>
+
+Sum up # wavelength needed <B>for</B> each link 
+
+<OL>
+<B>for</B> each link, add up # of the corresponding link in w<SUB>i</SUB>
+network, if its cost is INFINITY. 
+</OL>
+
+scan <B>for</B> each link, compute # fiber needed for that link 
+
+<OL>
+<B>if</B> (#wavelength needed on this link / 8)&gt;(# fibers originally
+on this link) 
+
+<B>then</B> add int(#wavelength on this link / 8)+1 fiber to this link
+
+</OL>
+
+<B>END</B> 
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<p>
+<HR>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FFFFFF" >
+<TR>
+<TD><B>findSP</B>(w<SUB>i</SUB>, d<SUB>ij</SUB>) 
+<OL>
+<LI><B>for</B> w<SUB>i</SUB>'s network, find Shortest Path for d<SUB>ij</SUB>
+</LI>
+
+<LI><B>if</B> we find one with finite cost, then </LI>
+
+<OL>
+assign this path to d<SUB>ij</SUB> <BR>
+mark all arcs along this path on this wi network to be INFINITY <BR>
+return yes 
+</OL>
+
+<B>else</B> 
+
+<OL>
+return no 
+</OL>
+</OL>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<P>
+<HR>
+
+<P><B>Advantages:</B> 
+
+<OL>
+<LI>easy to implement, although stupid </LI>
+
+<LI>we can use this to pre-analyze the real problem. After applying this
+algorithm to the real problem, we will obtain an upper bound about # of
+wavelength/fiber needed. This information may help us to develop mature
+algorithm. </LI>
+</OL>
+
+<P><B>Disadvantages</B>: 
+
+<OL>
+<LI>This method may result in many wavelengths(say, W), because I don't
+add the constraints about available number of wavelength(8) here.(so, W
+may &gt; 8) </LI>
+
+<LI>This method may waste lots of memory space, because I duplicate the
+topology of the network &quot;# wavelength&quot; times. For example, we
+will need space to store Wxn nodes, Wxm arcs, and in the worst case, we
+may need to run findSP W times to find a shortest path. </LI>
+
+<LI>All of the above, are because <B>we have to satisfy all the demands
+d<SUB>ij</SUB></B>. Adding new fiber is the worst way to satisfy all the
+demands. However, since this problem is NP-hard, I don't think we can solve
+this problem well only by heuristics if we still can not define all the
+cost and constraints clearly. </LI>
+</OL>
+
+<P><B>Other Options?</B> 
+
+<OL>
+<LI>So far, all the papers I have read <B>do not try to satisfy all the
+demands</B>. They only try to minimize the blocking probability. If we
+still want to satisfy all the demands, this will be very difficult, and
+may not have any good method to have it done. Because: </LI>
+
+<UL>
+<LI>the problem may be infeasible: with the fixed network topology, given
+any demand matrix. We can't guarantee to satisfy all the demands. If we
+insist to do so, adding new fibers is the easiest way. </LI>
+
+<LI>otherwise, we may have to re-routing some demand which occupies a path
+that conflicts too many demands. However, if we do this in the middle way,
+we can't guarantee the new route for this demand won't conflict others
+again in the future. </LI>
+
+<LI>Another heuristic to solve the above problem is to analyze the result
+network after we applied this STUPID METHOD. We can analyze for each demand,
+adding up # of wavelengths needed along the path, and see which demand(s)
+has the biggest #, then, try to rerout it. Again, this is heuristics, and
+shoul be very hard.(because we can't guarantee that we will decrease #
+of fibers when we do so.) </LI>
+</UL>
+</OL>
+
+<P><B>What to do next:</B> 
+
+<P>Unknown Yet..... 
+
+</BODY>
+</HTML>

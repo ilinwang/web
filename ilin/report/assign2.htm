@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>2nd Algorithm</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<H2 ALIGN=CENTER><FONT SIZE=+3>Second Method</FONT><FONT SIZE=+2>:</FONT>
+</H2>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><B><FONT SIZE=+2>Objective:</FONT></B></P>
+
+<UL>
+<LI>because the 1st method may waste too many fibers. Remember, in the
+later stages, especially when the algorithm is going to finish assigning
+all the demands, the demands may try to use the new fiber, instead of the
+old one (because I did not change the cost when I add new fiber.)</LI>
+
+<LI>In this new method, I tried to &quot;include&quot; the cost of adding
+a new fiber, which should make the algorithm 'prefer' existing available
+fiber.</LI>
+</UL>
+
+<P><FONT SIZE=+2><B>Ho</B>w</FONT></P>
+
+<UL>
+<LI>In order to achieve better result, I <B><I>only allow 1 unit </I></B>of
+demands to be sent once a time.Because I only &quot;reserve&quot; 1 more
+capacity once a time, if there is a big demand, say, 2.5 units, in this
+algorithm, I have to send it 3 times.¡@<BR>
+If I send all of them at the same time, the result won't be &quot;<B><FONT COLOR="#DC143C">optimal</FONT></B>&quot;,
+because each arc in virtual network only has capacity=1, if researving
+a specific fiber is very cheap, the cost of sending 2.5unit through that
+fiber(by adding that fiber 3 times) may be cheaper than spreading out 3
+disjoint pathes for sending it.<BR>
+Therefore, sendint 1 unit once a time should achieve better 'minimum cost'
+globally.</LI>
+
+<LI>Main idea : </LI>
+
+<UL>
+<LI>after we assign 1 unit of flow, we change all the cost of the arcs
+along the assigned path, by adding the fee of &quot;<B>researving</B>&quot;
+that fiber &quot;<B>next time</B>&quot;. Also, we increase their capacity
+to be 1 again, so that at any time in the process, it is always feasible
+to send 1 unit along the network, and, this way has included the cost of
+adding new fibers globally.<BR>
+Therefore, the result should be better than the 1st method which only adding
+new fibers with 0 cost.</LI>
+
+<LI>Since everytime when assign 1 unit of flow, it is always feasible,
+this problem turns into using <B><I>Shortest Path Algorithm</I></B>, instead
+of <B><I>Simplex Algorithm</I></B> in 1st method.</LI>
+</UL>
+</UL>
+
+<P><B><FONT SIZE=+2>Advantages</FONT></B>:</P>
+
+<UL>
+<LI>Because I include the cost of &quot;<B><I>researving</I></B>&quot;
+a new fiber into this algorithm, the algorithm will not try to add a new
+fiber only if adding a new fiber costs less than traversing through other
+paths.Therefore, the result should be better than the 1st method.</LI>
+
+<LI>Using Shortest Path Algorithm to solve the problem is easier than using
+Network Simplex Algorithm, however, this comes with teh cost that we can
+only send 1 unit once a time, which may result in much more loops of solving
+the Shortet Path problem.</LI>
+</UL>
+
+<P><B><FONT SIZE=+2>Disadvantages</FONT>:</B></P>
+
+<UL>
+<LI>To achieve better result, I only allow 1 unit to be sent once a time.
+If there are too many units totally, it will take too much time in solving
+the Shortest Path problem.</LI>
+</UL>
+
+<CENTER><P>
+<HR WIDTH="100%"></P></CENTER>
+
+<CENTER><P><IMG SRC="./gif/assign32.gif" HEIGHT=606 WIDTH=336></P></CENTER>
+
+<CENTER><P><B>Main Procedure of the 2nd Method</B> 
+<HR WIDTH="100%"></P></CENTER>
+
+<CENTER><P><IMG SRC="./gif/assign31.gif" HEIGHT=731 WIDTH=411></P></CENTER>
+
+</BODY>
+</HTML>

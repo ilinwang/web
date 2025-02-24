@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Routing and Switching in a Wavelength Convertible Optical Network
+</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<P><FONT SIZE=+1><B>Title</B>: <B>Routing and Switching in a Wavelength
+Convertible Optical Network</B> </FONT></P>
+
+<P><B>Author</B>: Kuo-Chun Lee and Victor O. K. Li </P>
+
+<P><B>Purpose</B>: </P>
+
+<OL>
+<LI>wavelength-convertible switch architecture and routing algorithm for
+circuit-switched WDM optical networks is studied in this paper. </LI>
+
+<LI>Wavelength converters are used to resolve wavelength conflicts and
+to reuse wavelengths </LI>
+
+<LI>these converters are not dedicated to individual channels, but are
+shared by the channels of a node or an outbound link in the <I>share-per-node</I>
+or the <I>share-per-link</I> wavelength-convertible switch, respectively.
+</LI>
+
+<LI>they developed a routing algorithm to conserve wavelength converters
+while maintaining performance close to that of a network with abundant
+converters. </LI>
+</OL>
+
+<P><B>Results</B>: they find the converters can improve the network performance
+such as the blocking probability and fairness considerably<BR>
+
+<HR></P>
+
+<P><B>Introduction</B> </P>
+
+<OL>
+<LI>circuit-switched WDM network may be configured as a broadcasting or
+a routing architecture. </LI>
+
+<UL>
+<LI>In a broadcasting network, each node broadcasts the incoming signal
+of each inbound link to all the outbound links so that one end node receives
+the wavelengths from all the others. </LI>
+
+<LI>merit of a broadcasting network is its simplicity in architecture and
+ease of control. but its wavelength utilization is not efficient because
+each wavelength can service at most 1 communication node pair.?? </LI>
+
+<LI>In a routing network, each node selectively forwards the inbound signal
+to the appropriate outbound links, and some of the wavelengths may be received
+at each end node. </LI>
+
+<LI>The routing network has better wavelength usage by routing multiple
+connections using the same wavelength in spatially disjoint areas. </LI>
+</UL>
+
+<LI>depending on the routing capability, link-selective &amp; wavelength-selective
+routing networks are available. </LI>
+
+<UL>
+<LI>link-selective routing networks: <BR>
+[1,2,16] propose the linear lightwave network using the linear divider
+and combiner(LDC) for link-selective routing. </LI>
+
+<UL>
+<LI>In [16], signals on a link are grouped into wavebands. The signal of
+any outgoing link at LDC is a linear combination of the signals of the
+incoming links, and the aggregate wavelengths from a particular incoming
+link and waveband are treated as an inseparable bundle and routed from
+the input ports of the node. </LI>
+
+<LI>the individual signals can not be differentiated unless they are in
+different wavebands. </LI>
+</UL>
+
+<LI>wavelength-selective routing networks: <BR>
+[5,6] proposes the lightnet which can selectively route the inbound signal
+according to its wavelength. <BR>
+Each individual circuit on a particular wavelength is demultiplexed and
+then directed to the appropriate outbound link. </LI>
+</UL>
+
+<LI>to increase the efficiency, they propose the wavelength-convertible
+routing network where the wavelength converter is available at each switching
+node to change the wavelength of the transit circuits from any incoming
+wavelength to an arbitrary outgoing wavelength. The efficiency of wavelength
+usage is <B>better</B> than the existing broadcasting and routing network
+architectures. </LI>
+
+<LI>to increase the efficiency, the wavelength converters are shared by
+the inbound circuits at each switching node. Routing protocols are designed
+to control wavelength conversions and conserve wavelength converters.</LI>
+</OL>
+
+<P>
+<HR><B>Architecture</B> </P>
+
+<OL>
+<LI>circuit occupies a channel(a wavelength of a link) when its signal
+passes through a link. </LI>
+
+<LI><I>dedicated</I> wavelength-convertible switch: <BR>
+an aggregate optical signal==&gt;demultiplexed into separate wavelengths
+of signal==&gt;be switched to one of the output ports connected to the
+desired outbound link by the nonblocking optical switch==&gt;pass through
+wavelength converter==&gt;various wavelengths of circuits combine to form
+an aggregate signal===&gt;not very cost efficient since some circuits may
+not always need conversions. an effective way is to share the converters.
+</LI>
+
+<LI><I>share-per-node</I>: <BR>
+all the converters at the switching node are collected in the converter
+bank which can be accessed by all the incoming circuits of that switching
+node. demultiplexed wavelengths are fed to the 1st optical switch:(1)if
+a wavelength does not need conversion, it will be directed by this optical
+switch to the proper outbound link(2)if it need conversion, it will be
+directed to the converter bank=&gt;then the converted wavelength is switched
+to the appropriate outbound link by the 2nd optical switch. </LI>
+
+<LI><I>share-per-link</I>: <BR>
+each outgoing link owns a dedicated converter bank which can be accessed
+only by those circuits going on that particular outbound link. the optical
+switch can selectively forward incoming wavelengths to the desired outbound
+link and the associated output ports with or without converter bank </LI>
+
+<LI>converter bank contains a few wavelength converters . each converter
+is assumed to have identical characteristics and can convert the wavelength
+of an incoming circuit from any input to any output wavelength. </LI>
+
+<LI>advantages of converter:(a)convertibility: resolve wavelength conflicts
+of the circuits on a common link, and reuse wavelengths=&gt;improve performance(b)tunability:
+adapt 1 converter to various conversion needs; allow converters to be shared,
+thus reduces the hardware cost <BR>
+disadvantage:(a)may need O/E conversion which decrease the network speed;
+completely optical conversion is also available. </LI>
+
+<LI>incoming circuits may use the local optical laser and receiver for
+changing wavelength. <I>share-with local</I>: the wavelengths which needs
+conversion is directed by the optical switch to 1 of the receivers in the
+receiver bank to recover the electrical signal which is next used to remodulate
+one of the lasers in the transmitter bank. </LI>
+
+<UL>
+<LI>efficiency of converters of share-with-local is better than share-per-node
+and share-per-link since an end-node transceiver also serves as a wavelength
+converter. ??? but it has the critical flow that electrical switching is
+necessary between receiver and transmitter banks; thus degrades the network
+speed and also violates the desire of keeping the network all-optical.
+So, they did not discuss this architecture. </LI>
+</UL>
+
+<LI>assume a particular node has d inbound, d outbound links, each with
+n wavelengths. dedicated switch needs nd converters, 1 nd*nd optical switch
+<BR>
+share-per-node switch with k converters per node needs 2 optical switches:
+nd*(nd+k) and k*kd. <BR>
+share-per-link switch with k converters per node needs nd*(nd+kd) switch
+??? <BR>
+sharing efficiency of converters: share-per-node&gt;share-per-link&gt;dedicated
+<BR>
+complexity of switching: as above </LI>
+
+<LI>to increase hardware efficiency of converters, a few converters are
+shared by the above structures. Due to the limited # of converters, the
+circuit should be routed on a wavelength-continuous path(i.e. no conversion)
+to reduce wavelength conversion unless resolving the wavelength conflict
+by conversion is required. </LI>
+</OL>
+
+<P>
+<HR><B>Routing</B> </P>
+
+<P>The objective is to minimize the long-term call blocking probability.
+But to find the optimum solution in such a dynamic problem is not feasible
+since current decision will affect the future, also, there are lots of
+possible decisions can be made. So, they apply a heuristic approach. </P>
+
+<P><B>overall algorithm</B> </P>
+
+<OL>
+<LI>Graph Transformation <BR>
+Transform the network to G(V,E,C) </LI>
+
+<LI>Detect Connection and Disconnection Request <BR>
+For a connection request, go to step 3, Call connection <BR>
+For a disconnection request, go to step 4, Call disconnection </LI>
+
+<LI>Call Connection <BR>
+Solve the routing problem(P1) using Dijkstra's algorithm: </LI>
+
+<OL>
+<P>if z<SUB>p</SUB>=INFINITY, reject the connection request <BR>
+otherwise, accept the call, set up the connection and update the edge costs
+<BR>
+Go to step2. </P>
+</OL>
+
+<LI>Call Disconnection <BR>
+Disconnect the circuit and update the edge costs <BR>
+Go to step 2. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Graph Transformation: </B>G(N,L)=&gt;G(V,E,C) </P>
+
+<P>(a)for each channel of wavelength<FONT FACE="Symbol"> l</FONT> on link
+l, </P>
+
+<UL>
+<P>create 2 nodes: transmitting t(l,<FONT FACE="Symbol">l</FONT>) &amp;
+receiving nodes r(l,<FONT FACE="Symbol"> l</FONT>) <BR>
+create 1 arc: channel edge (t,r), with cost c(l,<FONT FACE="Symbol">l</FONT>)
+</P>
+</UL>
+
+<P>(b)at each node i in N, connect each wavelength <FONT FACE="Symbol">l</FONT><SUB>1</SUB>
+on an inbound link l<SUB>1</SUB> to </P>
+
+<UL>
+<P>each wavelength <FONT FACE="Symbol">l</FONT><SUB>2</SUB> on an outbound
+link l<SUB>2</SUB> by the edge <BR>
+(r(l<SUB>1</SUB>,<FONT FACE="Symbol">l</FONT><SUB>1</SUB>),t(l<SUB>2</SUB>,<FONT FACE="Symbol">l</FONT><SUB>2</SUB>)).
+<BR>
+if <FONT FACE="Symbol">l</FONT><SUB>1<IMG SRC="./gif/ne.gif" HEIGHT=17 WIDTH=16></SUB><FONT FACE="Symbol">l</FONT><SUB>2</SUB>=&gt;this
+edge is a converter edge with cost &gt;0 </P>
+</UL>
+
+<P>(c)for each node i in N, create a super source vertex s(i), </P>
+
+<UL>
+<P>connect s(i) to each transmitter of node i </P>
+</UL>
+
+<P>(d)for each node i in N, create a super destination vertex d(i), </P>
+
+<UL>
+<P>connect d(i) from each receiver of node i </P>
+</UL>
+
+<P>(e)all edges except the channel and converter edges have 0 cost </P>
+
+<UL>
+<P>define k'(i): no. of remaining converters at node i <BR>
+k'(l): no. of remaining converters of the outbound link l at node i </P>
+</UL>
+
+<P>cost for channel edges: <BR>
+an idle channel has cost c(l,<FONT FACE="Symbol"> l</FONT>)=f : positive
+constant; an occupied channel edge has INFINITY cost </P>
+
+<P>converter edges: </P>
+
+<P>(1)share-per-node: </P>
+
+<UL>
+<P>if k'(i)&gt;0=&gt; cost of converter edge=g <BR>
+if k'(i)=0=&gt; cost of converter edge=INFINITY </P>
+</UL>
+
+<P>(2)share-per-link: </P>
+
+<UL>
+<P>if k'(l<SUB>2</SUB>)&gt;0=&gt; cost of idle converter edge c(l<SUB>1</SUB>,<FONT FACE="Symbol">
+l</FONT><SUB>1</SUB>,l<SUB>2</SUB>,<FONT FACE="Symbol"> l</FONT><SUB>2</SUB>)=g
+<BR>
+if k'(l2)=0=&gt; cost of idle converter edge c(l<SUB>1</SUB>,<FONT FACE="Symbol">
+l</FONT><SUB>1</SUB>,l<SUB>2</SUB>,<FONT FACE="Symbol"> l</FONT><SUB>2</SUB>)=INFINITY
+</P>
+</UL>
+
+<P>
+<HR></P>
+
+<P><B>Routing</B> </P>
+
+<P>Given G(V,E,C), and a call request with super source-destination vertex
+pair w <BR>
+Find the min-cost path. <BR>
+Define </P>
+
+<UL>
+<P>P<SUB>w</SUB>: set of all paths connecting w <BR>
+<FONT FACE="Symbol">d</FONT><SUB>pe</SUB>=1 :if edge e is on the path p
+<FONT FACE="Symbol">d</FONT><SUB>pe</SUB>=0 :o.w <BR>
+x<SUB>p</SUB>=1 :new call is routed on path p x<SUB>p</SUB>=0 :o.w. </P>
+</UL>
+
+<P>problem P1: 
+<HR></P>
+
+<CENTER><P><IMG SRC="./gif/img00037.gif" HEIGHT=129 WIDTH=185> 
+<HR>This problem can be solved by using any shortest path algorithm such
+as Dijkstra's algorithm. 
+<HR></P></CENTER>
+
+<P><B>Connect and Disconnect</B> </P>
+
+<P>(a)share-per-node: </P>
+
+<UL>
+<P>connect: </P>
+
+<UL>
+<P>if a new call is routed through the channel edge e =&gt; c(e)=INFINITY
+<BR>
+if a new call is routed through the converter edge e at node i =&gt; c(e)=INFINITY
+k'(i)=k'(i)-1 <BR>
+if k'(i)=0 =&gt; let all the other converter edges at the same node i have
+INFINITY cost </P>
+</UL>
+
+<P>disconnect: </P>
+
+<UL>
+<P>if a call is disconnected from the channel edge e =&gt; c(e)=f <BR>
+if a call is disconnected from the converter edge e at node i=&gt; c(e)=g
+, k'(i)=k'(i)+1 <BR>
+if k'(i) becomes 1 from 0 =&gt; restore the weights of all the other converter
+edges at node i to g </P>
+</UL>
+
+<P>(b)share-per-link: </P>
+
+<P>connect: </P>
+
+<UL>
+<P>if a new call is routed through the channel edge e =&gt; c(e)=INFINITY
+<BR>
+if a new call is routed through the converter edge e to outbound link l
+at node i=&gt; c(e)=INFINITY , k'(l)=k'(l)-1 <BR>
+if k'(l)=0 =&gt; let all the other converter edges connecting to this outbound
+link l of node i have INFINITY cost </P>
+</UL>
+
+<P>disconnect: </P>
+
+<UL>
+<P>if a call is disconnected from the channel edge e =&gt; c(e)=f <BR>
+if a call is disconnected from the converter edge e to outbound link l
+at node i=&gt; c(e)=g , k'(l)=k'(l)+1 <BR>
+if k'(l) becomes 1 from 0 =&gt; restore the weights of all the other converter
+edges </P>
+</UL>
+
+<P>connecting to this outbound link at node i to g </P>
+</UL>
+
+<P>
+<HR></P>
+
+<P><B>Numerical Results:</B> </P>
+
+<OL>
+<LI>ARPA2 network with 21 nodes, 52 directed links(26 bi-directed links)
+16 wavelengths per link. Each node has 2,3 or 4 incoming links(avg. 2.5
+links) resulting a total of 32, 48 or 64 incident channels(avg. 40 channels)
+at a node. Input traffic is generated uniformly from each of 21 nodes and
+is destined to the other 20 nodes with equal probability. <BR>
+the requests arrive at each node by independent Poisson process with rate
+r, and mean holding time 1/<FONT FACE="Symbol">m</FONT> with independent
+exponential distribution. </LI>
+
+<LI>each node has infinite # of transmitters and receivers such that the
+connection requests can only be blocked due to the channel or converter
+constraint. </LI>
+
+<LI>the converter reduces call blocking probability <BR>
+the converter augments traffic carried by the network for a given call
+blocking requirement </LI>
+
+<LI>share-per-node is more efficient than share-per-link </LI>
+
+<LI>blocking probability decreases as the no. of converters increases and
+saturates as the no. of converters is greater than some threshold less
+than the total no. of incoming channels. </LI>
+
+<LI>at this threshold, the residual blocking probability is mainly governed
+by the bandwidth constraint of the link??? converters have almost eliminated
+call blocking due to wavelength conflicts. this threshold tends to be smaller
+when the network input traffic is less. </LI>
+
+<LI>The results verifies the previous claim that a limited no. of converters
+is sufficient to provide decent performance. </LI>
+
+<LI>two mechanisms contribute to this threshold: (a)routing encourages
+the circuits to pass through the wavelength continuous paths, thereby reducing
+the unnecessary wavelength conversions. (b)each node may have some terminating
+or originating circuits which do not need wavelength conversions. </LI>
+
+<LI>the converters can improve fairness. the network can accept many long-distance
+calls with converters. This is because long-distance calls take multiple
+hops and are vulnerable to converter constraint. <BR>
+the blocking probability is not a fair performance measure since a routing
+algorithm may decrease its blocking probability by rejecting some long-distance
+calls to accept more short-distance calls. <BR>
+So, the wavelength convertible network should perform better than what
+its blocking probability indicates since more long-distance calls are accepted.
+</LI>
+</OL>
+
+</BODY>
+</HTML>

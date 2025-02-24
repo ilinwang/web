@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Index of I-Lin's Reports</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<CENTER><P><BASE target=""><!BODY bgcolor=f5ccb0 70db93 d9d9f3 TEXT=black LINK=blue VLINK=darkblue></P></CENTER>
+
+<CENTER><TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER BGCOLOR="#FFC0CB">
+<TD ALIGN=CENTER VALIGN=CENTER>
+<H2 ALIGN=CENTER>ReadMe file for AS4.C </H2>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<CENTER><P>
+<HR></P></CENTER>
+
+<P><B><I><FONT SIZE=+1>This is the readme file for my first Assignment
+code : as4.c</FONT></I></B></P>
+
+<UL>
+<LI><B>File required for compile: <A HREF="as4.c">as4.c</A> <A HREF="as4.h">as4.h</A></B></LI>
+
+<LI><B><FONT SIZE=+0>File required for run: <A HREF="topo.dat">topo.dat</A>
+<A HREF="mino.dat">mino.dat</A></FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>Output Files: </FONT></B></LI>
+
+<UL>
+<LI><B><FONT SIZE=+0><A HREF="path.dat">path.dat</A> : a file stores the
+path information for each unit of demand (in the index of unit of demand)</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0><A HREF="arcpath.dat">arcpath.dat</A> : a file stores
+the path information for each arc(virtual) (in the index of virtual arcs)</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0><A HREF="eq.dat">eq.dat</A> : a file stores path information
+for each node, in 3 categories--</FONT></B></LI>
+
+<UL>
+<LI><B><FONT SIZE=+0>only out</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>transport</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>only in</FONT></B></LI>
+</UL>
+
+<LI><B><FONT SIZE=+0><A HREF="vnode.dat">vnode.dat</A> : a file to store
+the associated information for each virtual node</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0><A HREF="varc.dat">varc.dat</A> : a file to store
+the associated information for each virtual arc</FONT></B></LI>
+</UL>
+
+<LI><B><FONT SIZE=+0>Note: </FONT></B></LI>
+
+<UL>
+<LI><B><FONT SIZE=+0><FONT COLOR="#0000FF">Done</FONT>: </FONT></B></LI>
+
+<UL>
+<LI><B><FONT SIZE=+0>assign path by Dijkstra</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>printout which path passes through which arc</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>printout which path passes through which node, in
+the 3 categories</FONT></B></LI>
+
+<OL>
+<LI><B><FONT SIZE=+0>only out : this category stores paths which are originated
+from this node</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>transport : this category store paths which pass through
+this node</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>only in : this category stores paths whose destination
+is this node</FONT></B></LI>
+</OL>
+</UL>
+
+<LI><B><FONT SIZE=+0><FONT COLOR="#FF1493">Not Yet</FONT>: </FONT></B></LI>
+
+<UL>
+<LI><B><FONT SIZE=+0>Cost function: haven't been defined yet</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>make path database for each unit of demand (requred
+for the optimization part)</FONT></B></LI>
+
+<LI><B><FONT SIZE=+0>Optimization part</FONT></B></LI>
+</UL>
+</UL>
+</UL>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><B><I><FONT SIZE=+1>How to compile:</FONT></I></B></P>
+
+<UL>
+<LI>alias <B>/opt/gnu/bin/gcc -ansi -O -wall -pedantic -o</B> to be <B>gcco</B></LI>
+
+<LI><B>gcco as4 as4.c</B></LI>
+</UL>
+
+<P><B><I><FONT SIZE=+1>How to execute:</FONT></I></B></P>
+
+<UL>
+<LI><B>as4 &gt; path.out</B></LI>
+</UL>
+
+<P><B>Sample output: click <A HREF="sample4.out">here </A><I><FONT COLOR="#FF1493">(please
+check the last 8 lines of this file, as3 won't have those output. It is
+the output about how many fibers should be assigned for each link)</FONT></I></B></P>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><B><I><FONT SIZE=+1>File format:</FONT></I></B></P>
+
+<CENTER><TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<TR ALIGN=CENTER BGCOLOR="#000080">
+<TD><FONT COLOR="#EEE8AA"><FONT SIZE=+1>topo.dat</FONT></FONT></TD>
+
+<TD><FONT COLOR="#EEE8AA"><FONT SIZE=+1>mino.dat</FONT></FONT></TD>
+</TR>
+
+<TR>
+<TD WIDTH="50%">6 9 --&gt; 6 nodes 9 arcs <BR>
+1 2 3 1 --&gt; this arc is from 1 to 2 , cost 3, capacity 1<BR>
+1 3 2 1 --&gt; from 1 to 3, cost 2, capacity 1 <BR>
+2 3 2 1 --&gt; from 2 to 3, cost 2, capacity 1 <BR>
+2 4 5 1 <BR>
+2 5 2 1 <BR>
+3 5 4 1 <BR>
+4 6 3 1 <BR>
+5 4 5 1 <BR>
+5 6 4 1</TD>
+
+<TD WIDTH="50%"><BR>
+1 6 10 --&gt; demand from 1 to 6 with 10 units<BR>
+2 5 873 --&gt; demand from 2 to 5 with 873 unit 
+<P><IMG SRC="../gif/sample1.gif" HEIGHT=246 WIDTH=311></P>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<CENTER><P>
+<HR></P></CENTER>
+
+<CENTER><TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+<TR ALIGN=CENTER BGCOLOR="#000080">
+<TH><FONT COLOR="#EEE8AA"><FONT SIZE=+1>Virtual Network Data: 1 -&gt; 6</FONT></FONT></TH>
+
+<TH><FONT COLOR="#EEE8AA"><FONT SIZE=+1>Virtual Network Data: 2 -&gt; 5</FONT></FONT></TH>
+</TR>
+
+<TR>
+<TH width=50%><IMG SRC="../gif/sample2.gif" HEIGHT=507 WIDTH=297></TH>
+
+<TH width=50%><IMG SRC="../gif/sample21.gif" HEIGHT=511 WIDTH=304></TH>
+</TR>
+</TABLE></CENTER>
+
+<P>
+<HR WIDTH="100%"></P>
+
+</BODY>
+</HTML>

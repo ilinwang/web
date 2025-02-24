@@ -1,0 +1,92 @@
+<HTML><HEAD><TITLE>Ph.D. Thesis Chaper 2</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link href="../ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../gif/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><FONT size=+1>Shortest 
+                          Paths and Multicommodity Network Flows</FONT></TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE><I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I>
+      <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=5 align="center" vAlign=top> <p align="center"> <strong>Chapter 
+                    2 Solution methods for multicommodity network flow problems</strong></p>
+                  <p align="center">[<a href="chap2.pdf">pdf:170kB</a>] [<a href="chap2.ps">ps:366kB</a>]</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    In this chapter, we try to summarize most of the solution 
+                    techniques that have appeared in the literature, especially 
+                    those which appeared after 1980.</p>
+                  <p align="justify"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Due to the special block-angular structure of MCNF problems, 
+                    many special solution methods have been suggested in the literature. 
+                    Basis partitioining methods partition the basis in a way such 
+                    that computing the inverse of the basis is faster. Resource-directive 
+                    methods seek optimal capacity allocations for commodities. 
+                    Price-directive methods try to find the optimal penalty prices 
+                    (dual variables) for violations of the bundle constraints. 
+                    Primal-dual methods raise the dual objective while maintaining 
+                    complementary slackness conditions and will be discussed in 
+                    more detail in Chapter 6. In the last two decades, many new 
+                    methods such as approximation methods, interior-point methods 
+                    and their parallelization have been proposed. Although the 
+                    convex or integral MCNF problems are not the main interests 
+                    of this dissertation, we still summarize recent progress in 
+                    these topics. </p>
+                  <p align="justify"><strong>Summary</strong><br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We have introduced 
+                    and summarized most of the methods in the literature for solving 
+                    the MCNF problems. Different solution techniques may be advantageous 
+                    for different MCNF problems depending on the problem characteristics. 
+                    This dissertation focuses on solving the class of MCNF problems 
+                    in which many OD commodities have to be routed. Therefore, 
+                    the algorithms by Barnhart et al. &lt;cite&gt;BaJoHaSi95, 
+                    BaHaVa96, BaHaVa00&lt;/cite&gt; seem to be most suitable for 
+                    our purpose. In Chapter 6, we will propose new primal-dual 
+                    column generation algorithms which follow the PD algorithmic 
+                    framework. We will also exploit the ideas from the CYCLE-RELAX 
+                    algorithm.</p>
+                  <p align="justify"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    In our algorithms (see Chapter 6), subproblems which seek 
+                    shortest paths between multiple pairs must be repeatedly solved. 
+                    Therefore, efficient multiple pairs shortest paths (MPSP) 
+                    algorithms will speed up the overall computational efficiency 
+                    of our MCNF algorithms. We introduce several shortest path 
+                    algorithms in Chapter 3, give our own new MPSP algorithms 
+                    in Chapter 4, and describe their computational performance 
+                    in Chapter 5. We will introduce our MCNF algorithms and their 
+                    computational performance in Chapter 6.</p>
+                  </TD>
+              </TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR></TBODY></TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="chap1.html">Chap1</a>][<a href="chap2.html">Chap2</a>][<a href="chap3.html">Chap3</a>][<a href="chap4.html">Chap4</a>][<a href="chap5.html">Chap5</a>][<a href="chap6.html">Chap6</a>][<a href="chap7.html">Chap7</a>][<a href="appendA.html">Appendix</a>][<a href="reference.html">Reference</a>] 
+          </DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="index.html">Summary</a>][<a href="vita.html">Vita</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

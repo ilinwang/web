@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Index of I-Lin's Reports</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<CENTER><P><BASE target=""><!BODY bgcolor=f5ccb0 70db93 d9d9f3 TEXT=black LINK=blue VLINK=darkblue></P></CENTER>
+
+<CENTER><TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER BGCOLOR="#FFC0CB">
+<TD ALIGN=CENTER VALIGN=CENTER>
+<H2 ALIGN=CENTER>Index of I-Lin's Reports </H2>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<CENTER><P>
+<HR></P></CENTER>
+
+<H2>Report:</H2>
+
+<UL>
+<LI><B>Shortest Path Algorithm :</B> click <A HREF="alg1.htm">here</A>
+(<I><FONT COLOR="#FF0000">ok now!</FONT></I>)</LI>
+
+<LI><B>Max Flow Algorithm :</B> click <A HREF="alg2.htm">here</A> (<I><FONT COLOR="#FF0000">ok
+now!</FONT></I>)</LI>
+
+<LI><B>A Heuristic Wavelength Assignment Algorithm for Multihop WDM Networks
+with Wavelength Routing and Wavelength Re-Use :</B> click <A HREF="report1.htm">here</A>
+(<I><FONT COLOR="#FF0000">ok now!</FONT></I>)</LI>
+
+<LI><B>A New Model for Optimal Routing in All-Optical Networks with Scaleable
+Number of Wavelength Converters :</B> click <A HREF="read4.htm">here</A>
+(<I><FONT COLOR="#FF0000">ok now!</FONT></I>)</LI>
+
+<LI><B>Routing and Switching in a Wavelength Convertible Optical Network
+:</B>click <A HREF="read5.htm">here</A> (<I><FONT COLOR="#FF0000">ok now!</FONT></I>)</LI>
+
+<LI><B>Algorithms For routing in a Linear Lightwave Network :</B> click
+<A HREF="read6.htm#1">here</A> </LI>
+
+<LI><B>A Minimum Interference Routing Algorithm for a Linear Lightwave
+Network</B> : click <A HREF="read6.htm#2">here</A></LI>
+
+<LI><B>WDM-Based Local Lightwave Networks PartII:Multihop Systems(II) :</B>
+click <A HREF="read8.htm#1">here</A> </LI>
+
+<LI><B>Topological Optimization Studies</B> : click <A HREF="read8.htm#2">here</A></LI>
+
+<LI><B>Regular Structures : </B>click <A HREF="read8.htm#3">here</A></LI>
+
+<LI><B>ShuffleNet=Hypercube x Ring and Embedding shuffleNet on Mesh Network</B>
+: click <A HREF="read8.htm#4">here</A></LI>
+
+<LI><B>ShuffleNet: An Application of Generalized Perfect Shuffles to Multihop
+Lightwave Networks : </B>click <A HREF="read8.htm#5">here</A></LI>
+
+<LI><B>Stupid Algorithm: </B>click <A HREF="pseudo2.htm">here</A> </LI>
+
+<LI><B>The First Assignment Algorithm : </B>click <A HREF="assign1.htm">here</A>
+</LI>
+
+<LI><B>The Second Assignment Algorithm :</B> click <A HREF="assign2.htm">here</A>
+</LI>
+
+<LI><B>The Third Assignment Algorithm : </B>click <A HREF="assign3.htm">here</A></LI>
+
+<LI><B>Comparason of the 1st, 2nd and 3rdAlgorithm :</B> click <A HREF="compare2.htm">here</A>
+</LI>
+
+<LI><B>Main Procedure :</B> click <A HREF="procedure1.htm">here</A> (<I><FONT COLOR="#FF0000">working
+on now, updated by 12/10</FONT></I>)</LI>
+
+<LI><B>Meeting result about the Optimization part:</B> click <A HREF="./gif/opt2.gif">here</A></LI>
+
+<LI><B>First C code for testing--using Dijkstra: </B><A HREF="./code/as3readme.html">readme</A></LI>
+
+<LI><B>2nd C code which can calculate path information:</B> cllick <A HREF="./code/as4readme.html">here</A></LI>
+</UL>
+<center>
+<!-- Start SuperStats code version 2.0f.  Do not alter this code!
+          http://www.superstats.com -->
+     <script language="JavaScript">
+     var code = " ";
+     </script>
+     <script src="http://code.superstats.com/code?u=ilinwang">
+     </script><script language="JavaScript">
+     document.write(code);
+     </script><noscript><a
+     href="http://stats.superstats.com/c.cgi?u=ilinwang"
+     target="_top"><img
+     src="http://stats.superstats.com/b.cgi?u=ilinwang&z=1"
+     border=0></a></noscript>
+     <!-- End SuperStats tracking code. -->
+
+
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+

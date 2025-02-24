@@ -1,0 +1,260 @@
+<HTML><HEAD><TITLE>Ph.D. Thesis Chaper 5</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link href="../ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../gif/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><FONT size=+1>Shortest 
+                          Paths and Multicommodity Network Flows</FONT></TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE><I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I>
+      <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=5 align="center" vAlign=top> <p align="center"> <strong>Chapter 
+                    5 Implementing new MPSP algorithms</strong></p>
+                  <p align="center">[<a href="chap5.pdf">pdf:336kB</a>] [<a href="chap5.ps">ps:754kB</a>]</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Many efficient SSSP and APSP algorithms and their implementations 
+                    have been proposed in the literature. However, only few of 
+                    them are targeted to solving the MPSP problems or problems 
+                    with fixed topology but changeable arc lengths or requested 
+                    OD pairs. These problems of course can be solved by repeated 
+                    SSSP algorithms. Other methods such as the LP-based reoptimization 
+                    algorithms (see Section 3.5.2) take advantage of previous 
+                    optimal shortest paths and perform either primal network simplex 
+                    methods (when arc lengths change) or dual network simplex 
+                    methods (when OD pairs change). More recent computational 
+                    experiments &lt;cite&gt;Bu93&lt;/cite&gt; indicate these reoptimization 
+                    algorithms are still inferior to the repeated SSSP algorithms 
+                    which repeatedly solve shortest path trees for different requested 
+                    origins (or destinations, depending on which one has smaller 
+                    cardinality).</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    A practical implementation of Carr&eacute;'s algorithm &lt;cite&gt;Ca71&lt;/cite&gt; 
+                    by Goto et al. &lt;cite&gt;GoOhYo76&lt;/cite&gt; tries to 
+                    exploit the sparseness and topology of the networks. For networks 
+                    with fixed topology, their implementation first does a preprocessing 
+                    procedure to identify a good node pivoting order so that the 
+                    fill-ins in the LU decomposition phase are decreased. To avoid 
+                    unnecessary triple comparisons, they record all the nontrivial 
+                    triple comparisons in the LU decomposition, forward elimination 
+                    and backward substitution phases, and then generate an ad 
+                    hoc APSP code. Their method only stores O(m) data structures, 
+                    which is the same as other combinatorial SSSP algorithms but 
+                    is better than O(n&sup2;) as required in general algebraic 
+                    algorithms. However, this comes with the price of storing 
+                    the long codes of nontrivial triple comparisons, and may require 
+                    more total hardware storage. Even worse, the long codes may 
+                    not be compilable for some compilers.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    In particular, we have tested a 1025-node, 6464-arc sparse 
+                    graph and generated a 500MB long code using the code generation 
+                    algorithm of Goto et al. &lt;cite&gt;GoOhYo76&lt;/cite&gt;. 
+                    The code we generated could not be compiled even on a fast 
+                    Sun workstation with 1GB memory using gcc, a C compiler by 
+                    GNU, with optimization tags. If instead we only store the 
+                    arc index of all the triple comparisons, the code will be 
+                    short but still need temporary storage around 200MB to store 
+                    these indices. Therefore, code generation is not practical 
+                    for large networks.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    In this chapter, we observe that Carr&eacute;'s algorithm 
+                    can be implemented combinatorially which resolves the need 
+                    of a huge storage quota by the code generation. Furthermore, 
+                    we can decompose and truncate Carr&eacute;'s algorithm according 
+                    to the indices of the distinct origins/destinations of the 
+                    requested OD pairs. Section 5.1 introduces some notation and 
+                    definitions appearing in this chapter. Section 5.2 describes 
+                    major procedures of our algorithm SLU, a sparse combinatorial 
+                    implementation of Carr&eacute;'s algorithm. Section 5.3 gives 
+                    detailed implementation issues, and techniques for speeding 
+                    up SLU. Implementations of algorithm DLU2, our proposed MPSP 
+                    algorithm that appeared in Section 4.3, are given in Section 
+                    5.4. Computational experiments including a sparse implementation 
+                    of the Floyd-Warshall algorithm, many state-of-the-art SSSP 
+                    codes written by Cherkassky et al. &lt;cite&gt;ChGoRa96&lt;/cite&gt;, 
+                    and networks that we generate, are presented in Section 5.5. 
+                    Section 5.6 shows results of our computational experiments 
+                    and draws conclusions.</p>
+                  <p align="justify"><strong>Summary</strong><br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; After these comprehensive 
+                    computational experiments, we have several observations.</p>
+                  <div align="justify"> 
+                    <ol>
+                      <li>Among the eight different pivoting rules for sparsity, 
+                        the dynamic Markowitz and its variant that employs simple 
+                        tie-breaking technique usually produce fewer fill-ins 
+                        than other pivoting rules.</li>
+                      <li>Among the three different SLU implementations, the bucket 
+                        implementation SLU1 outperforms the other two implementations 
+                        that are based on binary heaps, for all cases. Similarly, 
+                        the bucket implementation of DLU2, DLU21, has better performance 
+                        than the heap implementation.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For general 
+                        larger networks, SLU1 and DLU21 can not compete with the 
+                        best of the state-of-the-art SSSP codes , except for acyclic 
+                        networks. Nevertheless, SLU1 and DLU21 do not perform 
+                        worst for all cases.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For dense graphs, 
+                        usually DLU21 performs better than SLU1; for sparse graphs, 
+                        usually SLU1 is better than DLU21. Unlike other SSSP algorithms 
+                        which perform consistently regardless the number of distinct 
+                        destinations, SLU1 and DLU21 perform relatively better 
+                        for MPSP problems of more distinct requested destinations 
+                        than for problems of fewer distinct requested destinations.</li>
+                      <li>The Asia-Pacific flight network is the only real-world 
+                        network tested in this thesis. Although it is sparse (112 
+                        nodes, 1038 arcs), DLU21 performs better than SLU1, which 
+                        in turn outperforms all of the implemented label-setting 
+                        codes. The label-correcting codes perform similarly to 
+                        SLU1 and DLU21. The Floyd-Warshall algorithm is in no 
+                        case competitive with other SSSP algorithms or our proposed 
+                        MPSP algorithms.</li>
+                      <li>In most SPGRID families, the label-correcting codes 
+                        usually perform the best, except for the SPGRID-PH family 
+                        for which the label-setting codes perform the best. SLU1 
+                        and DLU21 have better performance on the SPGRID-SQ and 
+                        SPGRID-WL families than other SPGRID families.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For each SPGRID 
+                        family, label-setting codes usually perform relatively 
+                        worse on smaller networks.</li>
+                      <li>SLU1 and DLU21 are usually slower than other label-correcting 
+                        and label-setting codes for most SPRAND families. Label-correcting 
+                        codes perform better for most sparse SPRAND families, 
+                        but label-setting codes perform better for most dense 
+                        SPRAND families.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When the range 
+                        of arc lengths decreases (e.g.,&lt;=10 ), label-correcting 
+                        codes tend to perform much worse. When the range of arc 
+                        lengths increases on sparse graphs, label-setting codes 
+                        will perform only slightly worse.</li>
+                      <li>SLU1 and DLU21 are usually slower than other label-correcting 
+                        and label-setting codes for most NETGEN families. Label-correcting 
+                        codes perform better for most sparse NETGEN families, 
+                        but label-setting codes perform better for most dense 
+                        NETGEN families.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When the range 
+                        of arc lengths increases on sparse graphs, label-setting 
+                        codes tend to perform a little worse.</li>
+                      <li>SLU1 and GOR1 usually outperform other codes for all 
+                        SPACYC families except the SPACYC-PD family, for which 
+                        the label-setting codes perform asymptotically the best. 
+                        DLU21 performs asymptotically the worst for cases whose 
+                        arc lengths are all positive. However, all label-correcting 
+                        codes (except GOR1) and label-setting codes perform significantly 
+                        worse for cases with negative arc lengths.</li>
+                    </ol>
+                  </div>
+                  <div align="justify"> 
+                    <p><strong>Conclusion and Future Research</strong></p>
+                    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Although our 
+                      computational experiments are already extensive, more thorough 
+                      tests may still be required to draw more solid conclusions. 
+                      There are too many factors that may affect the performance 
+                      of MPSP algorithms, such as requested OD pairs, arc lengths, 
+                      network topologies, and node orderings.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In our experiments, 
+                      for each test case, we generate only one set of requested 
+                      OD pairs. Different requested OD pairs may affect the performance 
+                      since the distribution of requested pairs in the OD matrix 
+                      will not affect the SSSP algorithms but may affect our MPSP 
+                      algorithms.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; By specifying 
+                      the same numbers of nodes and arcs but different random 
+                      seeds, we may generate several different test cases with 
+                      the same topology but different arc lengths. A more thorough 
+                      experiment could generate several such networks and test 
+                      all of the algorithms on these cases to compute their average 
+                      performance. Due to time constraints, in this chapter we 
+                      use only one random seed for each topology.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Different node 
+                      orderings will significantly affect our MPSP algorithms. 
+                      In this chapter, we choose a node ordering aimed at reducing 
+                      the total fill-ins in the LU factorization. As discussed 
+                      in Section 4.4, another ordering consideration is to group 
+                      the requested OD pairs and assign them higher indices. This 
+                      is difficult to test for randomly generated networks and 
+                      requested OD pairs. It may be worth trying for some real-world 
+                      applications where both the network topology and requested 
+                      OD pairs are fixed.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our limited 
+                      results show that our MPSP algorithms seem to perform worse 
+                      for general larger networks. This may make sense since after 
+                      all SLU and DLU are algebraic algorithms, although we create 
+                      graphical implementations for testing. In particular, SLU 
+                      and DLU are more suitable for cases whose arc lengths are 
+                      randomly distributed for all cases since they are designed 
+                      to work independent of arc lengths. They are based on the 
+                      ordering of triple comparisons. The sequence of triple comparisons 
+                      is fixed and unavoidable in our MPSP algorithms. Thus, even 
+                      if there exists some arc with a very large length, our algorithms 
+                      could not avoid some trivial triple comparisons involving 
+                      this arc, although intuitively we know in advance these 
+                      operations are wasteful. Conventional SSSP algorithms, on 
+                      the other hand, are based more on the comparison of arc 
+                      lengths. For example, the greedy algorithm (Dijkstra's) 
+                      only does triple comparisons on nodes with the smallest 
+                      distance label in each iteration. Adding some &quot;greedy&quot; 
+                      ideas to our MPSP algorithms might help them avoid many 
+                      wasteful operations. However, it is still not clear how 
+                      to integrate these two different methodologies.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If we suspect 
+                      our MPSP algorithms may perform worse than conventional 
+                      SSSP algorithms for most cases, we can design an experiment 
+                      by generating the requested OD pairs most favorable to our 
+                      MPSP algorithms. In particular, since both SLU and DLU can 
+                      compute optimal distance faster for OD pairs with larger 
+                      indices, the most favorable settings for our MPSP algorithms 
+                      are: (a) find an optimal (or a very good) sparse node ordering, 
+                      and (b) in that ordering, generate k requested OD pairs 
+                      that span the k entries in the OD matrix in a line perpendicular 
+                      to the diagonal entries. That is, entries (n,n-k+1), (n-1,n-k+2), 
+                      &#8230;, (n-k+2,n-1), (n-k+1,n) will be the set of requested 
+                      OD pairs. Such a setting will force the conventional SSSP 
+                      to solve k SSSP problems, but will be most advantageous 
+                      for our MPSP algorithms since they are not only in the sparse 
+                      ordering but are also the closest to the &quot;southeastern&quot; 
+                      corner of the OD matrix in the new ordering. If experiments 
+                      on many random graphs with such settings still show that 
+                      our MPSP algorithms do not outperform the conventional SSSP 
+                      algorithms, we would conclude that our MPSP algorithms are 
+                      indeed less efficient.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The experiments 
+                      in this chapter are just a first step in evaluating algorithmic 
+                      efficiency when solving general MPSP problems. More thorough 
+                      experiments will be done in the future.</p>
+                  </div>
+                  </TD>
+              </TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR></TBODY></TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="chap1.html">Chap1</a>][<a href="chap2.html">Chap2</a>][<a href="chap3.html">Chap3</a>][<a href="chap4.html">Chap4</a>][<a href="chap5.html">Chap5</a>][<a href="chap6.html">Chap6</a>][<a href="chap7.html">Chap7</a>][<a href="appendA.html">Appendix</a>][<a href="reference.html">Reference</a>] 
+          </DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="index.html">Summary</a>][<a href="vita.html">Vita</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

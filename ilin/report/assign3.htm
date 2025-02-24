@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>3rd Algorithm</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<H2 ALIGN=CENTER><FONT SIZE=+3>Third Method</FONT><FONT SIZE=+2>:</FONT>
+</H2>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><B><FONT SIZE=+2>Objective:</FONT></B></P>
+
+<UL>
+<LI>because the 2nd method can only send 1 unit once a time, which may
+take too long to finsih the algorithm. </LI>
+
+<LI>In this new method, I send 1 demand as the 1st method, and using the
+concept of &quot;researving&quot; new fiber as 2nd method.t</LI>
+</UL>
+
+<P><FONT SIZE=+2><B>Ho</B>w</FONT></P>
+
+<UL>
+<LI>Send 1 demand once a time as the 1st method; Reseave the next fiber
+when capacity becomes 0 as he 2nd method.</LI>
+
+<LI>The main procedure is the combination of the 1st and 2nd method. Basically,
+we send 1 demand from the largest one to the smallest one. However, if
+a demand is really too large, and can't be feasible, we will have to <B>add
+new fiber for all the arcs as the 1st method. </B>If it is feasible, then,
+we scan for all the arcs on the assigned paths, if its capacity becomes
+0 after the assignment, we will <B>researve for next fiber, and change
+the capacity and cost as the 2nd method</B>. </LI>
+
+<LI>However, this is not as easy as the 2nd method when we want to update
+the network after assigning 1 demand. In the 2nd method, we can always
+guarantee the feasibility because the max flow it can send will be at least
+1 unit. And also, it will only occupy single path. In the 3rd method, the
+result will be complicated, there may be a path with 'tree' structure.
+And also, 2 paths may use some arcs together as long as the capacity is
+allowed. So, how to update the nework after the assignmet will be very
+complicated.</LI>
+
+<LI>Updating Network:</LI>
+
+<UL>
+<LI>Do not update the network after we finish assign that demand</LI>
+
+<LI>If we find the demand can't be satisfied, we will add 1 fiber for all
+the arcs, that is, capacity++, till we satisfy that demand</LI>
+
+<LI>After the assignment, scan for all the arcs along the assigned paths,
+<BR>
+if the capacity beomces 0, we <FONT COLOR="#B22222">turn its flag ON, capacity=1,
+cost+=fiber_cost <BR>
+</FONT>[<FONT COLOR="#800000">Note: here for 1 arc, I at most only add
+1 fiber</FONT>]<BR>
+if the capacity does not become 0, we do nothing for that arc</LI>
+
+<LI>Now, we may have to scan all the arcs whose flags just turn off<BR>
+For those which correspond to the same arc in the pysical network, we will
+<FONT COLOR="#FF0000">only choose 1 </FONT>to change the cost to include
+the new fiber fee[do not change its cost, because we already included in
+last step]; and then renew all the others' cost to be their original cost
+[<FONT COLOR="#A0522D">cost-=fiber_cos</FONT>t]. [<FONT COLOR="#A0522D">all
+these arcs' capacity=1, flag=ON</FONT>].</LI>
+</UL>
+
+<LI>Since we can not guarantee to satisfy a large demand, we may need to
+add new fiber overallly as the 1st method. Also, for the same sake, we
+have to use <B><I>Simplex Algorithm</I></B> as the 1st method. </LI>
+</UL>
+
+<P><B><FONT SIZE=+2>Advantages</FONT></B>:</P>
+
+<UL>
+<LI>Because I include the cost of &quot;<B><I>researving</I></B>&quot;
+a new fiber into this algorithm, the algorithm will not try to add a new
+fiber only if adding a new fiber costs less than traversing through other
+paths.Therefore, the result should be better than the 1st method.</LI>
+
+<LI>Because I send 1 demand instead of 1 unit of demand, so, it should
+be faster than the 2nd method. But the result should not be as optimal
+as which of the 2nd method.</LI>
+</UL>
+
+<P><B><FONT SIZE=+2>Disadvantages</FONT>:</B></P>
+
+<UL>
+<LI>The way of adding new fibers when we can't satisfy a large demand is
+also the disadvantage of the 1st method. </LI>
+
+<LI>It has more complicated updating network part than the 2nd method.
+Also, its result is not as optimal as the 2nd method</LI>
+</UL>
+
+<CENTER><P>
+<HR WIDTH="100%"></P></CENTER>
+
+<CENTER><P><IMG SRC="./gif/assign32.gif" HEIGHT=606 WIDTH=336></P></CENTER>
+
+<CENTER><P><B>Main Procedure of the 3rd Method</B> 
+<HR WIDTH="100%"></P></CENTER>
+
+<CENTER><P><IMG SRC="./gif/assign41.gif" HEIGHT=731 WIDTH=431> </P></CENTER>
+
+</BODY>
+</HTML>

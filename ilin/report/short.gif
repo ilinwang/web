@@ -1,0 +1,78 @@
+<!--龜-->
+
+<html>
+<head>
+<title>お知らせ</title>
+</head>
+
+<body bgcolor=#FFE4C4>
+
+<h2>proxy.fujitsu.co.jpからのお知らせ</h2>
+
+これはproxy.fujitsu.co.jpからのお知らせです。<br>
+このページはproxy.fujitsu.co.jpで許されていないアクセスを行なった場合などに
+表示されます。<br>
+このページが表示されているということはあなたのPROXYサービスの使い方に誤りが
+あります。<br>
+以下をよく読んで対処してください。
+
+<hr>
+
+<ul>
+  <li><b>proxy.fujitsu.co.jp経由では社内のWWWサーバにアクセスできません</b>
+
+       <p>
+       proxy.fujitsu.co.jpは社外のWWWサーバにアクセスするためのサービスです。
+       proxy.fujitsu.co.jpからは社内のWWWサーバにアクセスできません。
+       PROXYサーバにkawasaki.proxy.fujitsu.co.jp,tokyo.proxy.fujitsu.co.jpを
+       指定する場合、「No Proxy」(PROXYサーバを使用しない)に必ず
+       fujitsu.co.jp,pfu.co.jpを設定して下さい。
+       この設定をしないと社内のWWWサーバを参照できません。
+       </p>
+
+  <li><b>proxy.fujitsu.co.jpではFTP Proxy(ftp://...)をサービスしていません</b>
+
+       </p>
+       HTTP Proxy,Gopher Proxyのみサービスしています。
+       FTP Proxyは以下の理由によりサービスしていません。
+       </p>
+       <ul>
+	 <li>PROXYサーバとPROXY用の商用インターネット回線の負荷を軽減させる
+	 <li>社外へのftpはPROXY以外の方法(socks)で可能
+       </ul>
+       <p>
+       また、社内には以下のようなanonymous ftpサービスを行なっている
+       FTPサーバがあります。
+       すぐに社外にftpするのではなくて、まずこれらの社内のFTPサーバに無いか、
+       確認してから社外にftpするようにしてください。
+       </p>
+       <ul>
+	 <li>ftport.flab.fujitsu.co.jp<br>
+	      fnet.guideにポストされている
+	      「Anonymous-ftp Service for FNET-users on FTPORT」を参照して
+	      ください。
+	 <li>ftp.ai.cs.fujitsu.co.jp<br>
+	      FreeBSD関連、Java関連が豊富
+	 <li>ftp.fujitsu.co.jp
+       </ul>
+       <p>
+</ul>
+
+以下に<a href="http://www.nic.fujitsu.co.jp/fnetjoin/proxy/proxy-manual.html">
+PROXY利用マニュアル</a>があります。
+読んだことのない人は必ず読んでください。
+
+<ul>
+  <li>http://www.nic.fujitsu.co.jp/fnetjoin/proxy/proxy-manual.html
+</ul>
+
+<!--龜-->
+<hr>
+<font size=2>
+FNIC (Fujitsu Network Information Center)<br>
+富士通 ネットワーク高度化推進部 統合サービス推進部<br>
+e-mail: <a href=mailto:fnet-query@fujitsu.co.jp>fnet-query@fujitsu.co.jp</a>
+</font>
+
+</body>
+</html>

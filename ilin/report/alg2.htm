@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Max Flows:</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<P>
+<HR><FONT SIZE=+2><B>Max Flows:</B> </FONT>
+<HR></P>
+
+<OL>
+<LI>Augmenting path algorithm. </LI>
+
+<UL>
+<LI>(a)maintain mass balance constraints ad every node. </LI>
+
+<LI>(b)the algorithm incrementally augment flow along paths from source
+to sink </LI>
+</UL>
+
+<LI>Preflow-push algorithm. </LI>
+
+<UL>
+<LI>(a)flood the network so that some nodes have excesses. </LI>
+
+<LI>(b)the algorithm incrementally relieve flow from excess nodes forward
+to sink or backward to source </LI>
+</UL>
+</OL>
+
+<P><FONT SIZE=+1><B>I. Augmenting Path Algorithm.</B> </FONT></P>
+
+<P><B>algorithm</B> <B><I>augmenting path</I></B> 
+<HR><B>begin</B> </P>
+
+<UL>
+<P>x=0 <BR>
+<B>while</B> G(x) contains a directed path from s to t <B>do</B> <BR>
+<B>begin</B> </P>
+
+<UL>
+<P>identify an augmenting path P from s to t <BR>
+<FONT FACE="Symbol">d</FONT>=min{r<SUB>ij</SUB> :(i,j)<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>
+P} <BR>
+augment <FONT FACE="Symbol">d</FONT> units along P, update G(x) </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> 
+<HR></P>
+
+<P><B>algorithm <I>labeling (Ford &amp; Fulkerson)</I></B> 
+<HR><B>begin</B> </P>
+
+<UL>
+<P>label node t <BR>
+<B>while</B> t is labeled <B>do</B> <BR>
+<B>begin</B> </P>
+
+<UL>
+<P>unlabel all nodes <BR>
+set pred(j)=0 for each j<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>N
+<BR>
+label node s and set LIST={s} <BR>
+<B>while</B> LIST is not empty or t is unlabeled <B>do</B> <BR>
+<B>begin</B> </P>
+
+<UL>
+<P>remove a node i from LIST <BR>
+<B>for</B> each arc(i,j) in the residual network emanating from i <B>do</B>
+</P>
+
+<UL>
+<P><B>if</B> rij&gt;0 and j is unlabeled <BR>
+<B>then</B> set pred(j)=i, label j, add j to LIST </P>
+</UL>
+
+<P><B>end</B></P>
+</UL>
+
+<P><B>end<BR>
+if</B> t is labeled <B>then</B> augment </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> 
+<HR></P>
+
+<P><B>procedure</B> <B><I>augment</I></B> 
+<HR><B>begin</B> </P>
+
+<UL>
+<P>use the predecessor labels to trace back from sink to source to obtain
+an augmenting path P from s to t <BR>
+<FONT FACE="Symbol">d</FONT>=min{r<SUB>ij</SUB> :(i,j)<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>
+P} <BR>
+augment <FONT FACE="Symbol">d</FONT> units of flow along P and update residual
+capacities </P>
+</UL>
+
+<P><B>end</B> 
+<HR></P>
+
+<P>Drawbacks of labeling algorithm. </P>
+
+<OL>
+<LI># of iterations may be huge for large U </LI>
+
+<LI>if the capacities are irrational, it might not terminate(must select
+augmentation path carefully) </LI>
+
+<LI>forgetfulness--erasing labels will destroy potentially useful information.
+</LI>
+</OL>
+
+<P>
+<HR WIDTH="100%"><B>Max-flow Min-cut Theorem</B> </P>
+
+<OL>
+<LI>The max value of the flow from s to t in a capacitated network <BR>
+==The min. capacity among all s-t cuts </LI>
+
+<P>arc disjoint paths: 2 paths from s to t if they don't have any arc in
+common <BR>
+node disjoint paths:2 paths from s to t is they don't have any node in
+common </P>
+
+<LI>max. # of arc-disjoint paths from s to t == min # of arcs whose removal
+will disconnect all paths from s to t </LI>
+
+<LI>max # of node-disjoint paths from s to t == min # of nodes whose removal
+will disconnect all paths from s to t </LI>
+</OL>
+
+<P><B>Summary</B>: </P>
+
+<UL>
+<LI>weak duality: the value of any flow <IMG SRC="./gif/se.gif" HEIGHT=16 WIDTH=14>
+the capacity of any cut in the network </LI>
+
+<LI>strong duality: the value of some flow = the capacity of some cut in
+the network </LI>
+
+<LI>for problems with nonnegative lower bound on arcs: </LI>
+
+<UL>
+<LI>1st phase: to determine a feasible flow if one exists(a max-flow 0
+lb problem) </LI>
+
+<LI>2nd phase: converts this flow into a max-flow 0lb problem </LI>
+</UL>
+
+<LI>the max-flow problem has a feasible solution &lt;==&gt; the max possible
+outflow of every cut <IMG SRC="./gif/ge.gif" HEIGHT=16 WIDTH=14> the min
+required inflow for that cut </LI>
+</UL>
+
+<P>Ideas to speed up Labeling Max-flow algorithm.</P>
+
+<OL>
+<LI>1.use flow decomposition, theoretically, it's possible to find a max
+flow using at most m augmentations .(however, we need to know a max flow
+in advance!, so, this is impossible.) </LI>
+
+<LI>augment as large increment of flow as possible <BR>
+</LI>
+
+<OL>
+<LI>max. capacity augmenting path algorithm: <BR>
+always augment along a path with the max residual capacity(hard to implement)
+</LI>
+
+<LI>capacity scaling algorithm: <BR>
+augment flow sufficiently large enough </LI>
+
+<LI>using combinatorial strategy to limit the type of augmenting paths
+<BR>
+shortest augmenting path algorithm: </LI>
+
+<P>augment flow along a shortest path from s to t.(define the shortest
+path as a directed path in the residual network with the fewest # of arcs)
+<BR>
+since the length of the shortest path is guaranteed to increase, and each
+time, we at most do m augmentation for a path. </P>
+
+<LI>relaxing the mass balance constraint at intermediate steps of the algorithm.,
+thus we don't require the change of flow starts at s and terminates at
+t. </LI>
+
+<P>preflow-push algorithm: <BR>
+seek out shortest paths as c, but send flows on individual arcs. <BR>
+</P>
+</OL>
+</OL>
+
+</BODY>
+</HTML>

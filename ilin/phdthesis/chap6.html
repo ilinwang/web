@@ -1,0 +1,149 @@
+<HTML><HEAD><TITLE>Ph.D. Thesis Chaper 6</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link href="../ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../gif/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><FONT size=+1>Shortest 
+                          Paths and Multicommodity Network Flows</FONT></TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE><I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I>
+      <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=5 align="center" vAlign=top> <p align="center"> <strong>Chapter 
+                    6 Primal-dual column generation and partitioning methods</strong></p>
+                  <p align="center">[<a href="chap6.pdf">pdf:240kB</a>] [<a href="chap6.ps">ps:617kB</a>]</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    We have briefly introduced the primal-dual methods in Section 
+                    2.4 and key variable decomposition in Section 2.3.3. In this 
+                    chapter, we will combine these two methods to solve MCNF problems.</p>
+                  <p align="justify"><strong>Summary</strong><br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this chapter 
+                    we first discussed generic primal-dual methods (PD) for solving 
+                    origin-destination multicommodity network flow (ODMCNF) problems. 
+                    We proposed two methods to determine the step length theta^{*} 
+                    and choose the latter one for our implementation. We perturbed 
+                    the objective coefficients of the artificial variables to 
+                    resolve the degenerate pivots caused by primal degeneracy.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    We then proposed a new method, the primal-dual key path method 
+                    (KEY), to solve ODMCNF problems. We discussed its properties 
+                    and difficulties, and proposed techniques to resolve cycling 
+                    problems caused by dual degeneracy.<br>
+                    We compared our algorithm KEY with other three algorithms, 
+                    PD, DW, and NA. We found DW, the Dantzig-Wolfe decomposition 
+                    method, was the fastest algorithm in all of our tests. As 
+                    expected, solving the node-arc formulation (NA) without any 
+                    special techniques such as resource-directive methods or the 
+                    basis-partitioning methods introduced in Chapter 2, will be 
+                    time-consuming and very inefficient, except for small networks.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    KEY follows the generic PD steps but uses the key path decomposition 
+                    method to solve a relaxed RPP at each iteration. It is designed 
+                    for problems with large number of commodities. In our limited 
+                    tests, KEY does perform better than PD for cases with more 
+                    commodities. However, for larger cases with few commodities, 
+                    it performs much worse than PD. The reason for its inefficiency 
+                    is that it requires many iterations of key path swapping operations. 
+                    Although our proposed technique, which perturbs the objective 
+                    coefficients for path flows, has reduced the chances of key 
+                    path swapping and resolved the cycling problem caused by dual 
+                    degeneracy, it is still not efficient enough for some larger 
+                    cases.<br>
+                    More tests should be performed, especially using cases with 
+                    a large number of commodities, to draw more solid conclusions 
+                    on the efficiency of KEY.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    We also found that generating all shortest paths for the same 
+                    commodity may not save time in Dantzig-Wolfe decomposition 
+                    with a column generation scheme. That is, generating a single 
+                    shortest path for each commodity is good enough.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    To explain why DW performs so well compared to PD and KEY, 
+                    we give the following reasons:</p>
+                  <blockquote> 
+                    <p align="justify"> First, DW generates fewer shortest paths 
+                      than DW and KEY. In particular, DW will not generate a path 
+                      twice, if we keep all of the previously generated paths 
+                      in the restricted master problem. PD and KEY, on the other 
+                      hand, generate a new set of all shortest paths at every 
+                      iteration using the new dual solutions. Note that between 
+                      two primal-dual iterations, many paths may remain the shortest 
+                      and do not need to be altered. The reason that we remove 
+                      the entire previous set of shortest paths and add a new 
+                      set of shortest paths is that keeping old paths would require 
+                      bookkeeping on each specific path, which is difficult and 
+                      inefficient. In particular, to check whether a path is in 
+                      the current set takes exponential time when there are (exponentially) 
+                      many paths to be added or removed. Furthermore, using CPLEX 
+                      to solve the RPP usually requires the sparse representation 
+                      of the constraint matrix. In this case, each path corresponds 
+                      to a column. Removing and adding columns will require a 
+                      new sparse representation. Although we can add easily columns 
+                      at the end of the matrix, identifying the columns to be 
+                      removed requires sparse matrix operations. Thus, PD and 
+                      KEY invoke many more operations than DW does, making the 
+                      algorithms less efficient.</p>
+                  </blockquote>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Degeneracy is an important issue, especially for primal-dual 
+                    based methods like PD and KEY. Multiple optimal dual or primal 
+                    solutions may cause implementation problems. Techniques that 
+                    choose a &quot;good&quot; optimal solution are desired, and 
+                    may drastically shorten the total running time.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    KEY has one more issue of concern than PD: the memory requirement. 
+                    To implement the key path swapping operations more efficiently, 
+                    we allocate memory to store the initial relaxed RPP at each 
+                    primal-dual iteration. Inside a primal-dual iteration, KEY 
+                    may perform many iterations of key path swapping. The column 
+                    corresponding to the key path is empty, and an empty column 
+                    has no sparse representation at all. Thus, it is clumsy to 
+                    do the key path swapping and column operations only using 
+                    the original sparse representation of the RPP. Although we 
+                    have an efficient way to swap key paths and update each column 
+                    for the commodities that have new key paths, it still requires 
+                    much time, especially when there are many iterations of key 
+                    path swapping operations. Table 3.3 and Table 3.4 show that 
+                    more iterations of swapping key paths results in a longer 
+                    running time compared to PD.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    To make KEY more competitive, new techniques that identify 
+                    better dual improving directions can be developed. Our results 
+                    show that efficient MPSP algorithms play a crucial role in 
+                    improving all of the path-oriented multicommodity network 
+                    flow algorithms, especially primal-dual based algorithms like 
+                    PD and KEY which 85% (PD) or 95% (KEY) of their total running 
+                    time computing shortest paths.</p></TD>
+              </TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR></TBODY></TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="chap1.html">Chap1</a>][<a href="chap2.html">Chap2</a>][<a href="chap3.html">Chap3</a>][<a href="chap4.html">Chap4</a>][<a href="chap5.html">Chap5</a>][<a href="chap6.html">Chap6</a>][<a href="chap7.html">Chap7</a>][<a href="appendA.html">Appendix</a>][<a href="reference.html">Reference</a>]</DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="index.html">Summary</a>][<a href="vita.html">Vita</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

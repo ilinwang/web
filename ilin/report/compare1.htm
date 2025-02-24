@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>First Method	</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<CENTER><P><B><FONT SIZE=+2>Comparison to the First Method &amp; Second
+Method</FONT></B></P></CENTER>
+
+<CENTER><h4><i><font color=darkgreen>This page was updated by
+  <script language="LiveScript">
+
+  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+  </script>
+</font></i></h4><P>
+<HR WIDTH="100%"></P></CENTER>
+
+<TABLE BORDER=1 BGCOLOR="#FFFFFF" >
+<TR BGCOLOR="#0000FF">
+<TD WIDTH=79></TD>
+
+<TD WIDTH="294" BGCOLOR="#0000FF">
+<CENTER><P><FONT COLOR="#EEE8AA"><FONT SIZE=+2><B>First Method</B> </FONT></FONT></CENTER>
+</TD>
+
+<TD WIDTH=331>
+<CENTER><P><B><FONT COLOR="#FFEBCD"><FONT SIZE=+2>Second Method</FONT></FONT></B></CENTER>
+</TD>
+</TR>
+
+<TR>
+<TD WIDTH="79" BGCOLOR="#FFD700">
+<CENTER><P><BR>
+<BR>
+<B><FONT SIZE=+2>How </FONT></B></P></CENTER>
+
+<CENTER><P><B><FONT SIZE=+2>it </FONT></B></P></CENTER>
+
+<CENTER><P><FONT SIZE=+2><B>works</B> </FONT></P></CENTER>
+</TD>
+
+<TD WIDTH=294>
+<UL>
+<LI>Add 1 fiber for all the network whenever we can't assign a demand </LI>
+
+<LI>After we finish all the assignment, truncate redundant fiber </LI>
+</UL>
+
+<P><BR>
+<BR>
+</P>
+</TD>
+
+<TD WIDTH=331>
+<UL>
+<LI>Add 1 new variable--flag: </LI>
+</UL>
+
+<P>ON: researve for next fiber in advance.</P>
+
+<P> OFF: this arc still has spare capacity &gt;= 1</P>
+
+<UL>
+<P> </P>
+
+<LI>each time, only 1 unit of demand can be solved. Because we only researve
+1 more fiber for 1 wavelength each time after we assign the demand, so,
+we can not guarantee that next time, this problem is feasible. </LI>
+</UL>
+</TD>
+</TR>
+
+<TR>
+<TD WIDTH="79" BGCOLOR="#FFD700">
+<CENTER><P><BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<B><FONT SIZE=+2>A<BR>
+d<BR>
+v<BR>
+a<BR>
+n<BR>
+t<BR>
+a<BR>
+g<BR>
+e<BR>
+s</FONT></B><FONT SIZE=+2> </FONT></P></CENTER>
+</TD>
+
+<TD WIDTH=294>
+<UL>
+<LI>Easy to implement (must use <B><I>Simplex Solver</I></B>) </LI>
+
+<LI>Tends to average the traffic: </LI>
+</UL>
+
+<P>For the first few stages, this method is good, because it will try to
+find availabe wavelength, and won't add fiber until it really can't find
+one. So, if there are 100 demands, applying this method for the first 80
+demands should work well. </P>
+</TD>
+
+<TD WIDTH=331>
+<UL>
+<LI>We include the cost of using next fiber after we send 1 unit of demands
+this way will make the algorithm better for choosing the 'better' path
+whose cost is less. </LI>
+
+<LI>Since it will be always feasible to send 1 unit of demands every time.
+We can use <B><I>Shortest Path algorithm</I></B> instead of Min-Cost Flow
+algorithm. SP alg. will get a solution faster. However, remember that this
+comes a cost that we have to apply this SP alg. much more times than the
+1st method, because we can only send 1 unit at a time. </LI>
+
+<LI>This algorithm will also tend to average the traffic. And the effect
+should be better than 1st one, since it really take into consideration
+about adding fiber in advance. If it choose to add fiber, it only add one
+fiber on that arc, unlike adding 1 fiber for all arcs in the 1st method.
+</LI>
+</UL>
+</TD>
+</TR>
+
+<TR>
+<TD WIDTH="79" BGCOLOR="#FFD700">
+<CENTER><P><BR>
+<B><FONT SIZE=+2>D<BR>
+i<BR>
+s<BR>
+a<BR>
+d<BR>
+v<BR>
+a<BR>
+n<BR>
+t<BR>
+a<BR>
+g<BR>
+e<BR>
+s</FONT></B><FONT SIZE=+2> </FONT></P></CENTER>
+</TD>
+
+<TD WIDTH=294>
+<UL>
+<LI>Add 1 fiber for all the links in physical networks at each stage. </LI>
+
+<LI>In the final several stages, since we are using min-cost routing, some
+route may use the new fiber instead of older fibers. </LI>
+</UL>
+</TD>
+
+<TD WIDTH=331>
+<UL>
+<LI>We can only send 1 unit of demands once at a time. If there are too
+many units of demands, this will be very torublesome. Total no. of </LI>
+
+<LI>Need to know the cost in advance for better approximation </LI>
+</UL>
+</TD>
+</TR>
+</TABLE>
+
+</BODY>
+</HTML>

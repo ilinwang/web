@@ -1,0 +1,330 @@
+<html>
+<HEAD>
+   <TITLE>Chapter1 & 2 of My Thesis</TITLE>
+<!-- Changed by: I-Lin Wang, 24-Jul-1996 -->
+
+<BODY BGCOLOR="#EffbF">
+<!body background="./gif/wood.gif">
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<a name="chap1"><h2>Chapter 1</a><br>
+Introduction
+</h2>
+<p>
+The minimum cost flow problem is a special case of the general linear programming problem. It plays a major role in the area of network optimization. With the special structure of a network, researchers can develop more efficient algorithms to solve its equivalent LP formulation. The network simplex algorithm, for example, is designed to take advantage of the network structure and turns out more efficient than the general simplex algorithm as applied to network flow problems.</p>
+<p>
+Although the network simplex algorithm performs well in practice, with standard pivot rules it may have an exponential numbers of pivots. The algorithm discussed in this thesis, called the <i>premultiplier algorithm</i>, is the first polynomial time primal network simplex algorithm for the minimum cost flow problem. Its number of pivots is min {O(nmlognC), O(nm<sup>2</sup>logn)}.</p>
+<p>
+In this thesis, we implement the premultiplier algorithm. First we implement the nonscaling version of this algorithm which runs in pseudopolynomial time. We have also implemented two scaling versions of this algorithm. Finally we compared all thesis codes with Lee's original network simplex code <a href="references.html#r3" target="topics">[3]</a> and Goldberg's cost-scaling network simplex code called "cs2 for each <a href="references.html#r4" target="topics">[4]</a>. The comparison is done on seven problem families produced by 2 generators, NETGEN and GRIDGEN. All of the codes are complied and run by gcc on a SUN SPARC station<a href="notes.html#mark1" target="topics"><sup>1</sup></a> 5.</p>
+<hr><h3>
+<a name="1.1">1.1 Overview of this Thesis</a>
+</h3>
+<p>
+The structure of this thesis is organized as follows. Chapter 2 outlines the background of the premultiplier algorithm and original network simplex algorithm. Chapter 3 explains details of implementing the premultiplier algorithm. Chapter 4 describes the setup and results of our testing. We make our conclusions and discuss more insights into the premultiplier algorithm in Chapter 5.</p>
+
+<hr><img src="./gif/rainbow.gif"><hr>
+<a name="chap2"><h2>Chapter 2 <br></a>
+Background
+</h2>
+<p>
+Here we review some definitions and notations of networks and minimum cost flow problems. Then we outline the original network simplex algorithm and the premultiplier algorithm. For more detailed information, please refer to <a href="references.html#r1" target="topics">[1]</a> and <a href="references.html#r2" target="topics">[2]</a>.
+</p>
+<hr><h3>
+<a name="2.1">2.1 Notations and Definitions</a>
+</h3>
+<p>
+Consider a directed graph G=(N,A) where N is a set of n nodes and A is a set of m arcs. The direction of (i,j) is from the <i>tail</i> node i to the <i>head</i> node j. Each arc has a cost c<sub>ij</sub>, a capacity u<sub>ij</sub>, and a lower bound l<sub>ij</sub>. The flow in arc (i,j) is x<sub>ij</sub>. Associated with each node i, an integer number b(i) represents its supply/demand. If b(i)>0, we say node i is a <i>supply</i> node; if b(i)=0, we say that node i is a <i>transshipment</i> node; and we say that it is a <i>demand</i> node if b(i)<0. Figure 2.1(a) shows an example of a minimum cost flow problem over a network. The minimum cost flow problem is to send flow from supply nodes to demand nodes under the capacity constraints with minimum cost.</p>
+
+The linear programming formulation of minimum cost flow problem is as follows:
+<IMG SRC="./gif/21.gif">--------------------------------(21)<BR>
+subject to<br>
+<IMG SRC="./gif/22.gif">------------(2.2)<BR>
+<IMG SRC="./gif/23.gif">-------------------(2.3)<BR>
+<p>
+The flow x<sub>ij</sub> is a primal variable in the LP formulation. Each node has an associated potential p, which represents dual variables for each constraint of equation (2.2). This node potential is also called a vector of <i>"premultipliers"</i> in the premultiplier algorithm. The <i>reduced cost</i> of arc (i,j) is denoted by c<SUP>p</SUP><SUB>ij</SUB>=c<sub>ij</sub>-p<sub>i</sub>+p<sub>j</sub>. It can be shown easily that for a directed cycle C,<br><IMG SRC="./gif/14_1.gif"> .</p>
+<p>
+The <i>residual network</i> G(x) can be constructed as follows: for a feasible flow vector x, we replace each (i,j) in the original network by two arcs, (i,j) and (j,i), where (i,j) has cost c<sub>ij</sub> and <i>residual capacity</i> r<sub>ij</sub>=u<sub>ij</sub>-x<sub>ij</sub>, (j,i) has cost -c<sub>ij</sub> and residual capacity r<sub>ji</sub>=x<sub>ij</sub>. A residual network only contains arcs with positive residual capacity. If we add node 0 to the network in Figure 2.1(a), and add uncapacitated<a href="notes.html#mark2" target="topics"><sup>2</sup></a> arcs (1,0), (2,0), (3,0) and (0,4) with big cost C', we can send 5 units of flow from the supply node 1 to demand node 4 via node 0. The corresponding residual network for this feasible flow is illustrated in Figure 2.1(b).</p>
+<p>
+A <i>spanning tree</i> T is a connected subgraph of G with (n-1) arcs. In the network simplex algorithm, T represents the basis. We also denote the arcs belonging to T as tree arcs, and arcs not belonging to T as <i>nontree</i> arcs. A spanning tree is hanged from a node called root. For any spanning tree T with a root v, we let T(v) denote a subgraph of G(x) which is a directed <i>spanning in-tree</i> where all arcs are directed towards root v. In T(v), every node has a directed path <i>upward</i> to root v. An arc (i,j) in T(v) is upward if j lies in the path from i to v, and <i>downward</i> otherwise. If a tree arc (i,j) has zero residual capacity, only (j,i) will be in G(x) by definition. In T(v), however, we will add (i,j) with zero residual capacity. Therefore, every tree arc (i,j) becomes 2 arcs, (i,j) and (j,i), in T(v) and we can always find a directed path upward to v from every node. </p>
+<p>
+In a rooted spanning tree, each node i has a <i>predecessor</i> denoted by pred(i). The root node has no predecessor, and we denote this root as pred(root)=-1. There are several ways to define the spanning tree structure. Here we use the <i>FirstChild</i> and <i>RightSibling</i> structure to represent the rooted spanning tree. <a href="references.html#r6" target="topics">[6]</a> We describe it as below. As with other tree data structures, the data structure we use has the advantage of O(n) space for n node rooted tree. Moreover, this representation of trees seems more efficient for the premultiplier algorithm. The tree structure of Fig.2.1(c) is described in Table 2.1 and Table 2.2. In this representation, each node i has 3 pointers pointing to 3 adjacent nodes: (1) <i>pred(i)</i> (2) <i>FirstChild(i)</i> and (3) <i>RightSibling(i)</i>. The pred(i) points to the predecessor of node i. The FirstChild(i) points to the leftmost child of node i, and the RightSibling(i) points to the sibling of i immediately to the right. If node i has no child, we set FirstChild(i)=-1; if node i is the rightmost child of its predecessor, then RightSibling(i)=-1. For our convenience, we also store the tree arc connecting node i and pred(i) as <i>pred_arc(i)</i>. Since the root node has no predecessor, we set pred_arc(root)=-1. This is useful for changing the tree structure, especially when there are multiple arcs between 2 nodes. We store the number of arcs adjacent to node i as <i>n_arc(i)</i>.</p>
+<p>
+For each node, there is an associated arc adjacency list where we store all the arcs adjacent to this node in some fixed order. We denote the first arc in the arclist associated with node i as <i>FirstArc(i)</i>. We also use an arc pointer called <i>CurrentArc(i)</i> to represent the arc we are scanning when we look at node i. When the CurrentArc(i) reaches the end of the arclist of node i, we say that node i has been <i>exhausted</i>, that is, we have scanned all the adjacent arcs of node i, and we set CurrentArc(i)=-1.</p>
+<center>
+<a name="f2.1">Figure 2.1: a network example of minimum cost flow</a>
+<P><A HREF="./ps/fig21ab.eps"><IMG SRC="./gif/fig21ab.gif"></A></P>
+
+<a name="t2.1">Table 2.1:  arc information for initial tree in Figure  2.1(b)</a><pre>
+--------------------------------------------------
+<B>Arc no.</B>  <B>tail</B>  <B>head</B>  <B>cost</B>  <B>capacity</B>  <B>reduced</B>  <B>tree</B>  
+                                     <B>cost</B>           
+--------------------------------------------------
+1        1     2     1     4         1        No    
+2        1     3     2     2         2        No    
+3        2     3     1     3         1        No    
+4        2     4     3     4         3-2C'    No    
+5        3     4     1     3         1-2C'    No    
+6        1     0     C'    M         0        Yes   
+7        2     0     C'    M         0        Yes   
+8        3     0     C'    M         0        Yes   
+9        0     4     C'    M         0        Yes   
+                                                    
+--------------------------------------------------
+</PRE>
+
+<a name="t2.2">Table 2.2:  node information in Figure 2.1(b)</a><pre>
+--------------------------------------------------------------
+<B>Node i</B>  <B>p<SUB>i</SUB></B>     <B>pred(i)</B>  <B>First-</B>    <B>Right-</B>      <B>pred_</B>   <B>n_arc(i)</B>  
+                        <B>Child(i)</B>  <B>Sibling(i)</B>  <B>arc(i)</B>            
+--------------------------------------------------------------
+0       C'+1   -1       1         -1          -1      4         
+1       2C'+1  0        -1        2           6       3         
+2       2C'+1  0        -1        3           7       4         
+3       2C'+1  0        -1        4           8       4         
+4       1      0        -1        -1          9       3         
+                                                                
+--------------------------------------------------------------
+</PRE>
+</center>
+<p>
+To start the algorithm, we add a supernode with zero supply. For each supply or transshipment node, we construct an artificial arc starting from it pointing to the supernode; for each demand node, we construct an artificial arc from the supernode pointing to it. All these artificial arcs have an arc cost C'=1+nC where C=max{|c<sub>ij</sub>| | (i,j)  belongs to  A}, and each has capacity U=INFINITY. We also assign the node potential p<sub>i</sub> for this supernode to be C'+1, for each demand node to be 1, and for each supply node to be 2C'+1. With this arrangement of node potentials, the initial tree arcs will have zero reduced cost. There is more than one way to assign the node potential p. The reason we assign p<sub>i</sub> this way is for the convenience of using the scaling premultiplier algorithm. Now we will have an initial feasible spanning tree flow. (It is feasible for the network flow problem obtained after adding artificial arcs.) Figure 2.1(b) illustrates the initial residual network for the example in Figure 2.1(a). Figure 2.1(c) is the initial spanning tree for the same example.</p>
+<p>
+Note that by adding one supernode and n artificial arcs, we become solving a new problem with larger dimension. In order to avoid an artificial arc with positive flow appearing in the final optimal solution, we assign a big cost C'=1+nC to it. However, for the network flow problems that we considered, assigning C'=1+nC occasionally causes some overflow problems. For the network generators analyzed in this thesis, we assign C'=10 (C+1). This did not lead to any overflow problems, nor did it make some artificial arcs appear in the final optimum solution. </p>
+<p>
+In the following two sections, we will describe the original network simplex algorithm and the premultiplier algorithm.</p>
+<hr><h3>
+<a name="2.2">2.2 Original Network Simplex Algorithm</a>
+</h3>
+<p>
+The network simplex algorithm is a variant of the simplex algorithm for the linear programming problem. To solve the minimum cost flow problem, it begins with an initial feasible flow. A spanning tree structure is a partition all the arcs into 3 groups-T, L and U. T is the set of arcs in the spanning tree representing the basis. L and U denote the nonbasic arcs with flow at their lower bound and upper bound respectively. The flow x associated with the spanning tree structure can be obtained as follows:
+<ul>	 for each (i,j) belongs to U, set x<sub>ij</sub>=u<sub>ij</sub> <br>
+	 for each (i,j) belongs to L, set x<sub>ij</sub>=l<sub>ij</sub> <br>
+	solve the flow balance equation (2.2) to determine the flow x<sub>ij</sub>  for each (i,j) belongs to T 
+</ul>
+If l<sub>ij</sub> <=x<sub>ij</sub> <=u<sub>ij</sub>,  for each (i,j) belongs to T, the spanning tree structure (T,L,U) is <i>feasible</i>. 
+</p>
+<h3>
+Optimality Conditions 
+</h3>
+<p>
+(T,L,U) is an optimal spanning tree structure for the minimum cost flow problem if it is feasible and with some choice of node potential vector p, the reduced cost c<sup>p</sup><sub>ij</sub> satisfies the following conditions: </p>
+<ul>	 for each (i,j) belongs to U, c<sup>p</sup><sub>ij</sub>  <=0 <br>
+	 for each (i,j) belongs to L, c<sup>p</sup><sub>ij</sub>  >=0 <br>
+	 for each (i,j) belongs to T, c<sup>p</sup><sub>ij</sub>  = 0
+</ul>
+<p>
+In the original simplex algorithm for LP, the reduced cost for each basic variable remains zero in each iteration. Similarly, the reduced cost of spanning tree arcs remains zero in the network simplex algorithm. In each iteration, the network simplex algorithm tries to find a nonbasic arc with negative reduced cost and positive residual capacity in the residual network as an <i>entering arc</i> to pivot. Adding the entering arc will create a basic cycle W with negative reduced cost {Sum(c<sup>p</sup><sub>ij</sub>) along all (i,j) belongs to W}  for a unit flow. Along the basic cycle W, we can push flow as much as possible till we find a blocking arc. When we send flow along the basic cycle, we decrease the residual capacity for those arcs with the same orientation as the cycle, and increase the residual capacity for those arcs with the opposite orientation. When an arc in the basic cycle reaches its upper bound or lower bound, we say this arc is <i>saturated</i> and can be pivoted out the basis. If the flow around the cycle is zero in the pivot, we say this pivot is <i>degenerate</i>. A degenerate pivot does not help decrease the total cost of the problem. To avoid this degeneracy, we can use a special tree structure called <i>strongly feasible spanning tree</i>. However, in the implementation described in this thesis, we do not apply this concept to avoid degeneracy. We pivot out the first blocking arc as the <i>leaving arc</i> in the basic cycle.</p>
+<p>
+After the leaving arc is pivoted out, we have a new tree structure. To maintain the basis, we have to update the node potentials so that the basic tree arcs will have zero reduced cost. The algorithm keeps pivoting in and out arcs and updating node potentials till there is no nonbasic tree arc with negative reduced cost in the residual network. Then we have reached the optimality condition.</p>
+<p>
+Note that in the original network simplex algorithm, we have to update node potentials every time after the pivot. The advantage of maintaining node potentials is to evaluate the reduced cost of arcs and get the entering arc easily. However, this comes with the price that we have to maintain the node potentials at each stage. </p>
+A pseudo code for network simplex algorithm is described as follows:<br>
+<p>
+<b>Algorithm</b> <i>network simplex</i><br>
+<b>begin</b>
+<ul>	get the initial feasible flow x;<br>
+	<b>while</b> x is not optimum <b>do</b><br>
+	<b>begin</b><br>
+<ul>		find the entering arc;<br>
+		determine the basic cycle W; find the leaving arc; determine the flow along W;<br>
+		update p and the basic tree;
+</ul>	<b>end
+</ul>
+end</b></p>
+<p>
+For the procedure in the original network simplex algorithm, we do not need to change the root of spanning trees. There are many ways to identify the basic cycle W, depending on the data structures used for the network. For example, Lee's code, which is tested in this thesis, stores depth, thread, and predecessor for each node. It identifies W by using depth and predecessor <a href="references.html#r3" target="topics">[3]</a>. </p>
+<hr><h3>
+<a name="2.3">2.3 Premultiplier Network Simplex Algorithm</a>
+</h3>
+<p>
+In this new simplex algorithm, we will maintain a set of node potentials called "premultipliers for each <a href="references.html#r2" target="topics">[2]</a>. The definition of premultiplier is as follows:</p>
+<ul>
+<b>Definition 1:</b> The vector p of node potentials is called a vector of premultipliers with respect to the spanning in-tree T(v) if  <=0 for every upward arc (i,j) belongs to T(v)
+</ul>
+<p>
+Consider a node i such that all arcs lying in the path from i to root have zero reduced cost. Referring to the definition of premultiplier, we can reroot the spanning tree at node i without violating the definition of premultiplier. By using this characteristic of premultiplier, we define the eligibility of node and arc as follows:</p>
+<ul>
+<b>Definition 2:</b> Node i is <i>eligible</i> with respect to node potentials p if p is a vector of premultipliers with respect to T(i). Arc (i,j) in the residual network is <i>eligible</i> if i is eligible and c<sup>p</sup><sub>ij</sub> < 0.
+</ul>
+<p>
+By pivoting in an eligible arc (i,j), we can construct a basic W composed of 3 parts: the path from node j upward to the apex of W, the path from the apex downward to node i, and arc (i,j). The apex lies in the path from node i to the root. The reduced cost in the path from node j upward to the apex is nonpositive by definition 1. The reduced cost in the path from the apex to node i is zero because i is eligible. Therefore, we try to find an eligible arc to be the entering arc in the pivot procedure, because pushing a unit flow around W will induce a negative cost thus decrease the total cost.</p>
+<p>
+The initialization procedure and the pivot procedure in the premultiplier algorithm are the same as the original network simplex algorithm. However, the premultiplier algorithm uses a very different rule for updating node potentials. Unlike the original network simplex algorithm, the premultiplier algorithm does not update node potential every time after the pivot, instead, it updates node potentials only when it is unable to find any eligible arc. Also, the premultiplier algorithm may change the root after a pivot in order to maintain a vector of premultipliers. We are going to introduce two versions of the premultiplier algorithm: the nonscaling version and scaling version.</p>
+<hr><h3>
+<a name="2.3.1">2.3.1 Nonscaling Premultiplier Algorithm</a>
+</h3>
+A pseudo code for the nonscaling premultiplier algorithm is described as follows:<br>
+<p>
+<b>Algorithm</b> <i>nonscaling premultiplier</i><br>
+<b>begin</b>
+<ul>	get the initial feasible flow x, a spanning tree solution with the T and a vector p of premultipliers with respect to T(v);<br>
+	<b>while</b> x is not optimum <b>do</b><br>
+	<b>begin</b><br>
+<ul>		<b>if</b> there is an eligible arc <b>then</b><br>
+		<b>begin</b><br>
+<ul>			select an eligible arc (k,l);<br>
+			<i>simplex-pivot(k,l)</i>;<br>
+</ul>		<b>end</b><br>
+		<b>else</b> <i>modify-premultipliers</i><br>
+</ul>	<b>end
+</ul>
+end</b>
+</p>
+<p>
+<b>Procedure</b> <i>simplex-pivot(k.l)</i><br>
+<b>begin</b><br>
+<ul>	reset the root of the spanning tree to be node k;<br>
+	let W denote the basic cycle containing (k,l);<br>
+	let d = min{ r<sub>ij</sub> | (i,j) belongs to W };<br>
+	send d units of flow around W;<br>
+	let (p,q) denote the leaving arc of T(k);<br>
+	reset the root of the spanning tree to be p;
+</ul>
+<b>end</b>
+</p>
+<p>
+<b>Procedure</b> <i>modify-premultipliers</i><br>
+<b>begin</b><br>
+<ul>	let E denote the set of eligible nodes;<br>
+	Q={(i,j) | (i,j) belongs to T(v), i does not belong to E, j belongs to E };<br>
+	let D = min{ - | (i,j) belongs to Q };<br>
+	 for each j belongs to E, increase p<sub>j</sub> by D;
+</ul>
+<b>end</b>
+</p>
+<p>
+Note that we reset root twice in the procedure <i>simplex-pivot(k,l)</i>. In the first reset, the vector of premultipliers remains the same. By hanging up k as the root, it is easy to identify the basic cycle W. Then we can send flow along W as much as possible till we find the leaving arc (p,q). Note that (p,q) is a tree arc in the residual network with the same orientation as W. </p>
+<p>
+In the procedure <i>modify-premultipliers</i>, first we have to identify the tree arc adjacent to an eligible node with the smallest absolute value of reduced cost, then adding that absolute value to the potentials of all eligible nodes. If not all the nodes are eligible, D is always positive since the upward arc (i,j) in Q will always has nonpositive reduced cost. D=0 if and only if all nodes are eligible. Note that we can get this D in the procedure simplex-pivot if we perform a search in the spanning tree. By adding D to all the eligible nodes, all the upward tree arcs will still have nonpositive reduced cost, therefore, the resulting vector of node potentials will also be a vector of premultipliers. </p>
+<p>
+Since we don't increase the node potential until we can't find any eligible arc, after we increase the node potentials, the algorithm will either find an eligible arc and perform a <i>simplex-pivot</i> or not find any eligible arc and modify the premultipliers. In the latter case, the number of eligible nodes will increase since by adding D to all eligible node, at least the reduced cost of (i,j) will become zero and node i becomes eligible. The premultiplier algorithm ends when all nodes become eligible and no eligible arcs can be found.</p>
+<p>
+An example of applying the nonscaling premultiplier algorithm for the network in Figure 2.1 is illustrated in Figure 2.2. Note that C=3 and C'=10(3+1)=40 in this example. More detailed procedures of this nonscaling premultiplier algorithm will be described in Section 3.1.</p>
+<center>
+<a name="f2.2">Figure 2.2: A minimum cost flow problem solved by nonscaling premultiplier algorithm</a>
+<p><A HREF="./ps/p2.eps"><IMG SRC="./gif/p2.gif"></A></p>
+</center>
+<hr><h3>
+<a name="2.3.2">2.3.2 Scaling Version of Premultiplier Algorithm</a>
+</h3>
+<p>
+First, we will introduce some new definitions for the scaling premultiplier algorithm. Suppose that p is the set of premultipliers obtained immediately after a modification of premultipliers during an e-scaling phase. Let p denote the premultipliers at the beginning of the e-scaling phase. </p>
+<ul>
+<b>Definition 3:</b> The set N* denotes a subset of nodes whose premultipliers remain the same during the e-scaling phase.<br>
+<b>Definition 4:</b> Let p be a vector of premultipliers with respect to a basic feasible flow x. Then p is a vector of e-premultipliers if c<sup>p</sup><sub>ij</sub>>=  -e  for each (i,j) belongs to G(x).<br>
+<b>Definition 5:</b> Let R be a subset of nodes whose premultipliers are integral multiples of e/4 after they are modified. Node i is <i>awake</i> if i belongs to N* or R and CurrentArc(i)<>-1. A node is <i>asleep</i> if it is not awake. An awakened node goes to sleep if it has been exhausted.<br>
+<b>Definition 6:</b> A nontree arc (k,l) is <i>admissible</i> for the e-scaling phase if node k is both eligible and awake, and c<sup>p</sup><sub>kl</sub><= -e/4.
+</ul>
+A pseudo code for the generic scaling premultiplier algorithm is described as follows:
+<p>
+<b>Algorithm</b> <i>generic scaling-premultiplier</i><br>
+<b>begin</b>
+<ul>	get the initial feasible flow x and a vector p of premultipliers with respect to T(v);<br>
+	e = max {|c<sup>p</sup><sub>ij</sub>| :  <=0, (i,j) belongs to G(x) };<br>
+	<b>while</b> x is not optimum <b>do</b> <br>
+	<b>begin</b>
+<ul>		<i>improve-approximation(x, e, p)</i>;<br>
+		e = max {|c<sup>p</sup><sub>ij</sub>|: c<sup>p</sup><sub>ij</sub>  <=0, (i,j) belongs to G(x) };<br>
+		(note that e is decreased by at least a factor of 2 at each stage)
+</ul>	<b>end
+</ul>
+end</p>
+<p>
+Procedure</b> <i>improve-approximation(x, e, p)</i><br>
+<b>begin</b>
+<ul>	N*:=N;<br>
+	<b>while</b> N* is not empty <b>do</b><br>
+	<b>begin
+<ul>		if</b> there is an admissible arc <b>do<br>
+		begin</b><br>
+<ul>			select an admissible arc (k,l);<br>
+			<i>simplex-pivot(k,l)</i>;
+</ul>		<b>end<br>
+		else</b> <i>modify-e-premultipliers</i>;
+</ul>	<b>end
+</ul>
+end</p>
+<p>
+Procedure</b> <i>modify-e-premultipliers</i><br>
+<b>begin</b><br>
+<ul>	let E denote the set of eligible nodes;<br>
+	N*:=N*-S;<br>
+	if N* is empty then terminate <i>improve-approximation(x, e, p)</i>;<br>
+	D<sub>1</sub> = min{ -c<sup>p</sup><sub>ij</sub> | (i,j) belongs to T(v), i does not belong to E, j belongs to E };<br>
+	D<sub>2</sub> = min{ e/4 - p<sub>i</sub> (mod e/4) | i belongs to E };<br>
+	 for each j belongs to E, increase p<sub>j</sub> by D = min{ D<sub>1</sub>, D<sub>2</sub> };
+</ul>
+<b>end</b></p>
+<p>
+This scaling version uses the same technique to get the initial basic feasible tree T(v) as the nonscaling premultiplier algorithm. We can determine the corresponding flow x and vector of premultipliers p. In the beginning of the e-phase, all nodes are awake since no premultiplier is changed. Then, starting from the root node, we look for an eligible awake node. According to definition 8, an admissible arc can be detected only from an eligible and awakened node. Once we find an admissible arc, we treat it as an entering arc and continue the procedure simplex pivot. The procedure simplex-pivot is the same as in the nonscaling premultiplier algorithm. The algorithm will continue the procedure simplex-pivot till there is no eligible and awakened node. </p>
+<p>
+When the algorithm could not continue pivoting, we have to modify the premultipliers. We update N* by deleting those eligible nodes that were exhausted since we are going to increase their premultipliers. Therefore, they won't be in N* any more in this e-scaling phase. If N* is empty, we move to the next scaling phase, and continue the iterations of pivoting and updating premultipliers.</p>
+<p>
+To update the premultipliers, we need to calculate two values: D<sub>1</sub> and D<sub>2</sub>. D<sub>1</sub> is the same as the D used in the nonscaling version. To obtain D<sub>2</sub>, we have to scan all the current eligible nodes, calculate the minimum value that adding it will make the premultipliers achieve the nearest multiple of e/4. By adding D=D<sub>2</sub><D<sub>1</sub> to each eligible node, we can reawaken some nodes which were asleep before this iteration. Thus we can only need to scan those reawakened nodes to find the admissible arcs. If D=D<sub>2</sub>=D<sub>1</sub>, we should identify those reawakened nodes first, then scan them and those new eligible nodes belonging to N*.</p>
+<p>
+The algorithm will go to the next scaling phase when N* is empty and terminate if e < 1/n. An example of the scaling premultiplier algorithm for the network in Figure 2.1 is illustrated in Figure 2.3. More detailed procedures of this generic scaling premultiplier algorithm will be described in Section 3.2.</p>
+
+
+<center>
+<a name="f2.3">Figure 2.3: the same example solved by the generic scaling premultiplier algorithm</a>
+<p><A HREF="./ps/p31.eps"><IMG SRC="./gif/p31.gif"></A>
+<A HREF="./ps/p32.eps"><IMG SRC="./gif/p32.gif"></A>
+<A HREF="./ps/p33.eps"><IMG SRC="./gif/p33.gif"></A>
+</p></center>
+<h3>
+Modified Scaling Premultiplier Algorithm
+</h3>
+<p>
+If we take a closer look at the example in Figure 2.3, we find that the generic scaling premultiplier algorithm will often get D<sub>2</sub> and keep updating D<sub>2</sub> many times without finding any admissible arc. For example, iterations <a href="notes.html#mark3" target="topics"><sup>3</sup></a> (17)-(19), (20)-(22), (23)-(25), and (26)-(28) in Figure 2.3 are the same. They are just looping around those eligible nodes to find an admissible arc. Since the purpose of updating the premultipliers is to find an entering arc, we do hope not to spend too much time in modifying premultipliers without getting any admissible arc. This intrigued us to develope another scaling premultiplier algorithm using a different rule to update the premultipliers.</p>
+The new algorithm differs from the original one only in the procedure <i>modify-e-premultiplier</i>:
+<p>
+<b>Procedure</b> <i>modify-e-premultipliers</i><br>
+<b>begin</b>
+<ul>	let E denote the set of eligible nodes;<br>
+	N*:=N*-S;<br>
+	if N* is empty then terminate improve-approximation(x, e, p);<br>
+	D<sub>1</sub> = min{ -c<sup>p</sup><sub>ij</sub> | (i,j) belongs to T(v), i does not belong to E, j belongs to E };<br>
+	tc(i)=min{ c<sup>p</sup><sub>ij</sub> | (i,j) does not belong to T(v), r<sub>ij</sub>>0, i belongs to E } or max{ c<sup>p</sup><sub>ji</sub> | (j,i) does not belong to T(v), r<sub>ji</sub>>0, i belongs to E };<br>
+	D<sub>2</sub> = min{ (e/4 - p<sub>i</sub> (mod e/4))+k<sub>i</sub>e/4 | k<sub>i</sub>:minimum nonnegative integer making tc(i)-D<sub>2</sub><-e/4, i belongs to E };<br>
+	 for each j  belongs to E, increase p<sub>j</sub> by D = min{ D<sub>1</sub>, D<sub>2</sub> };<br>
+</ul>
+<b>end</b>
+</p>
+<p>
+The generic scaling premultiplier algorithm only scanned eligible nodes. This modified algorithm scans all the adjacent nontree arcs for each eligible node to identify the minimum value that adding it to the premultipliers of its tail will make this nontree arc admissible. We let tc(i) be the smallest value that adding it to p<sub>i</sub> will at least make one flowable <a href="notes.html#mark4" target="topics"><sup>4</sup></a> nontree arc with reduced cost <-e/4. However, to make that arc become admissible, we also need to reawaken node i. If D=D<sub>2</sub>, we know we will find an admissible arc when we scan node i in the next iteration. Otherwise, we know we won't be able to find any admissible arc for current eligible nodes, thus we can only increase the number of eligible nodes by adding D=D<sub>1</sub>.</p>
+<p>
+This approach will avoid those unprofitable updating premultipliers procedures, and make us find an admissible arc earlier for most of the cases. Whenever we add D=D<sub>2</sub>, we know we will find an admissible arc later and thus save much time in looping iterations. An example of this modified scaling premultiplier algorithm for the same network is illustrated in Figure 2.4. More detailed procedures of this modified scaling premultiplier algorithm will be described in Section 3.2.</p>
+<center>
+<a name="f2.4">Figure 2.4: same example solved by the modified scaling premultiplier algorithm</a>
+<p><A HREF="./ps/p42.eps"><IMG SRC="./gif/p42.gif"></A>
+</p></center>
+<p>
+Comparing Figure 2.3 with Figure 2.4, we find this modified scaling premultiplier algorithm avoids many unprofitable iterations. For example, the iteration (4) in Figure 2.4 is the result of the iterations (4)-(7) in Figure 2.3; iteration (7), (8), (9), (12) and (14) in Figure 2.4 correspond to iterations (10)-(12), (13)-(14), (15)-(28), (31)-(34), and (36)-(39) in Figure 2.3 respectively.</p>
+<p>
+This modified algorithm scans for admissible arcs before updating premultipliers. Therefore, the running time for each iteration of modifying premultipliers is O(m) instead of O(n) in the generic scaling premultiplier algorithm. Although O(m) is worse than O(n) theoretically, this modified scaling premultiplier algorithm always works much better than the generic algorithm in our computational tests.</p>
+<p>
+Next, we are going to describe our implementing details.
+</p>
+
+
+<hr>
+<a name="mark1">
+1.The CPU is SPARC/5. The gcc version is 2.5-95q3.</a><br>
+<a name="mark2">
+2.An arc is "uncapacitated for each if its capacity isinfinity.</a><br>
+<a name="mark3">
+3.Here iteration (i) means the iteration between state (i-1) and state (i).</a><br>
+<a name="mark4">
+4.a 'flowable' arc is an arc with residual capacity</a><br>
+
+
+
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<h4>
+    Next: Go to <a href="chap3.html#chap3"> Chapter 3 </a><br>
+    Go to <a href="toprograms1.html" target="_top"> Premultiplier C Codes </a>
+</h4>
+</BODY>
+
+</html>

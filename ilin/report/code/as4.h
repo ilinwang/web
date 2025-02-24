@@ -1,0 +1,82 @@
+
+#include <math.h>
+#include <time.h>
+#include <sys/types.h>
+#include <sys/times.h>
+#include <limits.h>
+
+#define NULL_NODE -1
+#define MAX_NODE 50000
+
+#define MAX_ARCS 250000
+#define MAX_NODES 50000
+
+#define M 1e10	      /* a very high cost */
+#define U 999999	      /* a very big capacity */
+
+
+struct arc
+{
+  int from,
+      to,
+      cost,
+      u,
+      flag,
+      *path_list,  /* record which unit of demand passes through it */
+      current_path,/* index for recording the index of path for 1 unit */
+      org_no,      /* record its origianl arc no. */
+      wavelength;  /* record its corresponding wavelength */  
+};
+typedef struct arc arc_t;
+typedef arc_t *Parc_t;
+
+struct node
+{
+  int no,
+      dist, 
+      pred, 
+      pred_arc,
+      n_arc,
+      org_n_arc,   /* ==n_arc originally, used for ease of renewing */
+      current_arc, /* a pointer to the array arc_list */
+      *arc_list,   /* list of adjacent arcs, keeping the indeces in star_arc */
+      heap,        /* a pointer to the heap array */
+      d_pred,      /* predecessor of the node in dijkstra */
+      d_pred_arc,  /* predecessor arc of the node in dijkstra */
+      org_no,      /* record its origianl node no. */
+      wavelength,  /* record its corresponding wavelength */
+      perm;
+  int n_path_out,
+      *path_out_list,
+      n_path_in,
+      *path_in_list,
+      n_path_trans,
+      *path_trans_list; 
+};
+typedef struct node node_t;
+typedef node_t *Pnode_t;
+
+
+/*------ globol variables ------*/
+FILE *fptopo, *fpmino, *fppath, *fparcpath, *fpvarc, *fpvnode, *fpeq;
+struct node *star_node;  /* Pointer to array of node list for VN*/
+struct arc  *star_arc;   /* Pointer to array of arc list for VN*/
+
+int org_n_node, org_n_arc, new_n_node, new_n_arc;
+int new_root_node, new_dest_node;
+int amount;
+int org_root_node, org_dest_node;
+int *heap, n_perm=0, root=0;
+int demand=0, unit=0, pathIndex=0;
+ 
+int path[100000], temp_node, path_nodes, curr_arc;
+
+void print_network(), reset_network(), print_node();
+int memory_allocation(), init_arc_list();
+void init_dij(), dijkstra(), heapify(), heapup(); 
+void print_artiarc(), print_heap();
+
+void initialize();
+int short_path();
+void update_network(), print_arc_path(), print_varc(), print_vnode(), print_eq();
+void count_fiber();

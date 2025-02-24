@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>A New Model for Optimal Routing in All-Optical Networks with Scalable Number of 
+</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<P><FONT SIZE=+1><B>Title: A New Model for Optimal Routing in All-Optical
+Networks with Scaleable Number of Wavelength Converters</B> </FONT></P>
+
+<P><B>Author</B>: Chien Chen; Subrata Banerjee </P>
+
+<P><B>Purpose</B>: </P>
+
+<OL>
+<LI>propose a novel approach for modeling the optimal routing and wavelength
+assignment problem in WDM all optical networks. </LI>
+
+<LI>propose a graph model called &quot;interconnected-layered-graph&quot;
+which provides an exact solution of the optimal routing and wavelength
+assignment problem in wavelength convertible networks with arbitrary no.
+of wavelength converters at each node. </LI>
+
+<LI>presented a dynamic routing and wavelength assignment scheme based
+on the proposed interconnected-layered-graph model. It is evaluated for
+various network configurations.<BR>
+</LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Problem</B>: </P>
+
+<P>assume nodes are equipped with limited and scaleable set of wavelength
+converters. They study the RAW problem with each wavelength router equipped
+with a limited no. of wavelength converters shared by all the incoming
+circuits. </P>
+
+<P>Thus, at each switching node with d ports and w wavelengths per port,
+the no. of converters is between 1 and d*w. (if |C|=d|W|, the model is
+exactly the same as the classical circuit-switching theory, which appears
+in most of the papers using wavelength converters.) <BR>
+</P>
+
+<P><B>The Network Model</B><BR>
+</P>
+
+<P>Define the network model N(R,C,A,L.W) for a given WDM optical network
+<BR>
+R={r<SUB>i</SUB>}: set of wavelength routers <BR>
+C={c<SUB>i</SUB>}: set of wavelength converters per wavelength router <BR>
+A={a<SUB>i</SUB>}: set of access nodes <BR>
+L={l<SUB>i</SUB>}: set of directed optical fiber links <BR>
+W={w<SUB>i</SUB>}: set of available wavelengths per link<BR>
+</P>
+
+<OL>
+<LI>for a router r, it can rout an incoming wavelength from one of its
+input port to any of its output port either directly(no converting) or
+via a converter c<SUB>i</SUB>, such that no same wavelengths will be routed
+to the same output port. </LI>
+
+<LI>at each node, no. of converters |C| is assumed to be scaleable from
+1 to d|W|. d is the no. of incoming physical links at that node. So, if
+|C|=d|w|, the network will be equivalent to an electronic circuit switched
+network. </LI>
+
+<LI>the access nodes are directly attached to routers via optical links.
+They provide electro-optical conversions for supporting electronic packet
+and circuit switching operations. It may be an end-user or electronic switching
+equipment. </LI>
+
+<LI>each link in L carries |W| WDM channels. It provides connection between
+a pair of routers or between an access node and a router. </LI>
+
+<LI>Assume the physical connectivity matrix is symmetric.??? 2-way link?
+</LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Analytical Formulation: </B></P>
+
+<OL>
+<LI>assume set of optical connection requests, M={(a<SUB>i</SUB>,a<SUB>j</SUB>)|
+a<SUB>i</SUB>,a<SUB>j</SUB> <IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>A}
+is known initially. Objective is to accommodate as many lightpath requests
+as possible.(i.e. to minimize the blocking probability) </LI>
+
+<LI>the interconnected-layered-graph(ILG) model allows the optimal routing
+and wavelength assignment problem to be formulated as a <I>maximal multicommodity
+integer flow</I> problem. </LI>
+</OL>
+
+<P><B>ILG model:</B> </P>
+
+<UL>
+<LI>each node i in R is replicated |W| times, and called router nodes,
+denoted as v<SUP>1</SUP><SUB>i</SUB>, v<SUP>2</SUP><SUB>i</SUB> ,v<SUP>3</SUP><SUB>i</SUB>
+... v<SUP>w</SUP><SUB>i</SUB> . </LI>
+
+<LI>if link connects router i to router j, then, node v<SUP>w</SUP><SUB>i</SUB>
+is connected to node v<SUP>w</SUP><SUB>j</SUB> by a directed &quot;<I>wavelength
+edge</I>&quot; e<SUP>w</SUP><SUB>ij</SUB>, <IMG SRC="./gif/img00018.gif" HEIGHT=19 WIDTH=40>W.
+</LI>
+
+<LI>for each router i, 2 additional &quot;<I>converter nodes</I>&quot;
+v<SUP>c</SUP><SUB>i</SUB> , v<SUP>c'</SUP><SUB>i</SUB> represents the set
+of wavelength converters. they are connected by a directed edge. </LI>
+
+<LI>converters at a node can be shared by the incoming circuits, so, we
+can add directed edges, called &quot;<I>converter edges</I>&quot;, from
+nodes (v<SUP>1</SUP><SUB>i</SUB>, v<SUP>2</SUP><SUB>i</SUB> ,v<SUP>3</SUP><SUB>i</SUB>
+... v<SUP>w</SUP><SUB>i</SUB>) to v<SUP>c</SUP>i, and from v<SUP>c'</SUP>i
+back to (v<SUP>1</SUP><SUB>i</SUB>, v<SUP>2</SUP><SUB>i</SUB> ,v<SUP>3</SUP><SUB>i</SUB>
+... v<SUP>w</SUP><SUB>i</SUB>) </LI>
+
+<LI>every access point can become 2 nodes: v<SUP>s</SUP><SUB>a</SUB>, v<SUP>d</SUP><SUB>a</SUB>.
+directed path from v<SUP>s</SUP><SUB>a</SUB> to (v<SUP>1</SUP><SUB>i</SUB>,
+v<SUP>2</SUP><SUB>i</SUB> ,v<SUP>3</SUP><SUB>i</SUB> ... v<SUP>w</SUP><SUB>i</SUB>),
+and back to v<SUP>d</SUP><SUB>a</SUB> . </LI>
+
+<LI>total no. of nodes: 2|A| + |R||W| + 2|R| </LI>
+
+<P>2|A|: duplicated access nodes(source, destination) <BR>
+|R||W|: because for 1 router, there are W duplicates <BR>
+2|R|: duplicated converters </P>
+</UL>
+
+<UL>
+<LI>total no. of arcs: |R| + 2|R||W| + |L||W| </LI>
+
+<P>|R|: 1 arc between duplicated c &amp; c'; there are |R| cc' pairs <BR>
+2|R||W|: R-C; for 1 router, 1 wavelength, it has 2 arcs <BR>
+|L||W|: A-R, R-R: for 1 wavelength, there are L arcs(the original) </P>
+</UL>
+
+<P>
+<HR>Q:??? how about the duplicated access node? 
+<HR></P>
+
+<UL>
+<LI>introduce cost |C| on c-c', to limit the no. of connections through
+the set of wavelength converters to the capacity of the edge connecting
+these 2 nodes. </LI>
+
+<LI>no. of converters at different nodes may be different (they assume
+the same) </LI>
+
+<LI>capacity c<SUB>ij</SUB> <IMG SRC="./gif/img00019.gif" HEIGHT=21 WIDTH=56 ALIGN=CENTER>=
+1 if <IMG SRC="./gif/img00020.gif" HEIGHT=17 WIDTH=17 ALIGN=CENTER> doesn't
+connect any converter nodes <BR>
+capacity c<SUB>ij</SUB> <IMG SRC="file:/export/home/ilin/doc/Report/www/gif/img00019.gif" HEIGHT=21 WIDTH=56 ALIGN=CENTER>=
+|C| , otherwse </LI>
+
+<LI>f(s<SUB>n</SUB>, d<SUB>n</SUB>) : amount of flow n carried from s<SUB>n</SUB>
+to d<SUB>n</SUB>, n=1,2...|M| ???commodity <BR>
+=1: if a light path is built from s<SUB>n</SUB>, to d<SUB>n</SUB> <BR>
+=0: o.w. </LI>
+
+<LI>x<SUP>n</SUP><SUB>ij</SUB> : value of flow n on each <IMG SRC="./gif/img00021.gif" HEIGHT=19 WIDTH=45 ALIGN=CENTER>
+<BR>
+=1: if flow n is assigned on <IMG SRC="./gif/img00022.gif" HEIGHT=17 WIDTH=17 ALIGN=CENTER>
+<BR>
+=0: o.w.</LI>
+</UL>
+
+<P>
+<HR></P>
+
+<P><IMG SRC="./gif/img00023.gif" HEIGHT=67 WIDTH=105> </P>
+
+<P><IMG SRC="./gif/img00024.gif" HEIGHT=22 WIDTH=49><IMG SRC="./gif/img00025.gif" HEIGHT=86 WIDTH=242>
+</P>
+
+<P><IMG SRC="./gif/img00026.gif" HEIGHT=22 WIDTH=61><IMG SRC="./gif/img00027.gif" HEIGHT=78 WIDTH=101>
+
+<HR></P>
+
+<P>This is an ILP, which is hard. So, they use a faster but suboptimal
+way to solve it.<BR>
+
+<HR></P>
+
+<P><B>Dynamic RAW Algorithm:</B> </P>
+
+<OL>
+<LI>lightpath between access nodes are setup dynamically(i.e. on demand)
+whenever a lightpath is requested=&gt; the algorithm will either find an
+available lightpath or block if none is available. </LI>
+
+<LI>if multiple paths exists, we should select the &quot;best&quot; one
+which minimize the blocking in the future=&gt; this is NP hard. </LI>
+
+<LI>So, they develop the simplified graph model from ILG, called SILG:
+<BR>
+(a)assign cost c(l) on each l<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>L
+<BR>
+(b)at time t, B: set of lightpaths already setup in N; m=(s,d): access
+node pair requesting a lightpath connection <BR>
+G'(V',E'): <BR>
+(1)delete all converter nodes, access nodes, and edges involving these
+nodes <BR>
+(2)add <I>inter-layer-edges </I>between every pair of the nodes v<SUP>1</SUP><SUB>i</SUB>,
+v<SUP>2</SUP><SUB>i</SUB>, ... v<SUP>w</SUP><SUB>i</SUB> which correspond
+to the same router i <BR>
+(3)for each router node i,<FONT FACE="Symbol"> b</FONT>(i): wavelength
+converter counter(to keep track of no. of available wavelength converter
+at router i) <BR>
+initially <FONT FACE="Symbol">b</FONT>(i)=|C|, </LI>
+
+<OL>
+<P>when a light path travels via an inter-layer-edge, it will decrease
+by 1 <BR>
+............................ is released ............................................increase........
+</P>
+</OL>
+
+<P>(4)cost in G': <BR>
+initially <BR>
+cost of each converter edge (inter-layer-edge) =&gt; positive constant
+<FONT FACE="Symbol">a</FONT> <BR>
+cost of each wavelength edge (intra-layer-edge) =&gt; c(l) </P>
+
+<OL>
+<LI>set cost of the <I>intra-layer-edge</I>s that support existing lightpaths
+to be <IMG SRC="./gif/infinity.gif" HEIGHT=11 WIDTH=17> </LI>
+
+<LI>when a <FONT FACE="Symbol">b</FONT>(i) becomes 0, set all the cost
+of <I>inter-layer-edge</I> associated with i to be <IMG SRC="./gif/infinity.gif" HEIGHT=11 WIDTH=17>
+</LI>
+</OL>
+
+<P>as soon as b(i) becomes + =&gt; reset cost of the corresponding inter-layer-edge
+to <FONT FACE="Symbol">a</FONT> </P>
+
+<LI>The Algorithm for SILG: </LI>
+
+<LI>objective: finding the &quot;cheapest&quot; path(path using the least
+amount of network resources) in G'. If the cheapest cost c<SUB>p</SUB>
+is INFINITY, then the call is blocked. </LI>
+
+<P><B>Step 1: </B></P>
+
+<OL>
+<P>Given N, transform it into G'; <BR>
+set cost of inter-layer-edge to <FONT FACE="Symbol">a</FONT>; cost of intra-layer-edge
+to c(l) <BR>
+for each router I, initialize <FONT FACE="Symbol">b</FONT>(i) (integer
+wavelength converter counter, between 1 and |C|) </P>
+</OL>
+
+<P><B>Step 2: wait for request</B> </P>
+
+<UL>
+<P><B>if</B> lightpath request connection from s to d; </P>
+
+<UL>
+<P>add s and d <BR>
+add edges from s to the router to which it is connected for all the layers
+in G' <BR>
+add edges to d from the router to which it is connected for all the layers
+in G' <BR>
+go to Step 3 </P>
+</UL>
+
+<P><B>otherwise</B> </P>
+
+<UL>
+<P>lightpath release request from s to d <BR>
+go to Step 4 </P>
+</UL>
+</UL>
+
+<P><B>Step 3: establish lightpath</B> </P>
+
+<OL>
+<P>Find a shortest(cheapest) path p in G' from s to d (by Dijkstra's algorithm)
+<BR>
+If cost of the path C<SUB>p</SUB>=<IMG SRC="./gif/infinity.gif" HEIGHT=11 WIDTH=17>
+then block the request <BR>
+otherwise, accept request; set up lightpath along the shortest path <BR>
+update cost of intra-layer-edges on p to <IMG SRC="./gif/infinity.gif" HEIGHT=11 WIDTH=17>
+<BR>
+If path p is routed via an inter-layer-edge at router I then <FONT FACE="Symbol">b</FONT>(i)=<FONT FACE="Symbol">b</FONT>(i)-1
+<BR>
+if <FONT FACE="Symbol">b</FONT>(i)=0 then set cost of all inter-layer-edges
+connecting router I to <IMG SRC="./gif/infinity.gif" HEIGHT=11 WIDTH=17>
+<BR>
+go to Step 2 </P>
+</OL>
+
+<P><B>Step 4: release lightpath</B> </P>
+
+<OL>
+<P>reset cost of intra-layer-edges e<SUB>ij</SUB> occupied by lightpath
+to c(e<SUB>ij</SUB>) <BR>
+If path p was routed via an inter-layer-edge at router I then <FONT FACE="Symbol">b</FONT>(i)=<FONT FACE="Symbol">b</FONT>(i)+1
+<BR>
+if b(i)=1 then set cost of all inter-layer-edges connecting to router I
+to <FONT FACE="Symbol">a</FONT> <BR>
+remove s and d, and all the edges connecting them in G' <BR>
+go to Step 2</P>
+</OL>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Numerical Results:</B><BR>
+</P>
+
+<OL>
+<LI>the simulation is done by randomly generating networks with different
+sizes. Degrees of all the nodes(i.e. routers) are assumed to be the same
+</LI>
+
+<LI>For each configuration, the simulation results are averaged over 10
+random topologies. assume the cost c(l)=1 <IMG SRC="./gif/forany.gif" HEIGHT=18 WIDTH=17>
+l <IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15> L; 6 access nodes are
+attached to each router.????? requests arrive by Poisson process with mean
+arrival rate r, holding times of the light paths are exponentially distributed,
+with mean 1 time unit <BR>
+once a lightpath is blocked, it is removed from the lightpath-request queue.
+<BR>
+The requests are uniformly distributed over all the access node pairs.
+</LI>
+
+<LI>when |C| increases, the blocking probability decreases. but, the improvement
+is not significant beyond 8 converters. </LI>
+
+<P><I>Network Utilization, u</I> <BR>
+=(no. lightpaths established*Avg hop distance of the established lightpaths)/(no.
+links*no. wavelengths per link) <BR>
+=probability that given wavelength on a given link is in use????? </P>
+
+<LI>The results show that a small no. of wavelength converters can improve
+the blocking rate significantly?? </LI>
+</OL>
+
+<P>REFER TO FIG6(a)(b) and FIG7: </P>
+
+<UL>
+<LI>One thing is strange: from Fig 6(b), the utilization of wavelength
+convertible network is less than that of the wavelength continuous networks
+for arrival rates between 280 and 370.(i.e. we expect |C|=0 should have
+less utilization, but it is just the opposite.) </LI>
+
+<LI>Since <I>more lightpaths are established in wavelength convertible
+networks</I>(i.e. less blocking), its lower utilization can only be attributed
+to <I>smaller avg hop distance of the established lightpaths</I>.(from
+the definition of u, they guess so.) </LI>
+
+<LI>Use of converters does not always reduce the blocking rate.(e.g. Fig6(a)
+shows when r&gt;380, |C|=0 is better than |C|=2) However, Fig6(b) shows
+utilization for networks with |C|=2 is actually higher than |C|=0 when
+r&gt;380.==&gt; <I>even though fewer no. of lightpath are accepted(less
+utilization), more lightpaths with longer hop-distances are supported because
+of the wavelength converters.</I> </LI>
+
+<LI>A small no. of wavelength converters can significantly improve the
+performance of larger networks.??? This is because <I>avg. hop distance
+lightpath requests are benefited more when wavelength converters are used</I>.
+</LI>
+</UL>
+
+<P>
+<HR></P>
+
+<P><B>Conclusion:</B><BR>
+</P>
+
+<OL>
+<LI>based on the ILG model, the optimal routing of the network with scaleable
+no. of wavelength converters can be formulated in more realistic way than
+the existing proposals. </LI>
+
+<LI>their model provides an exact optimal solution for a given network
+with a limited no. of wavelength converters at each node. </LI>
+
+<LI>A fast heuristic algorithm for dynamic routing is obtained under a
+simplified version of the ILG model. </LI>
+
+<LI>the results show that the performance is comparable to the one presented
+in [5] but its computational complexity k is only O(|R|<SUP>2</SUP>|W|<SUP>2</SUP>)
+</LI>
+</OL>
+
+<P><BR>
+</P>
+
+<P><B>Comment</B>: </P>
+
+<OL>
+<LI>From their result, it's hard to draw any conclusion. They did not mention
+much about how they test(e.g. what are those 10 kinds of network topologies?
+how do they construct the networks? What value should we set up for a and
+c(l)??) </LI>
+
+<LI>they claim they got the &quot;exact&quot; solution, but they also said
+they use a suboptimal way.?? I also don't know the relation between SILG
+and ILG. Why solving SILG will solve the original problem? </LI>
+
+<LI>what's the relationship between access nodes, router nodes, and converter
+nodes?? what are they? what does the original network look like? </LI>
+</OL>
+
+</BODY>
+</HTML>

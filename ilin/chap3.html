@@ -1,0 +1,415 @@
+<html>
+<HEAD>
+   <TITLE>Chapter 3 of My Thesis</TITLE>
+<!-- Changed by: I-Lin Wang, 24-Jul-1996 -->
+<BODY BGCOLOR="#EffbF">
+<!BODY BGCOLOR="#EEEA0F">
+<!body background="./gif/wood.gif">
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<a name="chap3"><h2>Chapter 3</a><br>
+Implementing the Premultiplier Algorithm
+</h2>
+<p>
+In this chapter we will explain how we implement the three versions of the premultiplier algorithm introduced in Chapter 2.</p>
+<h3>
+<a name="3.1">3.1 Nonscaling Premultiplier Algorithm </a><br>
+<br>
+<a name="3.1.1">3.1.1 Pseudo Code</a>
+</h3>
+<p>
+Here we break up the procedure simplex-p<sub>i</sub>vot into 4 steps:
+<ul>
+1. <i>find_in_arc</i> will find the entering arc <i>in_arc</i>; in_arc=-1 if we could not find any entering arc.<br>
+2. <i>update_tree1</i> will change the spanning tree structure so that the tail of in_arc becomes the root<br> 
+3. <i>find_out_arc</i> will add the in_arc into the tree; construct the basic cycle W; identify the leaving arc <i>out_arc</i>.<br>
+4. <i>update_tree2</i> will construct the new spanning tree so that the tail of out_arc becomes the root.
+</ul>
+<i>flag</i> is a variable used to check if the current tree satisfies the optimality conditions. We will explain this more in the procedure <i>update_pi</i>.
+</p>
+The following is pseudo code for the nonscaling premultiplier algorithm:
+<p>
+<b>Algorithm</b> <i>nonscaling premultiplier</i><br>
+<b>begin</b>
+<ul>	<i>initialization</i>;<br>
+	in_arc = find_in_arc;<br>
+	<b>while</b> flag=1 <b>do</b><br>
+	<b>begin</b>
+<ul>		<b>while</b> in_arc  -1 <b>do</b><br>
+		<b>begin</b><br>
+<ul>			<i>update_tree1</i>;<br>
+			out_arc = <i>find_out_arc</i>;<br>
+			<i>update_tree2</i>;<br>
+			in_arc = <i>find_in_arc</i>;
+</ul>		<b>end</b><br>
+		flag = <i>update_pi</i>;<br>
+		<b>if</b> flag=1 <b>then</b>
+			in_arc = <i>find_in_arc</i>;
+</ul>	<b>end</b>
+</ul><b>end</b>
+</p>
+Now we will explain the details of each procedure.
+<p>
+<h3>Initialization</h3><br>
+<b>Procedure</b> <i>Initialization</i><br>
+<b>begin</b>
+<ul>	read network files, get all nodes & arcs data;<br>
+	compute C'=10 (|C|+1) where C=max{c<sub>ij</sub> | (i,j) belongs to A};<br>
+	add a supernode as root, with =C'+1; for each supply and transshipment node i, construct an artificial arc to the supernode with flow=b(i); for each demand node j, construct an artificial arc from the supernode to it with flow=-b(j); all the artificial arcs have cost=C' and capacity=M, where M is a sufficiently big number; (999999999 is sufficiently big in our tests);<br>
+	set p<sub>i</sub>=2C'+1 for supply nodes; p<sub>i</sub>=1 for demand nodes;<br>
+	set CurrentArc(i)=FirstArc(i) for all nodes;<br>
+	mark all nodes except supernode to be ineligible;<br>
+	get initial tree data structure; <br>
+	turn on flag to be 1;
+</ul><b>end</b>
+</p>
+<p>
+As we described in Chapter 2, we add a supernode as the initial root node, and construct artificial arcs between all nodes and the supernode. Each artificial arc has a big cost C', and big capacity M. We want to set C' sufficiently large so that no optimal solution will have an artificial arc. In theory, C' should be nC+1; however, such a large value of C' may cause overflow, and we determined that C'=10(C+1) was satisfactory for our tests. 
+</p>
+<p>
+<h3>Finding the Entering Arc</h3><br>
+This is the procedure to find an eligible arc as the entering arc.<br>
+<b>Procedure</b> <i>find_in_arc</i><br>
+<b>begin</b>
+<ul>		let E denote the set of eligible nodes; initialize E as {root};<br>
+		set D=M where M is a sufficient large number;<br>
+		scan nontree arc adjacent to root starting from CurrentArc(root);<br>
+		<b>if</b> found a flowable eligible arc <b>then</b>
+			return it; leave this procedure;<br>
+		starting from the root, perform a depth-first-search along the spanning tree T(v);<br>
+		<b>while</b> there is still some eligible node which has not been exhausted <b>do</b><br>
+		<b>begin</b>
+<ul>			<b>if</b> found an exhausted eligible node <b>then</b> put it in E, skip it, keep searching;<br>
+			<b>else if</b> we find an inexhausted eligible node i <b>then</b><br>
+			<b>begin</b>
+<ul>				scan each nontree arc adjacent to node i starting from CurrentArc(i);<br>
+				<b>if</b> found a flowable eligible arc <b>then</b>
+					return it; leave this procedure;<br>
+				<b>else</b> put node i in E, mark it to be exhausted, and keep searching;
+</ul>			<b>end</b><br>
+			<b>else</b> 
+<ul>				we find an ineligible node j; <br>
+				set D=min{ D, absolute value of the reduced cost of pred_arc(j) };
+</ul>			<b>end</b>
+</ul>		<b>end</b><br>
+		return -1; leave this procedure;
+</ul><b>end</b>
+</p>
+<p>
+Basically, we perform a depth-first-search in this procedure. Referring to the definition 2 in Chapter 2, we can find an eligible node by searching along the tree T(v) starting from the root if all the arcs in the path from that node to the root have zero reduced cost. Standing at an eligible node, we scan its adjacent nontree arcs to identify eligible arcs. Note that we do not scan all the adjacent nontree arcs of a node every time; instead, we only start scanning from CurrentArc(i). The reasons will be explained in subsection 3.1.2. If an eligible node is exhausted, that is, CurrentArc(i)=-1, we will skip scanning this node and go to scan the next eligible node. By using CurrentArc(i), we avoid many redundant scans and speed up the algorithm. </p>
+<p>
+Starting from any eligible node, we keep searching further in its subtree. If we find an ineligible node, we will not search further in its subtree. We record the absolute value of the reduced cost of the arc connecting that ineligible node with its predecessor. If we have searched all the eligible nodes but have not found any eligible arc, we will set D to be the minimum absolute value of the reduced cost of those arcs connecting those ineligible nodes and their eligible predecessors. This D will be used for updating the premultipliers of eligible nodes in the procedure update_pi.</p>
+<p>
+We define in_arc to be the flowable eligible arc in the residual network pointing outward from the eligible node we are scanning. This procedure will either return the eligible arc if there is any, or return -1 if no eligible arc is found. More detailed procedures about this pseudo code are included in Appendix A.1.</p>
+<p>
+<h3>Update Tree Structure: The First Part</h3><br>
+In this procedure, we let the tail of the entering arc be the root.</p>
+<p>
+<b>Procedure</b> <i>update_tree1</i><br>
+<b>begin</b>
+<ul>		<b>if</b> the tail i of in_arc is not the root <b>then</b><br>
+		<b>begin</b>
+<ul>			make i the new root;<br>
+			update the tree structure;
+</ul>		<b>end</b><br>
+		set the predecessor of the new root to be the head of in_arc;<br>
+		set FirstChild(head of in_arc) to be the new root;<br>
+		construct the basic cycle W;
+</ul><b>end</b>
+</p>
+<p>
+Since we use the FirstChild and the RightSibling tree structure for this algorithm, this part will be a little complicated. To make node i the root, the arcs in the path from i to the root have to befor eachreversed". An example is illustrated in Figure 3.1.</p>
+<center>
+<a name="f3.1">Figure 3.1: An example for the procedure update_tree1</a>
+<p><A HREF="./ps/fig31.eps"><IMG SRC="./gif/fig31.gif"></A>
+</center></p>
+<p>
+Recall that the tail of in_arc is the eligible node we are scanning. In the <b>end</b> of this procedure, we set the predecessor of the root to be the head of in_arc so that we can easily traverse around the basic cycle W later. If we can push flow along in_arc, the cost will decrease. The orientation of the basic cycle W is the same as in_arc. The next procedure is to push flow along W, and identify the leaving arc, <i>out_arc</i>.</p>
+<p>
+<h3>Find the Leaving Arc</h3><br>
+In this procedure, we walk along W starting from the root and identify the blocking arc. The original network simplex algorithm also uses the same procedure to identify the leaving arc.</p>
+<p>
+<b>Procedure</b> <i>find_out_arc</i><br>
+<b>begin</b>
+<ul>		set v=pred(root), u=root, d=M, where M is a sufficiently large number;<br>
+		<b>while</b> v is not the root <b>do</b><br>
+		<b>begin</b><br>
+<ul>		<b>if</b> r<sub>uv</sub> = 0 <b>then</b> return (u,v), and leave this procedure;<br>
+		<b>else</b>
+<ul>			let d = min{ d, r<sub>uv</sub> }; record (u,v) if old d>r<sub>uv</sub>;<br>
+			set v=pred(v);
+</ul></ul>	<b>end</b><br>
+	send d along W;<br>
+	<b>begin</b>
+<ul>		<b>if</b> the direction of the tree arc is the same as W <b>then</b>
+<ul>			decrease its residual capacity by d;
+</ul>		<b>else</b> increase its residual capacity by d;<br>
+		compute Sum(c<sup>p</sup><sub>ij</sub>d), along each (u,v) on W;<br>
+</ul>		<b>end</b><br>
+		return (u,v);
+</ul><b>end</b>
+</p>
+<b>Update Tree Structure: The Second Part</b>
+<p>
+Now we have identified the leaving arc, out_arc. We set the tail of out_arc to be the new root. Since we have defined the predecessor of the current root to be the head of in_arc, it is fairly easy to update the new tree structure in which the tail of out_arc ia the new root.</p>
+<p>
+<b>Procedure</b> <i>update_tree2</i><br>
+<b>begin</b>
+<ul>		say, the in_arc is (u,v) where u is the current root; out_arc is (p, q) where p will become the new root; (note that pred(u)=v, and pred(p)=q now)<br>
+		<b>if</b> u=q and v=p <b>then</b><br>
+		<b>begin</b>
+<ul>		<b>if</b> (u,v) and (p,q) correspond to the same arc in the original network <b>then</b> 
+<ul>			the tree structure remains the same, reset pred(p)=-1, pred_arc(p)=-1, FirstChld(q)=RightSibling(p); leave this procedure;
+</ul>		<b>else</b>
+<ul>			make p the new root, reset pred(p)=-1, pred_arc(p)=-1;<br>
+			<b>if</b> LeftSibling(p)=-1 <b>then</b> FirstChild(q)=RightSibling(p), RightSibling(p)=-1; leave this procedure;<br>
+			<b>else</b> 
+<ul>				RightSibling(LeftSibling(p))=RightSibling(p), RightSibling(p)=-1; leave this procedure;
+</ul></ul></ul>	<b>end</b><br>
+	<b>else</b> <br>
+	<b>begin</b>
+<ul>		make p the new root, reset pred(p)=-1, pred_arc(p)=-1;<br>
+		<b>if</b> LeftSibling(p)=-1 <b>then</b> FirstChild(q)=RightSibling(p), RightSibling(p)=-1; leave this procedure;<br>
+		<b>else</b> 
+<ul>			RightSibling(LeftSibling(p))=RightSibling(p), RightSibling(p)=-1; leave this procedure;
+</ul></ul>		<b>end</b>
+</ul><b>end</b>
+</p>
+<p>
+Here we define a new node pointer, <i>LeftSibling(i)</i>, which points to the sibling of i immediately to the left. We can find LeftSibling(i) by traverse from FirstChild(pred(i)) to the right. We have to be careful about the case that in_arc and out_arc have the same node pairs. Figure 3.2 illustrates the tree before and after procedure update_tree2. Note that the subtrees of node 4 and 6 are easily maintained.</p>
+
+<center>
+<a name="f3.2">Figure 3.2: An example for the procedure update_tree2</a>
+<p><A HREF="./ps/fig32.eps"><IMG SRC="./gif/fig32.gif"></A>
+</center></p>
+<h3>Modify the Premultipliers</h3>
+<p>
+After we have searched all the eligible nodes but still did not find any eligible arc, we have to modify the premultipliers for all the eligible nodes.</p>
+<p>
+<b>Procedure</b> <i>update_pi</i><br>
+<b>begin</b>
+<ul>	<b>if</b> D = M <b>then</b> return flag=0, leave this procedure;<br>
+	<b>else</b>
+<ul>		add D to p<sub>i</sub> ,for each i belongs to E;<br>
+		reset CurrentArc(i)=FirstArc(i),for each i belongs to E;<br>
+		return flag=1, leave this procedure;
+</ul></ul><b>end</b>
+</p>
+<p>
+The premultipliers will only be updated after we could not find any eligible arcs in the procedure find_in_arc. Therefore, the vector of reduced costs will also only be changed after the premultipliers have been changed. We also need to reset the CurrentArc(i) to be FirstArc(i) for every eligible node i. This is because we can not guarantee if there is no eligible arc between FirstArc(i) and CurrentArc(i) after we changed p<sub>i</sub> . The reason will be explained later in subsection 3.1.2.</p>
+<p>
+Remember that we initialize D to be M in the <b>begin</b>ning of the procedure find_in_arc. D will remain M if we have scanned all nodes but still could not find any eligible arc. In such case, we have reached the optimality condition since all the tree arcs have zero reduced cost, and all the nontree arcs are either ineligible or eligible with zero residual capacity.</p>
+<hr>
+<a name="3.1.2"><h3>3.1.2 More about our implementing</h3></a>
+<p>
+Here we will explain more about some tips used in our nonscaling code which speed up this algorithm.</p>
+<b>Why we can skip scanning arcs between FirstArc(i) and CurrentArc(i) </b>
+<p>
+In this algorithm, we use CurrentArc(i) to be the starting pointer to scan for eligible arcs instead of FirstArc(i). This is because there will be no eligible arcs between FirstArc(i) and CurrentArc(i) as long as p<sub>i</sub> has not been updated. That is, during the two iterations of updating p<sub>i</sub> , we can skip scanning those arcs between FirstArc(i) and CurrentArc(i). Furthermore, we can even skip scanning this node and go to scan the next eligible node in E if CurrentArc(i)=-1.</p>
+<p>
+Since we reset CurrentArc(i) to be FirstArc(i) after we update p<sub>i</sub> , we will focus our following discussion on any iteration between the two iterations of updating p<sub>i</sub>. Also, (i,j) and (j,i) correspond to the same arc in the original network in our discussion. However, we will only use the outgoing arc (i,j) to represent that arc when we scan node i. </p>
+<p>
+Recall that FirstArc(i) is the first arc adjacent to node i. CurrentArc(i) points to the arc which was the entering arc when we scanned node i last time. </p>
+<p>
+Since c<sup>p</sup><sub>ij</sub>=c<sub>ij</sub>-p<sub>i</sub>+p<sub>j</sub> and p<sub>i</sub> remains the same during our discussion, c<sup>p</sup><sub>ij</sub> will either increase or remain the same due to the nondecreasing property of premultipliers.</p>
+<p>
+<ul><b>Claim :</b> If node i is not exhausted yet, that is, CurrentArc(i)<>-1, there will be no entering arc between FirstArc(i) and CurrentArc(i). If CurrentArc(i) = -1, we can skip i, and go to scan the next eligible node.<br>
+<b>Proof:</b><br>
+We first consider the case that CurrentArc(i)<>-1. Assume there are arcs between FirstArc(i) and CurrentArc(i). Since CurrentArc(i) was the entering arc when we scanned node i last time, which means, those arcs between FirstArc(i) and CurrentArc(i) can be classified into the following three groups:<br>
+1. nontree arcs with c<sup>p</sup><sub>ij</sub>>= 0, u<sub>ij</sub>>=  r<sub>ij</sub>>=  0;.<br>
+2. nontree arcs with c<sup>p</sup><sub>ij</sub> < 0, r<sub>ij</sub>=0<br>
+3. tree arcs, either (a) point upward with c<sup>p</sup><sub>ij</sub> =0 or (b) point downward with c<sup>p</sup><sub>ij</sub>>=  0<br>
+
+Now we discuss each group of arcs respectively for the later iterations when we scan node i again.<br>
+<b>The arcs of group 1 will fall into group 1 or 3(b) when we scan node i:</b><br>
+Since c<sup>p</sup><sub>ij</sub> will not decrease, (i,j) will never become eligible when we scan node i. However, (j,i) may be eligible when we scan node j if node j is eligible, c<sup>p</sup><sub>ji</sub><0 and u<sub>ji</sub>>=0,  r<sub>ji</sub>>0. In such case, (j,i) will become a tree arc, and belongs to group 3(b). If node j is not eligible or even if it is eligible but (j,i) is not p<sub>i</sub>voted in in later iteration, arc (i,j) will remain in group1. Therefore, arcs of group 1 won't become eligible.<br>
+<b>The arcs of group 2 will fall into group 1 or 2 when we scan node i:</b><br>
+Since c<sup>p</sup><sub>ij</sub> will not decrease, (i,j) will remain in group 2 if p<sub>j</sub> does not increase too much. If p<sub>j</sub> increases much enough, c<sup>p</sup><sub>ij</sub> will become nonnegative and (i,j) will be in group 1. According to our discussion for the arcs in group 1, the arcs in group 2 may also fall into group 3(b) later.<br>
+<b>The arcs of group 3 will fall into group 1 or 3 when we scan node i:</b><br>
+For some tree arc (i,j) in group 3, it will remain in group 3 if it is still a tree arc. If (i,j) is p<sub>i</sub>voted out to be a nontree arc, c<sup>p</sup><sub>ij</sub> will be nonnegative and thus (i,j) may fall into group 1. Similarly, (i,j) may fall into group 3(b) again according to our discussion for the arcs in group 1.<br>
+Therefore, any arc belonging to those 3 groups will never become an entering arc during our discussion. <br>
+Now consider the case that CurrentArc(i) = -1. In this case, all the arcs adjacent to node i will not be eligible by using the same discussion above, thus we can skip this node and go to scan the next eligible node. 		</p>
+</p>
+</ul>
+<h3>Tips to speed up the algorithm</h3>
+<p>
+We use two ideas to speed up this algorithm: (1) using CurrentArc(i) (2) computing reduced cost only when necessary.<br>
+As described earlier in this subsection, we can skip scanning those arcs between FirstArc(i) and CurrentArc(i). This did save much running time in the procedure find_in_arc and still gives us the correct result.</p>
+
+<h3><a name="#3.2">3.2 Scaling Premultiplier Algorithm</h3></a>
+<p>
+We implemented two versions of scaling premultiplier algorithm. We call them thefor eachgeneric scaling version"(scaling 1) and thefor eachmodified scaling version"(scaling 2). They differ in the procedure update_pi. Both of them have the same procedures initialization, update_tree1, find_out_arc and update_tree2 as the nonscaling version described in section 3.1.</p>
+<h3>
+<hr>
+<a name="3.2.1">3.2.1 Pseudo Code for the Generic Scaling Version</a></h3><br>
+
+The following is pseudo code of our code:
+<p>
+<b>Algorithm</b><i> generic scaling premultiplier</i>
+<b>begin</b>
+<ul><i>	initialization</i><br>
+	compute e=max{c<sup>p</sup><sub>ij</sub>  | (i, j) belongs to A };<br>
+	in_arc = <i>find_in_arc;</i><br>
+	mark all nodes to be awake; N*=set of all nodes;<br>
+	<b>while</b> e < 1/n <b>do</b><br>
+	<b>begin</b> 
+<ul>		<b>while</b> N* is not empty <b>do</b><br>
+		<b>begin</b><br>
+<ul>			<b>while</b> in_arc  -1 <b>do</b><br>
+			<b>begin</b>
+<ul>				<i>update_tree1;</i><br>
+				out_arc = <i>find_out_arc;</i><br>
+				<i>update_tree2;</i><br>
+				set method=1;<br>
+				in_arc = <i>find_in_arc;</i>
+</ul>			<b>end</b><br>
+			flag = <i>update_pi;</i>
+<ul>			<b>if</b> flag=1 <b>then </b>
+<ul>				in_arc = <i>find_in_arc;</i><br>
+				<b>if</b> (in_arc=-1 and method=2) <b>then</b>
+					set mode=1;<br>
+				<b>else</b> set mode=0;
+</ul></ul></ul>		<b>end</b><br>
+		goto next scaling phase, get new e, reset N*=set of all nodes, mark all nodes awake, reset CurrentArc(i)=FirstArc(i)for each i belongs to N;<br>
+		in_arc = <i>find_in_arc;</i><br>
+		set mode=0;
+</ul>	<b>end</b>
+</ul><b>end</b>
+</p>
+<p>
+The main loop is for the scaling phase. Each main loop corresponds to a scaling phase with a new value of e which decreases by at least a factor of 2 in each loop. The algorithm terminates when e < 1/n. During each scaling phase, it performs similar procedures as the nonscaling algorithm but with different criteria in identifying eligible arcs. We also use some controllers such as method and mode to switch the p<sub>i</sub>voting and updating policies so that we can save some CPU running time. </p>
+<p>
+Since this algorithm uses the same procedures of initialization, update_tree1, find_out_arc, and update_tree2 as the nonscaling version did, here we will only state the procedure find_in_arc and update_pi.</p>
+
+<h3>Finding the Entering Arc</h3>
+
+This is the procedure to find an eligible arc as the entering arc.
+<p>
+<b>Procedure</b> <i>find_in_arc</i><br>
+<b>begin</b>
+<ul>		<b>if</b> method=2 <b>then</b><br>
+		<b>begin</b>
+<ul>			<b>while</b> there is any eligible and awakened node i <b>do</b><br>
+			<b>begin</b>
+<ul>				scan each nontree arc adjacent to the root starting from CurrentArc(i);<br>
+				<b>if</b> found a flowable eligible arc <b>then</b>
+					return it; leave this procedure;
+</ul>			<b>end</b><br>
+			return -1; leave this procedure; 
+</ul>		<b>end</b><br>
+		<b>else</b> method=1 <b>then</b><br>
+		<b>begin</b>
+<ul>			let E be the set of eligible nodes; empty E; put root into E; 
+			set D<sub>1</sub>= M where M is a very big number;<br>
+			<b>if</b> root is awake <b>then</b><br>
+			<b>begin</b>
+<ul>				scan each nontree arc adjacent to the root starting from CurrentArc(root);<br>
+				<b>if</b> found a flowable eligible arc <b>then</b>
+					return it; leave this procedure;
+</ul>			<b>end</b><br>
+			starting from the root, perform a depth-first-search along the spanning tree T(v);<br>
+			<b>while</b> there is still some eligible and awakened node <b>do</b><br>
+			<b>begin</b>
+<ul>				<b>if</b> found an eligible and asleep node then put it in E, skip it, keep searching;<br>
+				<b>else if</b> we find an un exhausted eligible and awaken node i <b>then</b><br>
+				<b>begin</b>
+<ul>					scan nontree arc adjacent to node i starting from CurrentArc(i);<br>
+					<b>if</b> found a flowable eligible arc <b>then</b>
+						return it; leave this procedure;<br>
+					<b>else</b> put it in E, mark it to be asleep, take it out of N* if its premultiplier has not been updated during this scaling phase, keep searching;
+</ul>				<b>end</b><br>
+				<b>else</b> we find an ineligible node j <b>then</b><br>
+				<b>begin</b>
+<ul>					we do not search further for that subtree;<br>
+					set D<sub>1</sub>=min{ D<sub>1</sub>, absolute value of the reduced cost of pred_arc(j) };
+</ul>				<b>end</b>
+</ul>			<b>end</b><br>
+			return -1; leave this procedure;
+</ul>	<b>end</b>
+</ul><b>end</b>
+</p>
+<p>
+This procedure is very similar to its nonscaling version. In fact, they are exactly the same except the way of identifying an entering arc. In the nonscaling version, we scan an inexhausted eligible node for a flowable nontree arc with reduced cost < 0. Similarly, here in this scaling version, we scan an eligible and awakened node for a flowable admissible arc whose reduced cost < -e/4 during the e scaling phase.</p>
+<p>
+We will discuss about the controllerfor eachmethod" after we explain the procedure update_pi.</p>
+
+<h3>Modify the Premultipliers</h3>
+<p>
+After we have searched all the eligible and awakened nodes but still did not find any flowable admissible arc, we have to modify the premultipliers for all the eligible nodes.</p>
+<b>Procedure</b> <i>update_pi</i><br>
+<b>begin</b>
+<ul>	<b>if</b> D<sub>1</sub> = M <b>then</b> return flag=0, leave this procedure;<br>
+	<b>if</b> mode=0 <b>then</b><br>
+	<b>begin</b>
+<ul>		set D<sub>2</sub>(i)=e/4 - p<sub>i</sub> (mod e/4)for each i belongs to E; <br>
+		let D<sub>2</sub>=min{ D<sub>2</sub>(i),for each i belongs to E };
+</ul>	<b>end</b><br>
+	<b>else</b> mode=1 <b>then</b><br>
+	<b>begin</b>
+<ul>		scan all eligible nodes, <br>
+		decrease D<sub>2</sub>(i) by previous D ,for each i belongs to E;<br>
+		reset D<sub>2</sub>(i)=e/4 if D<sub>2</sub>(i)=0,for each i belongs to E;<br>
+		let D<sub>2</sub>=min{ D<sub>2</sub>(i),for each i belongs to E };<br>
+		decrease D<sub>1</sub> by previous D;
+</ul>	<b>end</b><br>
+	<b>if</b> D<sub>1</sub> > D<sub>2</sub> <b>then</b> set D = D<sub>2</sub> , method=2;<br>
+	<b>else</b> set D = D<sub>1</sub> , method=1;
+<ul>		for each j belongs to E, increase p<sub>j</sub> by D , if p<sub>j</sub> becomes multiple of e/4, we put node j into R, mark j to be awake;
+</ul>	return flag=1;
+</ul><b>end</b>
+</p>
+<p>
+Now we will explain the controllers <i>"method"</i> and <i>"mode"</i>. Consider the case that in some iteration after we update premultipliers by D<sub>2</sub> , we still can not find any admissible arc, and we have to call the procedure update_pi again. At this moment, all the eligible nodes remain the same, so, we can compute the new D<sub>2</sub>(i) by subtracting the old D<sub>2</sub>(i) with the previous D (which was the previous D<sub>2</sub>). We use mode=1 to denote this situation. If mode=0, we have to compute all the D<sub>2</sub>(i) by (e/4 - p<sub>i</sub> (mod e/4)). </p>
+<p>
+Note that if D=D<sub>2</sub>, we only need to scan those reawakened nodes in the procedure find_in_arc. We set method=2 for such case so that we do not need to perform the depth first search on the tree. Otherwise, we set method=1 and perform the depth first search along the tree as did the nonscaling version. </p>
+<p>
+Now we can explain why we set all the initial premultipliers to be positive(1, C'+1, and 2C'+1). It is because we need to compute p<sub>i</sub> (mod e/4) for D<sub>2</sub>. It is easier for us to compute the modulus and make the premultipliers multiple of e/4 if p<sub>i</sub> is positive.</p>
+<p>
+We use CurrentArc(i) as in the nonscaling algorithm. It can be shown that when N* is empty, c<sup>p</sup><sub>ij</sub>>=  -e/2 for each (i, j) belongs to G <a href="references.html#r2" target="topics">[2]</a>.</p>
+
+<h3>Tips to speed up the algorithm</h3>
+<p>
+From our computational testing results, we found this scaling algorithm often uses D<sub>2</sub> to update premultipliers, and may scan the same eligible nodes set often without finding any flowable admissible arc until D<sub>1</sub> << D<sub>2</sub>(i) for all eligible nodes i. This is unprofitable since we will waste too much time in updating D<sub>2</sub> but finally we still need D<sub>1</sub>. Although we use method=2 to avoid some computations in obtaining the new D<sub>2</sub> , this does not save much time. Therefore, we change this updating policy and do another slightly different scaling version which will focus on how to find a flowable admissible arc earlier and avoid some unprofitable loops of updating D<sub>2</sub>.</p>
+<hr>
+<a name="3.2.2"><h3>3.2.2 Pseudo Code for the Modified Scaling Version</h3></a>
+<p>
+This modified scaling version only differs with the generic one in the procedure update_pi. The following is the detailed pseudo code for the procedure update_pi:</p>
+<p>
+<b>Procedure</b><i> update_pi</i><br>
+<b>begin</b>
+<ul>	<b>if</b> D<sub>1</sub> = M <b>then</b> return flag=0, leave this procedure;<br>
+	set D<sub>2</sub>(i)=e/4 - p<sub>i</sub> (mod e/4)for each i belongs to E ;<br>
+	set tc(i)=min{c<sup>p</sup><sub>ij</sub> | (i,j) does not belong to T(v), r<sub>ij</sub>>0 } or min{-c<sup>p</sup><sub>ji</sub> | (j,i) does not belong to T(v), r<sub>ji</sub>>0 },for each i belongs to E;<br>
+	reset D<sub>2</sub>(i)=old D<sub>2</sub>(i) + kie/4 such that ki is the minimum nonnegative integer making tc(i) - D<sub>2</sub><-e/4, i belongs to E;<br>
+	get D<sub>2</sub>=min{D<sub>2</sub>(i),for each i belongs to E};<br>
+	<b>if</b> D<sub>1</sub> > D<sub>2</sub> <b>then</b> set D = D<sub>2</sub> , method=2;<br>
+	<b>else</b> set D = D<sub>1</sub> , method=1;<br>
+<ul>		for each j belongs to E, increase p<sub>j</sub> by D , if p<sub>j</sub> becomes multiple of e/4, we put node j into R, mark j to be awake;
+</ul>	return flag=1;
+</ul><b>end</b>
+</p>
+<p>
+This procedure is a little more complicated than its generic version. For each eligible node i, the algorithm scans each of its adjacent flowable nontree arcs and records the one with smallest reduced cost<a href="notes.html#mark5" target="topics"><sup>5</sup></a>, say, (i,j). For node i, (i,j) is the best candidate to be admissible after we update p<sub>i</sub> later. In other words, if we increase p<sub>i</sub> by tc(i), (i,j) will be the first arc whose reduced cost becomes zero. However, in order to maintain the polynomial running time, we need to reawaken node i. Thus we try to get the smallest D<sub>2</sub>(i) that is bigger than tc(i) for each eligible node i. And choose the smallest D<sub>2</sub>(i) to be D<sub>2</sub>. Then, we can guarantee to find an entering arc (i,j) when we scan node i if D<sub>2</sub><= D<sub>1</sub>.</p>
+<p>
+Therefore, after update_pi, we will either find an admissible arc if D<sub>2</sub><= D<sub>1</sub> or increase the number of eligible nodes if D<sub>1</sub> < D<sub>2</sub>. Basically, we can say this modified version combines those unprofitable iterations of updating D<sub>2</sub> in the generic version into one iteration.</p>
+
+<h3>Tips to speed up the algorithm</h3>
+<p>
+We use the same tips used in the generic version here. Also, for node i, we can stop scanning for D<sub>2</sub>(i) whenever we find D<sub>2</sub>(i) < D<sub>1</sub>. </p>
+<p>
+As for how to compute the reduced cost efficiently, it is not easy to analyze which way is better: (1) to compute the reduced cost for the arcs adjacent to eligible nodes after update_pi or (2) compute the reduced cost of an arc when it is necessary as the generic version did. It is possible that we may compute the reduced cost for the same arc many times if we use (2) . However, we still use (2) to compute the reduced cost in our code.
+</p>
+<hr>
+<a name="mark5">
+5.without loss of generality, here we only consider outgoing arcs (i,j) for node i.</a><br>
+
+
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<h4>Previous: <a href="chap12.html#chap1"> Chapter 1 & 2</a><br>
+    Next: Go to <a href="chap4.html#chap4"> Chapter 4 </a><br>
+    Go to <a href="toprograms.html" target="content"> Premultiplier C Codes </a>
+</h4>
+</BODY>
+
+</html>

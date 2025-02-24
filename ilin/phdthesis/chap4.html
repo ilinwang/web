@@ -1,0 +1,139 @@
+<HTML><HEAD><TITLE>Ph.D. Thesis Chaper 4</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link href="../ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../gif/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><FONT size=+1>Shortest 
+                          Paths and Multicommodity Network Flows</FONT></TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE><I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I>
+      <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=5 align="center" vAlign=top> <p align="center"> <strong>Chapter 
+                    4 New multiple pairs shortest paths algorithms</strong></p>
+                  <p align="center">[<a href="chap4.pdf">pdf:326kB</a>] [<a href="chap4.ps">ps:617kB</a>]</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    We have reviewed most of the shortest path algorithms in the 
+                    literature in Chapter 3. Our purpose is to design new algorithms 
+                    that can efficiently solve the MPSP problem. In this Chapter, 
+                    we propose two new MPSP algorithms that exploit ideas from 
+                    Carr&eacute;'s APSP algorithm (see Section 3.4.1.1).<br>
+                    Section 4.1 introduces some definitions and basic concepts. 
+                    Section 4.2 presents our first new MPSP algorithm (DLU1) and 
+                    proves its correctness. Section 4.3 gives our second algorithm 
+                    (DLU2) and describes why it is superior to the first one. 
+                    Section 4.4 summarize our work.</p>
+                  <p align="justify"><strong>Summary</strong><br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this chapter 
+                    we propose two new algorithms called DLU1 and DLU2 that are 
+                    suitable for solving MPSP problems. Although their worst case 
+                    complexity O(n&sup3;) is no more efficient than other algebraic 
+                    APSP algorithms such as Floyd-Warshall &lt;cite&gt;Fl62, Wa62&lt;/cite&gt; 
+                    and Carr&eacute;'s &lt;cite&gt;Ca69, Ca71&lt;/cite&gt; algorithms, 
+                    our algorithms can, in practice, avoid significant computational 
+                    work in solving MPSP problems.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    First obtaining the shortest distances from or to the last 
+                    node n, algorithm DLU1(i0,j0,k0) systematically obtains shortest 
+                    distances for all node pairs (s,t) such that s=k0, t=j0 or 
+                    s=i0, t=k0 where k0:=min_{i}{max{s_{i},t_{i}}}. By setting 
+                    i0:=1, it can be used to build the shortest path trees rooted 
+                    at each node t=k0. When solving MPSP problems, this algorithm 
+                    may be sensitive to the distribution of requested OD pairs 
+                    and the node ordering. In particular, when the requested OD 
+                    pairs are closely distributed in the right lower part of the 
+                    n&times;n OD matrix, algorithm DLU1 can terminate much earlier. 
+                    On the other hand, scattered OD pairs might make the algorithm 
+                    less efficient, although it will still be better than other 
+                    APSP algorithms. A bad node ordering may require many &quot;fill-ins.&quot; 
+                    These fill-ins make the modified graph denser, which in turn 
+                    will require more triple comparisons when applying our algorithms. 
+                    Such difficulties may be resolved by reordering the node indices 
+                    so that the requested OD pairs are grouped in a favorable 
+                    distribution and/or the required number of fill-in arcs is 
+                    decreased.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Algorithm DLU2 attacks each requested OD pair individually, 
+                    so it is more suitable for problems with a scattered OD distribution. 
+                    It also overcomes the computational inefficiency that algorithm 
+                    DLU1 has in tracing shortest paths. It is especially efficient 
+                    for solving a special MPSP problem of n OD pairs (s_{i},t_{i}) 
+                    that correspond to a matching. That is, each node appears 
+                    exactly once in the source and sink node set but not the same 
+                    time. Such an MPSP problem requires as much work as an APSP 
+                    problem using most of the shortest path algorithms known nowadays, 
+                    even though only n OD pairs are requested.<br>
+                    Our algorithms (especially DLU2) are advantageous when only 
+                    the shortest distances between some OD pairs are required. 
+                    For a graph with fixed topology, or a problem with fixed requested 
+                    OD pairs where shortest paths have to be repeatedly computed 
+                    with different numerical values of arc lengths, our algorithms 
+                    are especially beneficial since we may do a preprocessing 
+                    step in the beginning to arrange a good node ordering that 
+                    favors our algorithms. These problems appear often in real 
+                    world applications. For example, when solving the origin-destination 
+                    multicommodity network flow problem (ODMCNF) using Dantzig-Wolfe 
+                    decomposition and column generation &lt;cite&gt;BaJoHaSi95&lt;/cite&gt;, 
+                    we generate columns by solving sequences of shortest path 
+                    problems between some fixed OD pairs where the arc cost changes 
+                    in each stage but the topology and requested OD pairs are 
+                    both fixed. Also, in the computation of parametric shortest 
+                    paths where arc length is a linear function of some parameter, 
+                    we may solve shortest distances iteratively on the same graph 
+                    to determine the critical value of the parameter.</p>
+                  <p align="justify"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Our algorithms can deal with graphs containing negative arc 
+                    lengths and detect negative cycles as well. The algorithms 
+                    save storage and computational work for problems with special 
+                    structures such as undirected or acyclic graphs.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    Although we have shown the superiority of our algorithms over 
+                    other algebraic APSP algorithms, it is, however, still not 
+                    clear how our algorithms perform when they are compared with 
+                    modern SSSP algorithms empirically. Like all other algebraic 
+                    algorithms in the literature, our algorithms require O(n&sup2;) 
+                    storage which makes them more suitable for dense graphs. We 
+                    introduced techniques of sparse implementation that avoid 
+                    nontrivial triple comparisons, but they come with the price 
+                    of extra storage for the adjacency data structures.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    A more thorough computational experiment to compare the empirical 
+                    efficiency of DLU1 and DLU2 with many modern SSSP and APSP 
+                    algorithms is conducted in Chapter 5, in which we introduce 
+                    additional sparse implementation techniques that lead to promising 
+                    computational results.</p>
+                  </TD>
+              </TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR></TBODY></TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="chap1.html">Chap1</a>][<a href="chap2.html">Chap2</a>][<a href="chap3.html">Chap3</a>][<a href="chap4.html">Chap4</a>][<a href="chap5.html">Chap5</a>][<a href="chap6.html">Chap6</a>][<a href="chap7.html">Chap7</a>][<a href="appendA.html">Appendix</a>][<a href="reference.html">Reference</a>] 
+          </DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="index.html">Summary</a>][<a href="vita.html">Vita</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

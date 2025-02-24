@@ -1,0 +1,89 @@
+<HTML><HEAD><TITLE>Ph.D. Thesis Chaper 3</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link href="../ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../gif/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><FONT size=+1>Shortest 
+                          Paths and Multicommodity Network Flows</FONT></TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE><I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I>
+      <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=5 align="center" vAlign=top> <p align="center"> <strong>Chapter 
+                    3 Shortest path algorithms: 1-ALL, ALL-ALL, and SOME-SOME</strong></p>
+                  <p align="center">[<a href="chap3.pdf">pdf:210kB</a>] [<a href="chap3.ps">ps:447kB</a>]</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    In this thesis, we focus on solving ODMCNF, a class of min-cost 
+                    MCNF problems where the commodities represent origin-destination 
+                    (OD) pairs.<br>
+                    As introduced in Section 2.3.2, when we use Dantzig-Wolfe 
+                    decomposition and column generation to solve ODMCNF, we generate 
+                    new columns by solving sequences of shortest path problems 
+                    for specific commodities (OD pairs) using c+p^{*} as the new 
+                    arc lengths where c is the original arc cost vector and -p^{*} 
+                    is the optimal dual solution vector associated with the bundle 
+                    constraint after we solve the RMP. Since the RMP changes at 
+                    each iteration of the DW procedures, p^{*} will also change. 
+                    Therefore, the shortest paths between specific OD pairs have 
+                    to be repeatedly computed with different arc costs on the 
+                    same network. Efficient shortest path algorithms will speed 
+                    up the overall computational time needed to solve the ODMCNF.<br>
+                    In this chapter, we first survey shortest path algorithms 
+                    that have appeared in the literature, and then discuss the 
+                    advantages and disadvantages of these shortest path algorithms 
+                    in solving multiple pairs shortest path problems. Finally, 
+                    we introduce a new shortest path algorithm based on a new 
+                    LP solution technique that follows the primal-dual algorithmic 
+                    framework to solve sequences of nonnegative least squares 
+                    (NNLS) problems, and show its connection to the well-known 
+                    Dijkstra's algorithm.</p>
+                  <p align="justify"><strong>Summary on least squares 
+                    primal-dual shortest path algorithms</strong><br>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In summary, the 
+                    LSPD algorithm is identical to Dijkstra's algorithm for solving 
+                    both ALL-1 and 1-1 shortest path problems. The original PD 
+                    algorithm, on the other hand, is identical to the Dijkstra's 
+                    algorithm for solving the ALL-1 shortest path problem, but 
+                    needs to choose a specific dual improving direction (there 
+                    are multiple ones) so that it will be identical to the Dijkstra's 
+                    algorithm.<br>
+                    For the general arc cost cases, both LSPD and the original 
+                    PD algorithms can be applied, but Dijkstra's algorithm is 
+                    not applicable. The theoretical and practical performances 
+                    of LSPD and the original PD algorithms for solving shortest 
+                    path problems with general arc costs remain to be investigated.</p>
+                  </TD>
+              </TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR></TBODY></TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="chap1.html">Chap1</a>][<a href="chap2.html">Chap2</a>][<a href="chap3.html">Chap3</a>][<a href="chap4.html">Chap4</a>][<a href="chap5.html">Chap5</a>][<a href="chap6.html">Chap6</a>][<a href="chap7.html">Chap7</a>][<a href="appendA.html">Appendix</a>][<a href="reference.html">Reference</a>] 
+          </DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="index.html">Summary</a>][<a href="vita.html">Vita</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

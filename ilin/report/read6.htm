@@ -1,0 +1,612 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Algorithms For routing in a Linear Lightwave Network.</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+<H4 ALIGN=CENTER><B><I><FONT COLOR="#000000"><FONT SIZE=+1>Reports of 2
+Papers</FONT></FONT></I></B></H4>
+
+<H4><B><I><FONT COLOR="#000000"><FONT SIZE=+1>Contents:</FONT></FONT></I></B></H4>
+
+<UL>
+<LI><B><A HREF="#1"><b>Algorithms For routing in a Linear Lightwave Network</b></a></LI>
+
+<LI><A HREF="#2">A Minimum Interference Routing Algorithm for a Linear
+Lightwave Network </B> </A></LI>
+
+</UL>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<P>
+<HR></P>
+<a name=1>
+<P><FONT SIZE=+1><B>Title: Algorithms For routing in a Linear Lightwave
+Network</B>. </FONT></P>
+
+<P><B>Author</B>: Krishna Bala and Thomas E. Stern; Kavita Bala </P>
+
+<P><B>Abstract</B>: </P>
+
+<OL>
+<LI>they propose routing algorithms to set up calls on a circuit-switched
+basis in LLN(linear lightwave network). </LI>
+
+<LI>the overall problem is decomposed into 3 parts: </LI>
+
+<P>(1) Physical Path allocation <BR>
+(2) Checking for violations of the special optical constraints on the allocated
+physical path <BR>
+(3) Channel assignment </P>
+
+<LI>2.(1) uses the K-shortest path algorithm and tries to minimize the
+no. of sources potentially interfering with each other </LI>
+
+<LI>a channel assignment heuristic that tends to spread out calls evenly
+works better than one that tries to maximize channel reuse. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Introduction</B> </P>
+
+<OL>
+<LI>current work on lightwave network architectures has largely been based
+on </LI>
+
+<P>(a) using fixed passive power combiners in a broadcast mode <BR>
+(b) using point to point optical links with electronic switching and multiplexing
+</P>
+
+<LI>all operations on signals within the network are performed optically.
+Thus, unlike (b) above, it contains no &quot;electronic bottlenecks&quot;;
+as opposed to the star network in (a), the LLN can have any arbitrary mesh
+type topology thus achieving greater reliability and better load distribution
+</LI>
+
+<LI>the network is assumed to operate in a circuit-switched mode at the
+optical level </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Structure and Properties of the LLN</B> </P>
+
+<OL>
+<LI>the heart of the LLN is a LDC(linear divider-combiner) present at each
+node. Its function is to direct prescribed combinations of the inbound
+signals at the node to each outbound fiber in a controllable fashion. </LI>
+
+<LI>the <FONT FACE="Symbol">a</FONT>'s can be set to other values between
+0 and 1 to achieve power multiplexing and splitting. More general LDCs
+could have wavelength selectivity built into the control parameters <FONT FACE="Symbol">a</FONT><SUB>i</SUB>
+and thus act as controllable filters. However, this work is confined to
+LDCs without wavelength selectivity. </LI>
+
+<LI>Larger LDCs with more input and output fibers can be built, which are
+capable of directing a portion of the power from each input link to any
+output link.This paper assumes such devices are located at each network
+node. </LI>
+
+<LI>While some power attenuation occurs in traversing each LDC and each
+fiber, it is assumed that signal levels at all receivers are maintained
+sufficiently high(by optical amplification if necessary) for satisfactory
+reception. </LI>
+
+<LI>Assume: there is a network manager and a signaling system that sets
+up calls on request from the user stations, by establishing end-to-end(circuit
+switched) optical paths between transmitter and receiver. </LI>
+
+<LI>this paper only considers point-to-point connection for the simplicity
+although multicast connections are easily handled in LLNs. </LI>
+
+<LI>The network manager determines the physical path to be allocated to
+the call, sets the respective LDC parameters(like a's) along the route
+and finally assigns physical route allocated to the call. The physical
+route allocated to the call is assumed to remain unchanged throughout its
+duration. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Constraints of the LLN</B> </P>
+
+<OL>
+<LI>LLN has the following properties: </LI>
+
+<P>(a)each signal is transported optically in unmodified form from transmitter
+to receiver(i.e. there is no frequency conversion, regeneration, buffering
+or any other non-linear operation within the network)<BR>
+(b)more than 1 signal may be combined(linearly) on each link(fiber). these
+are termed &quot;interfering&quot; signals. <BR>
+(c)a MA(multiple access) scheme is implemented allowing for the signals
+interfering on any link to be distinguishable at the receivers. A typical
+channelization technique is WDMA, wherein the optical spectrum is subdivided
+into a no. of non-overlapping wavelength channels. </P>
+
+<LI>The structure of the LLN imposes some special constraints on the routing
+problem: </LI>
+
+<P><B>(a)Channel Continuity: <BR>
+</B>a call must be allocated the same channel(wavelength) on all the links
+that it traverses within the network <BR>
+<B>(b)Distinct Channel Assignment: <BR>
+</B>all interfering calls must be assigned distinct channels <BR>
+the same wavelength could be reused by calls using disjoint paths <BR>
+<B>(c)Inseparability: <BR>
+</B>signals combined on a single fiber cannot be separated within the LLN
+<BR>
+This is because LDC operate on the aggregate power carried on each inbound
+link without distinguishing between signals on different channels. <BR>
+inseparability tends to create unintended multicast connections where point-to-point
+connections were intended. This is inevitable, and may waste both power
+and bandwidth. <BR>
+<B>(d)Mutually Independent Sources Combining(MISC) <BR>
+</B>only signals from mutually independent sources may be combined on the
+same fiber.i.e. a signal is not allowed to split taking multiple paths
+in the network and then recombine on a link. If a routing violates this
+condition, it will result in a source interfering with itself. <BR>
+<B>(e)Color Clash: <BR>
+</B>a color clash arises when a routing decision on a new call results
+in combining on the same fiber 2 or more calls, already in progress(on
+disjoint paths) which were previously assigned to the same channel. </P>
+
+<LI>This paper will address 2 channel assignment policies: <BR>
+(1)one in which retuning of sources is permitted <BR>
+(2)the other which precludes retuning of calls already in progress <BR>
+However, the MISC condition violations cannot be avoided by a retuning
+of sources. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Routing</B> </P>
+
+<OL>
+<LI>routing involves </LI>
+
+<P>(a)choosing a path for a requested call <BR>
+(b)checking for violations of the LLN constraints <BR>
+(c)assigning an appropriate channel to the call </P>
+
+<LI>this paper only deal with point-to-point connections. the problem can
+be divided into 3 parts </LI>
+
+<P>(1)physical path allocation <BR>
+the algorithm using here is to find K shortest s-d paths. 2 variants: </P>
+</OL>
+
+<UL>
+<UL>
+<LI><B>Case1</B>: No Retuning of Sources Permitted <BR>
+using meaningful link cost assignment, we choose the one among the K-paths
+which interferes with the least no. of other sources, without violating
+the MISC and Color Clash conditions. <BR>
+if none of the K shortest paths satisfies the constraints, the call is
+blocked. <BR>
+if K=1=&gt;the physical path allocated to the call is the shortest path
+<BR>
+<BR>
+disadvantage of using shortest path routing: <BR>
+(i)it ignores the detrimental effects of inseparability <BR>
+(ii)it does not take into account the power losses within the nodes. <BR>
+(i)(ii) can be overcome by considering K&gt;=2. <BR>
+</LI>
+
+<LI><B>Case2</B>: Retuning of Source Permitted <BR>
+same as Case1 except ignoring the Color Clash constraint violation. </LI>
+</UL>
+
+<P>(2)checking for an MISC violation </P>
+
+<P>As the call moves from link to link on its paths(both intended and unintended)
+it carries along with it all the signals with which it has combined on
+previous links. The algorithm checks to see if any of the signals carried
+along in this fashion violates the MISC condition. </P>
+
+<P>For example, if we are checking the MISC condition violation for signal
+S<SUB>1</SUB> </P>
+
+<P>Algorithm for checking MISC violation </P>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD><B>MAIN-program-MISCcheck </B>
+<P>INIT: 
+<ul>source s=S1; <BR>
+temp=S1; <BR>
+current-link=first-link-on-physical-path <BR>
+</ul>
+For each link (m,n) on the Physical path do:(LOOP1) <BR>
+<ul>
+For each signal Si on current link do:(LOOP2) <BR>
+<ul>
+If signal Si is in temp=&gt; MISC=1, go to LASTSTEP <BR>
+else MISC=0 <BR>
+call procedure checkmisc(signal Si, current link,temp); <BR>
+</ul>
+END OF LOOP2 <BR>
+update temp to include all signals on the current link; <BR>
+current link = next link on physical path of signal S1 <BR>
+</ul>
+END OF LOOP1 </P>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FFFFFF" >
+<TR>
+<TD><B>LASTSTEP:</B>
+<P>if (MISC=0) then no MISC violation <BR>
+else if (MISC=1) then MISC violation has occurred <BR>
+END OF MAIN program MISCcheck </P>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD><B>procedure checkmisc(signal Sk, current link, temp);</B>
+<P>if (current link=destination-of-signal-S<SUB>k</SUB>) then goto END
+OF LOOP3 <BR>
+For each signal S<SUB>j</SUB> on current link do:(LOOP3) <BR>
+<ul>If signal S<SUB>j</SUB> is in temp =&gt; MISC=1, go to LASTSTEP <BR>
+else MISC=0; <BR>
+next link = next link on the Physical path of signal S<SUB>j</SUB>; <BR>
+recursively call procedure checkmisc(signal S<SUB>j</SUB>, next link, temp)
+</ul>
+END OF LOOP3 <BR>
+end-of-procedure-checkmisc </P>
+</TD>
+</TR>
+</TABLE></CENTER>
+
+
+<P>(3)channel allocation </P>
+
+<P>once a physical path is selected for a new call, the complete set of
+paths(both intended and unintended) is obtained as a by product of the
+MISC condition checking algorithm. </P>
+
+<P>2 channel assignment policies: </P>
+
+<UL>
+<LI><B>Case1</B>: No Retuning of Sources Permitted <BR>
+the channels that have already been assigned to calls in progress remain
+fixed. <BR>
+channels that are already in use on links can not be assigned to the incoming
+call <BR>
+2 heuristics for channel assignment: </LI>
+
+<P>(a)MAX heuristic: <BR>
+among all the remaining usable channels, assign the most used one to call.
+<BR>
+it's because we want to reuse each channel as much as possible. </P>
+
+<P>(b)MIN heuristic: <BR>
+assign the call on the least used of all the remaining usable channels
+<BR>
+this heuristic tends to distribute the calls evenly among the channels
+</P>
+
+<LI><B>Case2</B>: Retuning of Sources Permitted <BR>
+calls already in progress may be retuned to new channels when a new call
+is accepted. So, we have to buffer the information carried by these calls
+at the source for the period that the retuning is taking place. Because
+we are retuning the sources, the Color Clash violations can be avoid. </LI>
+</UL>
+
+<P>The problem of assigning or reassigning channels to calls is shown to
+be NP-Complete. So, they don't invest this case. </P>
+</UL>
+
+<P>
+<HR></P>
+
+<P><B>Procedures</B> </P>
+
+<P>There are 7 procedures for this paper</P>
+
+<OL>
+<LI>Creation of a random topology: <BR>
+create 30 nodes with avg degree=6 for each node connected graph by [HAGO83]
+<BR>
+each node has 1 transmitter and infinite receivers(i.e. no call will be
+block due to unavailability of a receiver <BR>
+cost of all links =1 </LI>
+
+<LI>Generation of calls: <BR>
+each available transmitter is simulated as a 2-state Markov chain(idle/busy)
+with transition rate <FONT FACE="Symbol">l</FONT>(call arrival rate), and
+<FONT FACE="Symbol">m</FONT>(1/call holding time). <BR>
+Destination is equally likely for all the other nodes. <BR>
+once a transmitter generates a call, it cannot generate any new arrivals
+until the call terminates </LI>
+
+<LI>Physical path allocation: <BR>
+using K-shortest path algorithm </LI>
+
+<LI>Checking for MISC violations: as above </LI>
+
+<LI>Checking for Color Clashes: <BR>
+using similar algorithm of checking for MISC violation </LI>
+
+<LI>Assigning a channel to the call: <BR>
+max. no. of channels on any link was set to be 6(doesn't mean much here)
+<BR>
+they simulated for both MIN and MAX heuristics </LI>
+
+<LI>Actual allocation and removal of a call: <BR>
+procedures were written to allocate the call on intended and unintended
+links <BR>
+after we complete the call, the opposite procedure is followed to remove
+all intended and unintended connections created by that call.</LI>
+</OL>
+
+<P><BR>
+
+<HR></P>
+
+<P><B>Results</B> </P>
+
+<OL>
+<LI>MIN heuristics performs better, because of the reduction Color Clashes.
+</LI>
+
+<LI>the dominant cause of blocking in the network is due to Color Clash
+violations. </LI>
+
+<LI>The K-shortest path for K=2 performs better than K=1 due to the reduction
+in Color Clashes. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Conclusion</B> </P>
+
+<OL>
+<LI>The algorithm that performed the best used the K-Shortest(K=2) Path
+algorithm and attempted to minimize the no. of sources interfering due
+to an incoming call. </LI>
+
+<LI>channel assignment heuristic that tended to spread out calls evenly
+worked better than one that tried to maximize the reuse of the channels,
+owing to the reduction in the no. of Color Clashes. </LI>
+</OL>
+
+<P>
+<HR WIDTH="100%"></P>
+<a name=2>
+<P><FONT SIZE=+1><B>Title: A Minimum Interference Routing Algorithm for
+a Linear Lightwave Network</B> </FONT></P>
+
+<P><B>Author</B>: Krishna Bala and Thomas E. Stern; Kavita Bala </P>
+
+<P><B>Abstract</B>: </P>
+
+<OL>
+<LI>This paper is based on the previous paper. The only difference is in
+the process of physical path allocation. </LI>
+
+<LI>It is shown that the problem of funding a physical path that does not
+violate the MISC constraint of the LLN is NP-complete. </LI>
+
+<LI>They use an algorithm called BLOW-UP for the physical path allocation
+to set up an incoming call along a path that minimizes the maximum incremental
+interference under certain conditions. </LI>
+
+<LI>they use the same algorithms to check for MISC and Color Clash conflicts
+as previous paper. They only use the MIN heuristic to allocate calls to
+the channels which are the least used. </LI>
+
+<LI>Comparing to the equivalent STAR based network, it has a significant
+reduction in blocking probability. Furthermore, the BLOW-UP algorithm shows
+better performance than other algorithms explored in previous paper. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Introduction : smae as above paper<BR>
+Structure and Properties of the LLN :same as above paper<BR>
+Constraints of the LLN : same as above paper</B><BR>
+
+<HR></P>
+
+<P><B>Routing</B> </P>
+
+<UL>
+<LI>physical path allocation: </LI>
+</UL>
+
+<OL>
+<LI>Inseparability may convert an intended point-point connection to a
+point-multipoint connection involving both unintended and intended paths.
+The intended path is referred to as the physical path. </LI>
+
+<LI>Theorem 1: </LI>
+</OL>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD>Finding a physical path that satisfies the MISC constraint on it and
+all associated unintended paths is NP-complete. (I didn't see the proof
+in [BALA2 91]) </TD>
+</TR>
+</TABLE></CENTER>
+
+<OL>
+<LI>Thus, they seek a path which has a good chance to satisfy both MISC
+and Color Clash constraints by choosing a physical path for each incoming
+call that has the &quot;least&quot; amount of interference with other calls
+already in progress. The define an &quot;image&quot; network as follows:
+</LI>
+
+<LI>Image network: each node in the network is &quot;blow up&quot; to create
+additional intranodal links between each input/output pair. </LI>
+</OL>
+
+<OL>
+<LI>Referring to the Fig6 &amp; 7, within each node, we create an internal
+node for each inbound link and each outbound link. Add intranodal links
+between each of these internal nodes directed from the inbound links to
+the outbound links. </LI>
+
+<LI>For each intranodal link i-j, let G<SUB>j</SUB> represents the set
+of signals outbound from internal node j; G<SUB>i</SUB> represents the
+set of signals inbound to internal node i; the cost of this link w<SUB>ij</SUB>=M*|G<SUB>j</SUB>-G<SUB>i</SUB>|
+where M&gt;sum of cost of all non-intranodal links.; Let each non-intranodal
+link has cost 1. </LI>
+
+<LI>for example, in Fig7, there are 4 paths to construct 3-3*: </LI>
+
+<P>(a)3-C-B-D-F-3* with cost : 1+M+1+M+1+1+1 <IMG SRC="file:/export/home/ilin/doc/Report/www/gif/img00038.gif" HEIGHT=25 WIDTH=97 ALIGN=ABSCENTER>=2
+</P>
+
+<P>(b)3-C-B-D-E : 1+M+1+M+1+1+1+1 <IMG SRC="file:/export/home/ilin/doc/Report/www/gif/img00039.gif" HEIGHT=24 WIDTH=98 ALIGN=ABSCENTER>=2
+</P>
+
+<P>(c)3-C-D-F-3* : 1+1+2M+1+1 <IMG SRC="file:/export/home/ilin/doc/Report/www/gif/img00040.gif" HEIGHT=24 WIDTH=98 ALIGN=ABSCENTER>=2
+</P>
+
+<P>(d)3-C-D-E-F-3* : 1+1+1+1+1 <IMG SRC="file:/export/home/ilin/doc/Report/www/gif/img00041.gif" HEIGHT=25 WIDTH=48 ALIGN=ABSCENTER>=0
+</P>
+
+<P>the final number is the number of sources that call 3-3* interferes
+with, and is carried along by signal S3(due to inseparability) to its destination
+</P>
+
+<P>Since M outweighs the total sum of cost traversing the network, we should
+try not to pass through the intranodal link with cost M. </P>
+
+<LI>Algorithm BLOW-UP: </LI>
+</OL>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD>The algorithm chooses the physical path for the call that corresponds
+to the shortest path in the image network. Define &quot;INCREMENTAL INTERFERENCE&quot;
+to be the additional interference caused at a receiver due to the introduction
+of the new call into the network.</TD>
+</TR>
+</TABLE></CENTER>
+
+<OL>
+<P>Theorem A: </P>
+</OL>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD>If the shortest path in the image network does not violate the MISC
+condition <BR>
+then, it is the path along which the MAXIMUM INCREMENTAL INTERFERENCE IS
+MINIMIZED among all paths that do not violate the MISC constraint.</TD>
+</TR>
+</TABLE></CENTER>
+
+<UL>
+<P>The proof follows from the following 2 claims: </P>
+</UL>
+
+<UL>
+<LI>Lemma A1: </LI>
+</UL>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD>If in the image network the shortest path does not violate the MISC
+condition <BR>
+then, it is the path along which the INCREMENTAL INTERFERENCE at the destination
+receiver due to incoming call is MINIMUM from among all paths that do not
+violate the MISC condition </TD>
+</TR>
+</TABLE></CENTER>
+
+<UL>
+<LI>Lemma A2: </LI>
+</UL>
+
+<CENTER><TABLE ALIGN=ABSCENTER BORDER=2 CELLSPACING=0 CELLPADDING=0 BGCOLOR="#FDF5E6" >
+<TR>
+<TD>The MAXIMUM INCREMENTAL INTERFERENCE due to the introduction of a new
+call occurs at the destination receiver of that call. </TD>
+</TR>
+</TABLE></CENTER>
+
+<UL>
+<P>
+<HR>Q:the proof of Theorem A, Lemma A1,2 can be found in [BALA2 91]???
+
+<HR></P>
+</UL>
+
+<UL>
+<LI>Checking MISC and Color Clash Violations: <BR>
+The physical path allocation algorithm BLOW-UP does not guarantee that
+MISC and Color Clash conditions will be satisfied if the call is allocated
+on the chosen path. </LI>
+
+<P>They use the same algorithm as the previous paper for checking the violation.
+</P>
+
+<LI>Channel Allocation: <BR>
+since many Color Clash violations occurred using the MAX heuristic. So,
+they only use the MIN heuristics here. </LI>
+</UL>
+
+<P><BR>
+
+<HR WIDTH="100%"></P>
+
+<P><B>Results and Conclusion</B> </P>
+
+<OL>
+<LI>Similar simulator in previous paper is built here. They tested for
+the same networks. </LI>
+
+<LI>A STAR network built for comparing with the LLN is a 30 terminal network
+with 6 channels, and each terminal is modeled by a 2 state Markov chain
+as above. The blocking probability for this case is the same as that of
+a circuit switch having 30 inputs and 6 outputs and can be obtained using
+the formula for the Engset distribution with parameter <FONT FACE="Symbol">l/m</FONT>.
+</LI>
+
+<LI>From their result, the BLOW-UP algorithm performed slightly better
+than K-SP algorithm in previous paper. </LI>
+
+<LI>It is expected that the BLOW-UP algorithm will perform better in LLN's
+where each pair of nodes is connected by multiple fibers, resulting in
+a large no. of alternate paths. </LI>
+
+<LI>the LLN using BLOW-UP algorithm performs significantly better than
+an equivalent STAR based network. </LI>
+</OL>
+
+<P>
+<HR WIDTH="100%"></P>
+<center>
+<table border=0>
+<tr><th><img src=./gif/read6_12.gif></th><th><img src=./gif/read6_34.gif></th></tr>
+<tr><th><img src=./gif/read6_56.gif></th><th><img src=./gif/read6_67.gif></th></tr>
+</table>
+<P><BR>
+<BR>
+</P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Shortest Path:</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<P>
+<HR><FONT SIZE=+2><B>Shortest Path:</B> </FONT>
+<HR></P>
+
+<P><FONT SIZE=+1><B>I. Label-Setting vs. Label-Correcting Algorithms</B>
+</FONT></P>
+
+<P>same: </P>
+
+<OL>
+<LI>iterative; assign tentative distance labels to nodes at each step </LI>
+
+<LI>if label-correcting examine a node from LIST with the min distance
+label in a problem with nonnegative arc lengths, it's the same as Dijkstra's
+algorithm </LI>
+</OL>
+
+<P>differ: </P>
+
+<OL>
+<LI>how they update distance labels </LI>
+
+<LI>how they converge toward the shortest path distances </LI>
+
+<OL>
+<LI>label setting: designate 1 label as permanent(optimal) at each iteration
+</LI>
+
+<LI>label correcting: consider all labels as temporary until the final
+step, when they all become permanent </LI>
+</OL>
+
+<LI>label setting only for: </LI>
+
+<OL>
+<LI>acyclic networks with arbitrary arc lengths(could be negative) </LI>
+
+<LI>nonnegative arc lengths </LI>
+</OL>
+
+<P>label correcting can be applied to all classes of problems </P>
+
+<LI>label setting is much more efficient </LI>
+</OL>
+
+<P>label correcting offers more algorithmic flexibility, label setting
+can be viewed as a special case of label-correcting </P>
+
+<P><FONT SIZE=+1><B>II. Label-Setting Algorithms: Dijkstra's algorithm</B>
+</FONT></P>
+
+<P><B>Algorithm <I>Dijkstra</I></B> 
+<HR><B>begin</B> </P>
+
+<UL>
+<P>S=0, S'=N; </P>
+</UL>
+
+<UL>
+<P>d(i)=INFINITY for all node i </P>
+
+<P>d(s)=0; pred(s)=0 </P>
+
+<P><B>while</B> |S|&lt;n <B>do</B> </P>
+
+<P><B>begin</B> </P>
+
+<UL>
+<P>let i belonging to S' be a node for which d(i)=min{d(j)| j<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>S'}
+<BR>
+add i to S; delete i from S' <BR>
+<B>for</B> each (i,j)<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>A(i)
+<B>do</B> </P>
+
+<UL>
+<P><BR>
+<B>if</B> d(j)&gt;d(i)+c<SUB>ij</SUB> <B>then</B> d(j)=d(i)+c<SUB>ij</SUB>;
+pred(j)=i </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> </P>
+
+<CENTER><P><IMG SRC="dijkstra.gif" HEIGHT=651 WIDTH=431>
+<HR></P></CENTER>
+
+<P><FONT SIZE=+1><B>III. Label-Correcting Algorithms: modified version
+(Bellman-Ford Algotithm)</B> </FONT></P>
+
+<P><B>Algorithm <I>modified label-correcting</I></B> 
+<HR></P>
+
+<P><B>begin</B> </P>
+
+<UL>
+<P>d(s)=0; pred(s)=0; <BR>
+d(j)=INFINITY for each node j except s <BR>
+LIST={s} <BR>
+<B>while</B> LIST not empty <B>do</B> <BR>
+<B>begin</B> </P>
+
+<UL>
+<P>remove i from LIST <BR>
+<B>for</B> each arc(i,j)<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>A(i)
+<B>do</B> <BR>
+<B>begin</B> </P>
+
+<UL>
+<P><B>if</B> d(j)&gt;d(i)+c<SUB>ij</SUB> <B>then</B> <BR>
+<B>begin</B> </P>
+
+<UL>
+<P>d(j)=d(i)+c<SUB>ij</SUB>; pred(j)=i <BR>
+<B>if</B> j not in LIST <B>then</B> add j into LIST </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> </P>
+</UL>
+
+<P><B>end</B> </P>
+
+<CENTER><P><IMG SRC="floyd-warshall.gif" HEIGHT=761 WIDTH=466>
+<HR WIDTH="100%"></P></CENTER>
+
+<OL>
+<LI>examine nodes in LIST in FIFO order (best strongly polynomial0time
+for solving shortest path problem with negative arc length) </LI>
+
+<LI>Dequeue: select nodes from the front of LIST, <BR>
+add node to the front of LIST (if that node has been in LIST) <BR>
+add node to the rear of LIST (otherwise) <BR>
+this method is very efficient in practice, but not polynomial time. </LI>
+</OL>
+
+<P><FONT SIZE=+1><B>IV. All pairs Shortest Paths</B> </FONT></P>
+
+<OL>
+<LI>repeated shortest path algorithm, run Dijkstra's algorithm n times
+</LI>
+
+<LI>generic label correcting algorithm </LI>
+
+<P><B>Algorithm <I>all-pairs label-correcting</I></B> 
+<HR></P>
+
+<P><B>begin</B> </P>
+
+<OL>
+<P>set d[i,j]=INFINITY for all [i,j]<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>N
+x N <BR>
+set d[i,j]=0 for all i<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>N
+</P>
+
+<P><B>for</B> each (i,j)<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>A
+<B>do</B> </P>
+
+<OL>
+<P>d[i,j]=c<SUB>ij</SUB> </P>
+</OL>
+
+<P><B>end</B></P>
+
+<P><B>while</B> the network contains 3 nodes i,j, and k satisfying d[i,j]&gt;d[i,k]+d[k,j]
+<B>do</B> </P>
+
+<OL>
+<P>d[i,j]=d[i,k]+d[k,j] </P>
+</OL>
+
+<P><B>end</B></P>
+</OL>
+
+<P><B>end</B></P>
+
+<LI>Floyd-Warshall algorithm </LI>
+
+<P><B>Algorithm</B> <B><I>Floyd-Warshall</I></B> 
+<HR></P>
+
+<P><B>begin</B> </P>
+
+<OL>
+<P>set d[i,j]=INFINITY, pred[i,j]=0 for all [i,j]<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>N
+x N <BR>
+set d[i,j]=0 for all i<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>
+N <BR>
+<B>for</B> each (i,j)<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>A
+<B>do</B> </P>
+
+<OL>
+<P>d[i,j]=c<SUB>ij</SUB>, pred[i,j]=i </P>
+</OL>
+
+<P><B>end</B></P>
+
+<P><B>for</B> each k=1 to n <B>do</B> </P>
+
+<OL>
+<P><B>for</B> each [i,j]<IMG SRC="./gif/belong2.gif" HEIGHT=15 WIDTH=15>N
+x N <B>do</B> </P>
+
+<OL>
+<P><B>if</B> d[i,j]&gt;d[i,k]+d[k,j] <B>then</B> </P>
+
+<P><B>begin</B> </P>
+
+<OL>
+<P>d[i,j]=d[i,k]+d[k,j] </P>
+
+<P>pred[i,j]=pred[k,j] </P>
+</OL>
+
+<P><B>end</B> </P>
+</OL>
+
+<P><B>end</B></P>
+</OL>
+
+<P><B>end</B></P>
+</OL>
+
+<P><B>end</B> 
+<HR WIDTH="100%"></P>
+
+<P>*pred[i,j]: the last node prior to j in the tentative shortest path
+from i to j </P>
+
+<LI>2(a)(b) are matrix manipulation algorithms. </LI>
+
+<UL>
+<LI>advantages: simplicity, intuitive appeal, and ease of implementation
+</LI>
+
+<LI>drawbacks: significant storage, poorer workt-case complexity </LI>
+</UL>
+
+<P>However, they are fairly popular computational methods. <BR>
+They achieve the best available running time for dense networks. </P>
+</OL>
+
+</BODY>
+</HTML>

@@ -1,0 +1,181 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<TITLE>I-Lin's Research Notes</TITLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B" leftmargin="0" topmargin="0">
+<div align="left"> 
+  <table border="0" align="center">
+    <tr> 
+      <th> 
+        <table width="100%" border="0">
+          <tr> 
+            <td width="100">&nbsp;</td>
+            <td> 
+              <table border=1 align="center" width="166" >
+                <tr align=CENTER valign=CENTER bgcolor="#FFC0CB"> 
+                  <th align=CENTER valign=CENTER nowrap> <font size="+1">I-Lin's 
+                    Research Notes</font></th>
+                </tr>
+              </table>
+            </td>
+            <td width="100"> 
+              <div align="right"><i></i></div>
+            </td>
+          </tr>
+        </table>
+        <i><font color="#006400" face="Arial, Helvetica, sans-serif" size="-1"> 
+        </font></i> 
+        <hr>
+      </th>
+    </tr>
+    <tr> 
+      <td> 
+        <table border="1" bordercolor="#FFFF99" align="center">
+          <tr> 
+            <th valign="top" colspan="4" bgcolor="#0066CC"><font size="-1" color="#CCFF00">I 
+              will try to put more about the researches I am doing or have done</font></th>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="sh_pa"></a>Shortest 
+              Path</font></b></td>
+            <td valign="top" width="15"><b><font size="-1">1.</font></b></td>
+            <td valign="top" width="420"><b><font size="-1">Solving Shortest Path 
+              Problem using NNLS</font></b></td>
+            <td valign="top" width="105" align="right"><font size="-1"><a href="nnls_sh_pa1.pdf" target="_blank">Download</a> 
+              (.pdf) </font></td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">I find for shortest path 
+              problem with nonnegative arc length, the NNLS is, in fact, Dijkstra's 
+              Algorithm. </font></td>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="mcnf"></a>Multicmmodity 
+              Network Flow</font></b></td>
+            <td width="15" valign="top"><b><font size="-1">1.</font></b></td>
+            <td valign="top" width="420"> <b><font size="-1">On Solving Origin-Destination 
+              Multicommodity Network Flow Problem</font></b></td>
+            <td valign="top" width="105" align="right"><font size="-1"><a href="mcnfreport2.pdf" target="_blank">Download</a> 
+              (.pdf)</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">This is just a summary 
+              of Prof. Barnhart's paper about ODMCF using Rosen's partition idea.</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="nnls"></a>NonNegative 
+              Least Square Algorithm</font></b></td>
+            <td valign="top" width="15"><b><font size="-1">0.</font></b></td>
+            <td valign="top" width="420"><b><font size="-1"></font></b></td>
+            <td valign="top" width="105" align="right">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">Trying to make a combinatorial 
+              algorithm to solve general network flow problem using this NNLS 
+              idea.</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="min_cost"></a>Min-Cost 
+              Network Flow</font></b></td>
+            <td valign="top" width="15"><b><font size="-1">1.</font></b></td>
+            <td valign="top" width="420"><b><font size="-1">Implementing the Premultiplier 
+              Network Simplex Algorithm</font></b></td>
+            <td valign="top" width="105" align="right"><font size="-1"><a href="http://sunmoon.pair.com/ilin/tothesis1.html" target="_self">URL</a> 
+              (html,.ps,.c)</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">Premultiplier Network 
+              Simplex is the first primal network simplex algorithm with polynomial 
+              running time. It was developed by Prof.J.B. Orlin. I implement it 
+              as my master thesis in MIT ORCenter, Feb. 1996.</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="ac_net"></a>Air 
+              Cargo Network</font></b></td>
+            <td valign="top" width="15"><b><font size="-1">0.</font></b></td>
+            <td valign="top" width="420"><b></b></td>
+            <td valign="top" width="105" align="right">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">Trying to develope some 
+              methods to evaluate the practice of Air Cargo Terminal</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="ac_term"></a>Air 
+              Cargo Terminal</font></b></td>
+            <td valign="top" width="15"><b><font size="-1">0.</font></b></td>
+            <td valign="top" width="420"><b></b></td>
+            <td valign="top" width="105" align="right">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">Trying to develope some 
+              methods to evaluate the practice of Air Cargo Terminal</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" rowspan="2" align="left" bgcolor="#33CCFF" width="90"><b><font size="-1"><a name="fujitsu"></a>Wavelength 
+              Assignment Routing Algorithm</font></b></td>
+            <td valign="top" width="15"><b><font size="-1">1.</font></b></td>
+            <td valign="top" width="420"><b><font size="-1">A Simple Heuristic 
+              for Wavelength Assignment/Routing Problem in Optical Network</font></b></td>
+            <td valign="top" width="105" align="right"><font size="-1"><a href="http://sunmoon.pair.com/ilin/report" target="_self">URL</a> 
+              (html,.c)</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" width="15">&nbsp;</td>
+            <td valign="top" colspan="2"><font size="-1">This is what I did in 
+              Fujitsu in Apr.96~Apr.97. It's just a heuristic. It may not be so 
+              good compared with others.</font></td>
+          </tr>
+          <tr> 
+            <td valign="top" width="90" align="left" bgcolor="#33CCFF"><b></b></td>
+            <td valign="top" width="15"><b><font size="-1"></font></b></td>
+            <td valign="top" width="420"><b><font size="-1"></font></b></td>
+            <td valign="top" width="105" align="right"><font size="-1"></font></td>
+          </tr>
+          <tr> 
+            <td valign="top" width="90" align="left" bgcolor="#33CCFF"><img src="../transparent.gif" width="90" height="1"></td>
+            <td valign="top" width="15"><img src="../transparent.gif" width="15" height="1"></td>
+            <td valign="top" width="420"><img src="../transparent.gif" width="420" height="1"></td>
+            <td valign="top" width="105" align="right"><img src="../transparent.gif" width="105" height="1"></td>
+          </tr>
+        </table>
+        <hr>
+      </td>
+    </tr>
+    <tr> 
+      <td> 
+        <div align="center">
+          <!-- BEGIN ADDFREESTATS EASY CODE V2 NO FRAMES 
+          -->
+          <!-- CODE FOR YOUR PAGE: main -->
+          <!-- URL : http://sunmoon.pair.com/ilin/main.html -->
+          <!-- PAGE NUMBER :1 -->
+          <script language="javascript" src="http://www.addfreestats.com/cgi-bin/easycode.cgi?usr=00032689P001">
+          </script>
+          <!-- END ADDFREESTATS EASY CODE V2 -->
+          <i><font color="#006400" face="Arial, Helvetica, sans-serif" size="-2">Last 
+          updated by 
+          <script language="LiveScript">
+  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified)
+
+  // end hiding contents --> 
+</script>
+          </font></i> </div>
+      </td>
+    </tr>
+  </table>
+</div>
+</BODY>
+</HTML>
+
+
+

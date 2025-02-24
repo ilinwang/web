@@ -1,0 +1,115 @@
+Shortest Path:
+===============
+
+I. Label-Setting vs. Label-Correcting Algorithms
+   same: 
+         (a)iterative; assign tentative distance labels to nodes at each step
+         (b)if label-correcting examine a node from LIST with the min distance 
+            label in a problem with nonnegative arc lengths, it's the same as 
+            Dijkstra's algorithm
+   differ:
+   	 (a)how they update distance labels
+   	 (b)how they converge toward the shortestpath distances
+   	    label setting: designate 1 label as permanent(optimal) at each iteration
+   	    label correcting: consider all labels as temporary until the final
+   	                      step, when they all become permanent
+   	 (c)label setting only for:
+   	      (1)acyclic networks with arbitrary arc lengths(could be negative)
+   	      (2)nonnegative arc lenghts
+   	    label correcting can be applied to all classes of problems
+   	 (d)label setting is much more efficient
+   	    label correcting offers more algorithmic flexibility, label setting
+   	    can be viewed as a special case of label-correcting
+   	    
+----
+
+II. Label-Setting Algorithms: Dijkstra's algorithm
+
+    Algorithm Dijkstra
+    begin
+    	S=0, S'=N;
+    	d(i)=INFINITY for all node i
+    	d(s)=0; pred(s)=0
+    	while |S|<n do
+    	begin
+    		let i belonging to S' be a node for which d(i)=min{d(j)| j belongs to S'}
+    		add i to S; delete i from S'
+    		for each (i,j) belonging to A(i) do
+    			if d(j)>d(i)+cij
+    			then d(j)=d(i)+cij; pred(j)=i
+    		end
+    	end
+    end
+    
+---
+III. Label-Correcting Algorithms: modified version (Bellman-Ford Alg)
+
+    Algorithm modified label-correcting
+    begin
+    	d(s)=0; pred(s)=0;
+    	d(j)=INFINITY for each node j except s
+    	LIST={s}
+    	while LIST not empty do
+    	begin
+    		remove i from LIST
+    		for each arc(i,j) belonging to A(i) do
+    		begin
+    			if d(j)>d(i)+cij then
+    			begin
+    				d(j)=d(
+i)+cij; pred(j)=i
+    				if j not in LIST 
+    				then add j into LIST
+    			end
+    		end		
+    	end
+    end	
+    
+1.examine nodes in LIST in FIFO order (best strongly polynomial0time for 
+  solving shortest path problem with negative arc length)
+2.Dequeue: select nodes from the front of LIST, 
+	   add node to the front of LIST (if that node has been in LIST)
+	   add node to the rear  of LIST (o.w)
+   this method is very efficient in practice, but not polynomial time.
+   
+---
+IV. All pairs Shortest Pahts
+
+1.repeated shortest path algorithm, run Dijkstra n times
+2.(a)generic label correcting algorithm
+  
+     Algorithm all-pairs label-correcting
+     begin
+     	set d[i,j]=INFINITY for all [i,j] belonging to N X N
+     	set d[i,j]=0 for all i belonging to N
+     	for each (i,j) belonging to A do
+     	   d[i,j]=cij
+     	while the network contains 3 nodes i,j, and k satisfying
+     	   d[i,j]>d[i,k]+d[k,j] do
+     	   d[i,j]=d[i,k]+d[k,j]
+     end  
+
+  (b)Floyd-Warshall algorithm
+  
+     Algorithm floyd-Warshall
+     begin
+     	set d[i,j]=INFINITY, pred[i,j]=0 for all [i,j] belonging to N X N
+     	set d[i,j]=0 for all i belonging to N
+     	for each (i,j) belonging to A do
+     	   d[i,j]=cij, pred[i,j]=i
+     	for each k=1 to n do
+     	   for each [i,j] belonging to N X N do
+     	      if d[i,j]>d[i,k]+d[k,j] then
+     	      begin
+     	      	 d[i,j]=d[i,k]+d[k,j]
+     	      	 pred[i,j]=pred[k,j]
+     	      end
+     end  
+  
+ *pred[i,j]: the last node prior to j in the tentative shortest path from i to j
+  
+3. 2(a)(b) are matrix manipulationalgorithms.
+   advantages: simplicity, intuitive appeal, and ease of implementation
+   drawbacks: significant storage, poorer workt-case complexity
+   However, they are fairly popular computational methods.
+   They achieve the best available running time for dense networks.

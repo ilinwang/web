@@ -1,0 +1,125 @@
+<HTML><HEAD><TITLE>Ph.D. Thesis Summary</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link href="../ilin1.css" rel="stylesheet" type="text/css"></HEAD>
+<BODY bgcolor="#D9D9F3" background="../gif/blbk1.gif">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><FONT size=+1>Shortest 
+                          Paths and Multicommodity Network Flows</FONT></TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE><I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I>
+      <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+            <TBODY>
+              <TR> 
+                <TD  rowSpan=5 align="center" vAlign=top> 
+                  <p align="center"> <strong>Summary</strong></p>
+                  <p align="center"><font color="#FF0000">Download whole Ph.D. 
+                    Thesis [<a href="ilinth2_all.pdf">pdf:1.3MB</a>] [<a href="ilinth2_all.ps">ps:2.4MB</a>]</font></p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The 
+                    shortest path problem is a classic and important combinatorial 
+                    optimization problems. It often appears as a subproblem when 
+                    solving difficult combinatorial problems like multicommodity 
+                    network flow (MCNF) problems.</p>
+                  <p align="justify"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Most 
+                    shortest path algorithms in the literature are either to compute 
+                    the 1-ALL single source shortest path (SSSP) tree, or to compute 
+                    the ALL-ALL all pairs shortest paths (APSP). However, most 
+                    real world applications require only multiple pairs shortest 
+                    paths (MPSP), where the shortest paths and distances between 
+                    only some specific pairs of origin-destination nodes in a 
+                    network are desired. The traditional single source shortest 
+                    path (SSSP) and all pairs shortest paths (APSP) algorithms 
+                    may do unnecessary computations to solve the MPSP problem.</p>
+                  <p align="justify"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We 
+                    survey and summarize many shortest path algorithms, and discuss 
+                    their pros and cons. We also investigate the Least Squares 
+                    Primal-Dual method, a new LP algorithm that avoids degenerate 
+                    pivots in each primal-dual iteration, for solving 1-1 and 
+                    1-ALL shortest path problems with nonnegative arc lengths, 
+                    show its equivalence to the classic Dijkstra's algorithm, 
+                    and compare it with the original primal-dual method.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We propose 
+                    two new shortest path algorithms to save computational work 
+                    when solving the MPSP problem. Our MPSP algorithms are especially 
+                    suitable for applications with fixed network topology but 
+                    changeable arc lengths. We discuss the theoretical details 
+                    and complexity analyses. We test several implementations of 
+                    our new MPSP algorithms extensively and compare them with 
+                    many state-of-the-art SSSP algorithms for solving many families 
+                    of artificially generated networks and a real Asia-Pacific 
+                    flight network.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our MPSP 
+                    computational experiments show that there exists no &quot;killer&quot; 
+                    shortest path algorithm. Our algorithms have better performance 
+                    for dense networks, but become worse for larger networks. 
+                    Although they do not have best performance for the artificially 
+                    generated graphs, they seem to be competitive for the real 
+                    Aisa-Pacific flight network.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We provide 
+                    an extensive survey on both the applications and solution 
+                    methods for MCNF problems in this thesis. Among those methods, 
+                    we investigate the combination of the primal-dual algorithm 
+                    with the key path decomposition method. In particular, to 
+                    efficiently solve the restricted primal problem (RPP) in each 
+                    primal-dual iteration, we relax the nonnegativity constraints 
+                    for some set of basic variables, which makes the relaxed RPP 
+                    smaller and easier to solve since the convexity constraint 
+                    will be implicitly maintained.</p>
+                  <p align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We implement 
+                    our new primal-dual key path method (KEY), propose new methods 
+                    to identify max step length, and suggest perturbation methods 
+                    to avoid degenerate pivots and indefinite cycling problems 
+                    caused by primal and dual degeneracy. We perform limited computational 
+                    experiments to compare the running time of the generic primal-dual 
+                    (PD) method, the Dantzig-Wolfe (DW) decomposition method, 
+                    and the CPLEX LP solver that solves the node-arc form (NA) 
+                    of the MCNF problems, with our method KEY. Observations from 
+                    the computational experiments suggest directions for better 
+                    DW implementation and possible remedies for improving PD and 
+                    KEY.</p><CENTER>
+<SCRIPT language=javascript><!--
+document.write("<a href=\"http://top.addfreestats.com/cgi-bin/main.cgi?usr=00032689P0011\" target=\"_blank\">");
+document.write("<img src=\"http://www.addfreestats.com");
+document.write("/cgi-bin/connect.cgi?");
+document.write("usr=00032689P0011");
+document.write("&refer="+escape(document.referrer)+"");
+document.write("&tips="+Math.random()+"");
+document.write("\" alt=\"AddFreeStats\" border=0></A>");
+//--></SCRIPT>
+<NOSCRIPT><A 
+href="http://top.addfreestats.com/cgi-bin/main.cgi?usr=00032689P0011" 
+target=_blank><IMG alt="AddFreeStats.com Free Web Stats in real-time !" 
+src="../resume_files/connect.gif" border=0></A> </NOSCRIPT></CENTER><!--  http://www.addfreestats.com --><!-- END ADDFREESTATS.COM NORMAL CODE V2 - Free Web Stats --></CENTER>
+
+                  </TD>
+              </TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR>
+        <TR></TR></TBODY></TABLE>
+      <HR>
+    </TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="chap1.html">Chap1</a>][<a href="chap2.html">Chap2</a>][<a href="chap3.html">Chap3</a>][<a href="chap4.html">Chap4</a>][<a href="chap5.html">Chap5</a>][<a href="chap6.html">Chap6</a>][<a href="chap7.html">Chap7</a>][<a href="appendA.html">Appendix</a>][<a href="reference.html">Reference</a>][<a href="vita.html">Vita</a>] 
+          </DIV></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=center>[<a href="index.html">Summary</a>]</DIV></TD></TR></TBODY></TABLE></DIV></BODY></HTML>

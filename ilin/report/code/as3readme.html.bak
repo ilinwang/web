@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Index of I-Lin's Reports</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<CENTER><P><BASE target=""><!BODY bgcolor=f5ccb0 70db93 d9d9f3 TEXT=black LINK=blue VLINK=darkblue></P></CENTER>
+
+<CENTER><TABLE BORDER=1 >
+<TR ALIGN=CENTER VALIGN=CENTER BGCOLOR="#FFC0CB">
+<TD ALIGN=CENTER VALIGN=CENTER>
+<H2 ALIGN=CENTER>ReadMe file for AS3.C
+</TD>
+</TR>
+</TABLE></CENTER>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<CENTER><P>
+<HR></P></CENTER>
+
+<P><B><I><FONT SIZE=+1>This is the readme file for my first Assignment
+code : as3.c</FONT></I></B></P>
+
+<UL>
+<LI><B>File required for compile: <A HREF="as3.c">as3.c</A> <A HREF="as3.h">as3.h</A></B></LI>
+
+<LI><B><FONT SIZE=+0>File required for run: <A HREF="topo.dat">topo.dat</A>
+<A HREF="mino.dat">mino.dat</A></FONT></B></LI>
+</UL>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><B><I>How to compile:</I></B></P>
+
+<UL>
+<LI>alias <B>/opt/gnu/bin/gcc -ansi -O -wall -pedantic -o</B> to be <B>gcco</B></LI>
+
+<LI><B>gcco as3 as3.c</B></LI>
+</UL>
+
+<P><B><I>How to execute:</I></B></P>
+
+<UL>
+<LI><B>as3 &gt; path.out</B></LI>
+</UL>
+
+<P>
+<HR WIDTH="100%"></P>
+
+<P><B><I>File format:</I></B></P>
+
+<CENTER><TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 >
+<TR ALIGN=CENTER BGCOLOR="#000080">
+<TD><FONT COLOR="#EEE8AA"><FONT SIZE=+1>topo.dat</FONT></FONT></TD>
+
+<TD><FONT COLOR="#EEE8AA"><FONT SIZE=+1>mino.dat</FONT></FONT></TD>
+</TR>
+
+<TR>
+<TD>6 9 --&gt; 6 nodes 9 arcs <BR>
+1 2 3 1 --&gt; this arc is from 1 to 2 , cost 3, capacity 1<BR>
+1 3 2 1 --&gt; from 1 to 3, cost 2, capacity 1 <BR>
+2 3 2 1 --&gt; from 2 to 3, cost 2, capacity 1 <BR>
+2 4 5 1 <BR>
+2 5 2 1 <BR>
+3 5 4 1 <BR>
+4 6 3 1 <BR>
+5 4 5 1 <BR>
+5 6 4 1</TD>
+
+<TD>1 6 10 --&gt; demand from 1 to 6 with 10 units<BR>
+2 5 873 --&gt; demand from 2 to 5 with 873 unit</TD>
+</TR>
+<tr><th><img src=../gif/sample1.gif></th><th><img src=../gif/sample2.gif></th>
+</tr>
+</TABLE></CENTER>
+
+<P>
+<HR WIDTH="100%"></P>
+
+</BODY>
+</HTML>

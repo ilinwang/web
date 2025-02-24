@@ -1,0 +1,79 @@
+<HTML> 
+<HEAD><TITLE>Before download C codes</TITLE> 
+<!-- Changed by: I-Lin Wang, 24-Jul-1996 -->
+<SCRIPT> 
+function Delay() 
+   {timerID=setTimeout('Reset()',3000);} 
+function Reset() 
+   { 
+   document.forms[0].elements[0].value = "Cover";                                                                                   // name 
+   document.forms[0].elements[1].value = "Abstract";                                                                                   // email 
+
+   //Delay(); 
+   document.forms[0].elements[0].focus(); 
+   }  
+function cover() 
+   { 
+      if (confirm("\nDownload the Postscript file of \n my thesis's cover page\n")) 
+         {  
+	setTimeout("window.location='./ps/cover.ps'",100);
+         return true; 
+         } 
+   } 	
+function Abstract() 
+   {    
+      if (confirm("\nDownload Postscript file of \n my thesis's Abstract. ")) 
+         {  
+	setTimeout("window.location='./ps/abstract.ps'",100);
+         return true; 
+         }  
+   } 	
+function content() 
+   {    
+      if (confirm("\nDownload Postscript file of \n my thesis's Contents and Acknowledgment. ")) 
+         {  
+	setTimeout("window.location='./ps/content.ps'",100);
+         return true; 
+         }  
+   } 	
+function chapter() 
+   {    
+      if (confirm("\nDownload Postscript file of \n my thesis's all Chapters, Appendix and References. ")) 
+         {  
+	setTimeout("window.location='./ps/chapter.ps'",100);
+         return true; 
+         }  
+   } 	
+
+</SCRIPT> 
+</HEAD> 
+ 
+<BODY onLoad="Delay()" BACKGROUND="./jpg/a055.jpg"> 
+ 
+<center>
+<h2><i> <font color=yellow>Welcome to download I-Lin's Premultiplier Network Simplex Thesis !! </font></i></h2>
+</center>
+<hr>
+<a name="download"></a>
+<form>
+<center>
+<TABLE BORDER=0 WIDTH=300> 
+<TR> 
+<TD align="center"><h2><font color=yellow>Download</font></h2>
+<TD align="center"><INPUT TYPE="button" VALUE="Cover" onClick="cover()"> 
+<TD align="center"><INPUT TYPE="button" VALUE="Abstract" onClick="Abstract()">
+<TD align="center"><INPUT TYPE="button" VALUE="Contents" onClick="content()">
+<TD align="center"><INPUT TYPE="button" VALUE="Chapters" onClick="chapter()">
+</TR> 
+</TABLE>
+</center> 
+</FORM> 
+<HR WIDTH=250 ALIGN=center SIZE=2> 
+<CENTER><ADDRESS><STRONG> 
+by <font color=faafa>I-Lin Wang</font><BR>  
+<a href=mailto:ilin@pair.com><img src=./gif/email1.gif></a> 
+</STRONG></ADDRESS></CENTER> 
+<HR WIDTH=250 ALIGN=center SIZE=2> 
+</BODY> 
+ 
+</HTML>

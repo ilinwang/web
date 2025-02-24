@@ -1,0 +1,193 @@
+<html>
+<HEAD>
+   <TITLE>Appendix of My Thesis</TITLE>
+<!-- Changed by: I-Lin Wang, 24-Jul-1996 -->
+<BODY BGCOLOR="#EffbF">
+<!BODY BGCOLOR="#EEEA0F">
+<!body background="./g<b>if</b>/wood.gif">
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<h2><a name="appendixa">
+Appendix A  </a><br><br>
+Detailed Pseu<b>do</b> Codes and Output of Our Codes</h2>
+<h3><a name="appendixa1">A.1 Detailed Pseu<b>do</b> Code for the procedure find_in_arc in the Nonscaling Premultiplier Algorithm</a></h3>
+<b>Procedure</b> <i>find_in_arc</i><br>
+<b>begin</b>
+<ul>		let E be the set of eligible nodes; empty E; put root into E; set node pointer i=root;<br>
+		set D=M where M is a very big number;<br>
+		<b>while</b> ( CurrentArc(i)<>-1 ) <b>do</b><br>
+		<b>begin</b>
+<ul>			<b>if</b> CurrentArc(i) is a nontree arc <b>then</b><br>
+			<b>begin</b>
+<ul>				compute its reduced cost;<br>
+				let u=tail of CurrentArc(i); v=head of CurrentArc(i);<br>
+				<b>if</b> (u=i, c<sup>p</sup><sub>uv</sub><0 and r<sub>uv</sub>>0) or (v=i, c<sup>p</sup><sub>uv</sub>>0 and r<sub>uv</sub><u<sub>uv</sub>) <b>then</b> 
+				return (u,v);
+</ul>			<b>end</b><br>
+			CurrentArc(i)=CurrentArc(i)+1;<br>
+			<b>if</b> CurrentArc(i)>n_arc(i) <b>then</b> CurrentArc(i)=-1;
+</ul>		<b>end</b><br>
+		let j=FirstChild(i); (assume j always exists, i.e. root is not a leaf)<br>
+		get pred_arc(j); compute reduced cost of pred_arc(i);<br>
+		<b>while</b> ( j<>root ) <b>do</b><br>
+		<b>begin</b>
+<ul>			<b>while</b> ( j<>-1 and pred_arc(j) has zero reduced cost ) <b>do</b><br>
+			<b>begin</b>
+<ul>				mark j to be eligible; put j into E;<br>
+				<b>while</b> ( CurrentArc(j)<>-1 ) <b>do</b><br>
+				<b>begin</b><br>
+<ul>				<b>if</b> CurrentArc(j) is a nontree arc <b>then</b>
+<ul>					<b>begin</b>
+<ul>						compute its reduced cost;<br>
+						let u=tail of CurrentArc(j); v=head of CurrentArc(j);<br>
+						<b>if</b> (u=i,c<sup>p</sup><sub>uv</sub> <0 and r<sub>uv</sub>>0) or (v=i,c<sup>p</sup><sub>uv</sub> >0 and r<sub>uv</sub>< u<sub>uv</sub>) <b>then</b> 
+						return (u,v);
+</ul>					<b>end</b><br>
+					CurrentArc(j)=CurrentArc(j)+1;<br>
+					<b>if</b> CurrentArc(j)>n_arc(j) <b>then</b> CurrentArc(j)=-1;
+</ul></ul>				<b>end</b><br>
+			let i=j;<br>
+			let j=FirstChild(i);<br>
+			get pred_arc(j); compute reduced cost of pred_arc(j)
+</ul>		<b>end</b><br>
+		<b>if</b> ( pred_arc(j) has zero reduced cost and FirstChild(j)=-1) <b>then</b> <br>
+		<b>begin</b>
+<ul>				mark j to be eligible; put j into E;<br>
+				<b>while</b> ( CurrentArc(j)<>-1 ) <b>do</b><br>
+				<b>begin</b>
+<ul>				<b>if</b> CurrentArc(j) is a nontree arc <b>then</b><br>
+					<b>begin</b>
+<ul>						compute its reduced cost;<br>
+						let u=tail of CurrentArc(j); v=head of CurrentArc(j);<br>
+						<b>if</b> (u=i,c<sup>p</sup><sub>uv</sub> <0 and r<sub>uv</sub>>0) or (v=i, c<sup>p</sup><sub>uv</sub> >0 and r<sub>uv</sub>< u<sub>uv</sub>) <b>then</b> 
+							return (u,v);
+</ul>					<b>end</b><br>
+					CurrentArc(j)=CurrentArc(j)+1;<br>
+					<b>if</b> CurrentArc(j)>n_arc(j) <b>then</b> CurrentArc(j)=-1;
+</ul>				<b>end</b>
+</ul>		<b>end</b><br>
+		<b>if</b> ( the reduced cost of pred_arc(j)<> 0) <b>then</b>
+<ul>			D=min{ D , absolute value of the reduced cost of pred_arc(j) };
+</ul>		<b>while</b> ( j<>root and Rightsibling(j)=-1 ) <b>do</b>
+<ul>			j=pred(j);
+</ul>		<b>if</b> ( j<>root ) <b>then</b><br>
+		<b>begin</b>
+<ul>			i=pred(j);<br>
+			j=RightSibling(j);<br>
+			get pred_arc(j); compute reduced cost of pred_arc(j);
+</ul>		<b>end</b>
+</ul>	<b>end</b><br>
+	return -1;
+</ul><b>end</b>
+</p>
+<hr>
+<h3><a name="appendixa2">A.2 Sample Output of our premultiplier codes</a></h3>
+<p>
+<pre>
+The following are the outputs of running a 512 nodes network by NETGEN-HI
+PNS==> 		premulti21 simplex
+PS1==> 		premulti3 simplex
+PS2==> 		premulti4 simplex
+OLD==>		original simplex
+CS2==>		CS3.4
+
+-----------the following is premulti21 simplex--------------
+n_node=513 (512 + 1 supernode); n_arc=4608 (4096 + 512 artificial arcs)
+CPU time in find_in_arc is 5.733333
+CPU time in find_out_arc is 0.066667
+CPU time in update_tree is 0.100000
+CPU time in update_pi is 0.083333
+CPU time in total is 6.150000
+# pivots: 1990 (non-deg: 1109 + deg: 881)
+# pi updates: 1874 
+# arcs scanned in find_in_arc: 1875865 (pivots: 809295 + update_pi: 1066570)
+# eligible nodes / pivots: 47
+# eligible nodes / update_pi: 56 
+# arcs / nondegen. cycle: 16 
+# arcs scanned / deg. cycle: 8 
+# arcs scanned to find in_arc<>-1 / pivot: 406 
+# arcs scanned to find in_arc=-1 / update_pi: 569 
+# arcs scanned in update_tree / pivot: 27 
+primal value=24398649.000000, dual value=24398649.000000
+optimal conditions are satisfied
+~/Public/c/all> premulti3 /var/tmp/net pp ppp
+-----------the following is premulti3 simplex--------------
+n_node=513 (512 + 1 supernode); n_arc=4608 (4096 + 512 artificial arcs)
+CPU time in find_in_arc is 2.350000
+CPU time in find_out_arc is 0.116667
+CPU time in update_tree is 0.050000
+CPU time in update_pi is 7.333333
+CPU time in total is 10.366667
+# pivots: 1542 (non-deg: 746 + deg: 796)
+# nodes whose pi is multi-eps/4: 18739 (in method2: 18729)
+# pi updates: 14232 (delta1: 1443 + delta2: 12785 + d1=infty: 4)
+# arcs scanned in find_in_arc: 433153 (pivots: 53871 + update_pi: 379282)
+# eligible nodes / pivots: 57
+# eligible nodes / update_pi: 129 
+# nodes whose pi is multi-eps / method2 pivost: 1 
+# arcs / nondegen. cycle: 14 
+# arcs scanned / deg. cycle: 9 
+# arcs scanned to find in_arc<>-1 / pivot: 34 
+# arcs scanned to find in_arc=-1 / update_pi: 26 
+# arcs scanned in update_tree / pivot: 38 
+primal value=24398649.000000, dual value=24398649.000000
+optimal conditions are satisfied
+~/Public/c/all> premulti4 /var/tmp/net pp ppp
+-----------the following is premulti4 simplex--------------
+n_node=513 (512 + 1 supernode); n_arc=4608 (4096 + 512 artificial arcs)
+CPU time in find_in_arc is 1.300000
+CPU time in find_out_arc is 0.116667
+CPU time in update_tree is 0.083333
+CPU time in update_pi is 2.300000
+CPU time in total is 4.100000
+# pivots: 1529 (non-deg: 758 + deg: 771)
+# nodes whose pi is multi-eps/4: 1259 (in method2: 1002)
+# pi updates: 2081 (delta1: 1428 + delta2: 650 + d1=infty: 3)
+# arcs scanned in find_in_arc: 113441 (pivots: 49085 + update_pi: 64356)
+# arcs scanned in update_pi: 506312
+# eligible nodes / pivots: 60
+# eligible nodes / update_pi: 52 
+# nodes whose pi is multi-eps / method2 pivots: 1 
+# arcs / nondegen. cycle: 15 
+# arcs scanned / deg. cycle: 8 
+# arcs scanned to find in_arc<>-1 / pivot: 32 
+# arcs scanned to find in_arc=-1 / update_pi: 30 
+# arcs scanned in update_tree / pivot: 38 
+# arcs scanned in update_pi / update_pi: 243 
+primal value=24398649.000000, dual value=24398649.000000
+optimal conditions are satisfied
+~/Public/c/all> yu1 /var/tmp/net pp ppp
+-----------the following is original simplex-------------
+24398649.000000    512     4096 [/var/tmp/net,pp]
+Simplex done.  Report is in file <pp>
+CPU time is 1.483333
+total # pivots: 4842 
+total # arcs_scanned: 187778 
+# arcs / cycle: 18 
+# arcs scanned / pivot: 38 
+~/Public/c/all> ./gold/cs2 < /var/tmp/net
+c----------- CS 3.4 --------------
+c
+c nodes:             512     arcs:             4096
+c scale-factor:       12     cut-off-factor:   23.3
+c
+c time:             0.55     cost:         24398649
+c refines:             4     discharges:       6450
+c pushes:           7137     relabels:        10095
+c updates:            18     u-scans:          5863
+c p-refines:           5     r-scans:          3062
+c dfs-scans:        6656     bad-in:        0  +  0
+c
+</p>
+</pre>
+
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<h4>
+    Previous: Return <a href="chap5.html#chap5"> Chapter 5 </a><br>
+    Next: Go to <a href="references.html#references"> References </a><br>
+    Go to <a href="toprograms.html" target="content"> Premultiplier C Codes </a>
+</h4>
+</BODY>
+
+</html>

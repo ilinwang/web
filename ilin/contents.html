@@ -1,0 +1,130 @@
+<html>
+<HEAD>
+   <TITLE>Contents of My Thesis</TITLE>
+<!-- Changed by: I-Lin Wang, 20-Aug-1996 -->
+
+<!BODY BGCOLOR="#EEEA0F">
+<BODY  BGCOLOR="lightyellow" TEXT="black" LINK="#ba30aa" VLINK="#008800">
+<!body background="./gif/wood.gif">
+<hr><img src="./gif/rainbow.gif"><hr>
+<h2>
+<A name="contents">Contents</a></h2>
+<h3>
+1  <a href="chap12.html#chap1">Introduction</a> <br>
+
+<ul>1.1 <a href="chap12.html#1.1"> Overview of this Thesis </a> <br>
+</ul>
+2  <a href="chap12.html#chap2">Background </a> <br>
+<ul>2.1 <a href="chap12.html#2.1"> Notations and Definitions</a> <br> 
+2.2 <a href="chap12.html#2.2"> Original Network Simplex Algorithm</a> <br> 
+2.3 <a href="chap12.html#2.3"> Premultiplier Network Simplex Algorithm</a> <br>
+<ul>       2.3.1 <a href="chap12.html#2.3.1">Nonscaling Premultiplier Algorithm</a> <br>
+       2.3.2 <a href="chap12.html#2.3.2">Scaling Version of Premultiplier Algorithm</a> <br>
+</ul>
+</ul>
+3  <a href="chap3.html#chap3">Implementing the Premultiplier Algorithm</a> <br>
+<ul>3.1  <a href="chap3.html#3.1">Nonscaling Premultiplier Algorithm</a> <br> 
+<ul>       3.1.1  <a href="chap3.html#3.1.1">Pseudo Code </a> <br>
+       3.1.2  <a href="chap3.html#3.1.2">More about our implementing </a> <br>
+</ul>3.2  <a href="chap12.html#chap1">Scaling Premultiplier Algorithm </a> <br>
+<ul>       3.2.1  <a href="chap3.html#3.2.1">Pseudo Code for the Generic Scaling Version </a> <br>
+       3.2.2  <a href="chap3.html#3.2.2">Pseudo Code for the Modified Scaling Version </a> <br>
+</ul></ul>
+4  <a href="chap4.html#chap4">Computational Testing Results </a> <br>
+<ul>
+4.1  <a href="chap4.html#4.1">Testing Setup </a> <br>
+<ul>           4.1.1 <a href="chap4.html#4.1.1"> NETGEN network generator</a> <br>
+        4.1.2  <a href="chap4.html#4.1.2">GRIDGEN network generator</a> <br>
+</ul>
+4.2  <a href="chap4.html#4.2">Testing Codes</a> <br>
+4.3  <a href="chap4.html#4.3">Results of NETGEN Families </a> <br>
+<ul>        4.3.1  <a href="chap4.html#4.3.1">Sensitivity</a> <br>
+</ul>
+4.4  <a href="chap4.html#4.4">GRIDGEN Families </a> <br>
+</ul>
+5  <a href="chap5.html#chap5">Discussion and Conclusion  </a> <br>
+<ul>
+5.1  <a href="chap5.html#5.1">CPU Time Analysis and Bottleneck</a> <br>
+5.2  <a href="chap5.html#5.2">More Insights in Premultiplier Algorithm</a> <br>
+5.3  <a href="chap5.html#5.3">Conclusion </a> <br>
+</ul>
+A  <a href="appendix.html#appendixa">Detailed Pseudo Codes and Output of Our Codes </a> <br>
+<ul>
+A.1  <a href="appendix.html#appendixa1">Detailed Pseudo Code for the procedure find_in_arc in the Nonscaling Premultiplier Algorithm </a> <br>
+A.2  <a href="appendix.html#appendixa2">Sample Output of our premultiplier codes</a> <br>
+</ul>
+</h3> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>List of Figures</h2>
+<h3>
+2-1  <a href="chap12.html#f2.1">a network example of minimum cost flow </a> <br>
+2-2  <a href="chap12.html#f2.2">A minimum cost flow problem solved by nonscaling premultiplier algorithm</a> <br>
+2-3  <a href="chap12.html#f2.3">the same example solved by the generic scaling premultiplier algorithm</a> <br>
+2-4  <a href="chap12.html#f2.4">same example solved by the modified scaling premultiplier algorithm</a> <br>
+3-1  <a href="chap3.html#f3.1">An example for the procedure update_tree1</a> <br>
+3-2  <a href="chap3.html#f3.2">An example for the procedure update_tree2</a> <br>
+4-1  <a href="chap4.html#f4.1">plot of CPU time for NETGEN-HI families</a> <br>
+4-2  <a href="chap4.html#f4.2">CPU time distribution plot for 2 NETGEN-HI families </a> <br>
+4-3  <a href="chap4.html#f4.3">plot of CPU time for NETGEN-LO families</a> <br>
+4-4  <a href="chap4.html#f4.4">CPU time distribution plot for 2 NETGEN-LO families</a> <br>
+4-5  <a href="chap4.html#f4.5">plot of CPU time for GRIDGEN-WIDE families</a> <br>
+4-6  <a href="chap4.html#f4.6">CPU time distribution plot for 2 GRIDGEN-WIDE families</a> <br>
+4-7  <a href="chap4.html#f4.7">plot of CPU time for GRIDGEN-LONG families</a> <br>
+4-8  <a href="chap4.html#f4.8">CPU time distribution plot for 2 GRIDGEN-LONG families</a> <br>
+4-9  <a href="chap4.html#f4.9">plot of CPU time for GRIDGEN-SQUARE families </a> <br>
+4-10  <a href="chap4.html#f4.10">CPU time distribution plot for 2 GRIDGEN-SQUARE families</a> <br>
+5-1  <a href="chap5.html#f5.1">an example of nodes scanned history by PNS</a> <br>
+</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>
+List of Tables</h2>
+<h3>
+2.1  <a href="chap12.html#t2.1">arc information for initial tree in Figure 2.1(b)</a> <br>
+2.2  <a href="chap12.html#t2.2">node information in Figure 2.1(b)</a> <br>
+4.1  <a href="chap4.html#t4.1">NETGEN-HI family data</a> <br>
+4.2  <a href="chap4.html#t4.2">NETGEN-LO family data </a> <br>
+4.3  <a href="chap4.html#t4.3">GRIDGEN-WIDE family data</a> <br>
+4.4  <a href="chap4.html#t4.4">GRIDGEN-LONG family data </a> <br>
+4.5  <a href="chap4.html#t4.5">GRIDGEN-SQUARE family data</a> <br>
+5.1  <a href="chap5.html#t5.1">CPU time proportion of 4 procedures running GRIDGEN-WIDE networks by PNS</a> <br>
+5.2  <a href="chap5.html#t5.2">CPU time proportion of 4 procedures running GRIDGEN-WIDE networks by PS1</a> <br>
+5.3  <a href="chap5.html#t5.3">CPU time proportion of 4 procedures running GRIDGEN-WIDE networks by PS2</a> <br>
+</h3>
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<h4>
+    Previous: Return <a href="acknowledgment.html"> Acknowledgment </a><br>
+    Next: Go to <a href="chap12.html#chap1"> Chapter1 </a><br>
+    Go to <a href="toprograms.html" target="content"> Premultiplier C Codes </a>
+</h4>
+</BODY>
+
+</html>

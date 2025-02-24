@@ -1,0 +1,211 @@
+<html>
+<HEAD>
+   <TITLE>Chapter 4 of My Thesis</TITLE>
+<!-- Changed by: I-Lin Wang, 24-Jul-1996 -->
+<BODY BGCOLOR="#EffbF">
+<!BODY BGCOLOR="#EEEA0F">
+<!body background="./gif/wood.gif">
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<a name="chap4"><h2>Chapter 4</a><br>
+Computational Testing Results</h2>
+<hr>
+<a name="4.1"><h3>4.1 Testing Setup</a></h3>
+<p>
+We use six network families produced by two network generator: NETGEN and GRIDGEN. Both of them are available in DIMACS ftp site. Here we use the similar setup as Goldberg did in <a href="references.html#r4" target="topics">[4]</a> so that we can compare our codes with other codes he evaluated. We generate 2 categories of networks by NETGEN, and 3 categories by GRIDGEN. Each category contains 6 network families with different size. Each network family contains 50 networks with the same configurations except the random seed. All the CPU time we list in this Chapter for a network family is the average of its 50 networks. The same simplex code may have different performance for different network generators.</p>
+<hr>
+<h3><a name="4.1.1">4.1.1 NETGEN network generator</a></h3>
+<p>
+NETGEN is a network generator developed by Klingman, Napier, and Stutz <a href="references.html#r5" target="topics">[5]</a> in 1974. We use its C version to create our testing categories--NETGEN-HI and NETGEN-LO. The 15 input parameters are as follows:</p>
+<h3>NETGEN-HI, and LO:</h3>
+<pre>
+1 seed		random number seed (a positive integer, we create it by a random number function)
+2 problem	problem number (a positive integer, set to be 1 in our code)
+3 nodes		number of nodes, we set it to be 2<sup>n</sup>, n=9~14 in our testing
+4 sources	number of source nodes: 2<sup>n-2</sup>
+5 sinks		number of sink node: 2<sup>n-2</sup>
+6 density	number of arcs: 2<sup>n+3</sup>
+7 mincost	min arc cost: 0
+8 maxcost	max arc cost: 4096
+9 supply	total supply: 2<sup>2(n-2)</sup>
+10 tsources	number of transshipment source nodes: 0
+11 tsinks	number of transshipment sink nodes: 0
+12 hicost	percent of arcs with max cost: 100%
+13 capacitated	percent of capacitated arcs: 100%
+14 mincap	min arc capacity: 1
+15 maxcap	max arc capacity: (1) for NETGEN-HI: 16384 (2) for NETGEN-LO: 16
+</pre>
+<p>
+The NETGEN-HI and NETGEN-LO only differ in their max arc capacity. We tested 6 network families starting from n=9 to n=14 for each category. We did not test larger networks with n>14 since it would take too long to complete the same scale of tests.</p>
+<hr>
+<a name="4.1.2"><h3>4.1.2 GRIDGEN network generator</h3></a>
+<p>
+GRIDGEN is a network generator developed by Lee <a href="references.html#r3" target="topics">[3]</a> written in C language. This network generator generates a grid-like network plus a supernode. To be consistent with some configurations of the NETGEN generator, we set the input parameters as follows:</p>
+<h3>GRIDGEN-SQUARE, LONG and WIDE:</h3>
+<pre>
+1 problem	number of problems (a positive integer, set to be 1 in our code)
+2 output name	output file name
+3 two-way	1 if arcs are linked in both direction; 0 otherwise; we set this to be 0
+4 seed		random number seed (a positive integer, we create it by a random number function)
+5 nodes		number of nodes, we set it to be 2<sup>n</sup>, n=9~14 in our testing
+6 grid width	we run 3 different geometries: (1) SQUARE: set grid width=nodes<sup>1/2</sup> 
+		(2) LONG: set grid width=nodes/16 (3) WIDE: set grid width=16
+7 sources	number of source nodes: 2<sup>n-2</sup>
+8 sinks		number of sink node: 2<sup>n-2</sup>
+9 avg. degree	average degree for a node: 23
+10 supply	total supply: 2<sup>2(n-2)</sup>
+11 cost flag	1 for UNIFORM; 2 for EXPONENTIAL; we set this to be 1
+12 mincost	min arc cost: 0
+13 maxcost	max arc cost: 4096
+14 capacity flag 1 for UNIFORM; 2 for EXPONENTIAL; we set this to be 1
+15 mincap	min arc capacity: 1
+16 maxcap	max arc capacity: 16384
+</pre>
+<p>
+We use GRIDGEN to create three categories of networks: SQUARE, LONG and WIDE. They only differ in geometries. We also tested 6 network families starting from n=9 to n=14 for each category. The costs and capacities are uniformly distributed in our test. One can set them to be exponentially distributed by changing some input parameters. </p>
+<hr>
+<a name="4.2"><h3>4.2 Testing Codes</h3></a>
+<p>
+We run three premultiplier codes: (1) the nonscaling version (2) the generic scaling version and (3) the modified scaling version. To compare their performance with other codes, we also run two other codes: (1) a simplex code developed by Lee <a href="references.html#r3" target="topics">[3]</a> that used the original network simplex algorithm and (2) a cost scaling simplex code developed by Goldberg <a href="references.html#r4" target="topics">[4]</a>.</p>
+<p>
+To simplify the notation, let's call the nonscaling premultiplier simplex code "PNS"; the generic scaling premultiplier simplex code "PS1"; the modified scaling version "PS2"; the simplex code by Lee "OLD"; and the cost scaling code by Goldberg "CS2".</p>
+<p>
+OLD was not optimal speeding the original simplex algorithm. It has two pivot-in rules for the entering arc. One is the first pivot-in rule which scans arcs from some node and pivots in the first eligible arc it encounters. The other rule uses a heuristic that scanning for the entering arc from those nodes with larger node potential. This heuristic did speed up the algorithm a lot. From our experience, we found the first pivot-in rule is too slow, especially when the network is large. Therefore, we choose that heuristic version to compare with our codes.</p>
+<p>
+CS2 followed the algorithm used in <a href="references.html#r4" target="topics">[4]</a>. We use the version 3.4 for our testing. It can be obtained by ftp theory.stanford.edu. According to Goldberg <a href="references.html#r4" target="topics">[4]</a>, the code is typically faster than many other simplex codes <a href="references.html#r4" target="topics">[4]</a>. </p>
+<hr>
+<a name="4.3"><h3>4.3 Results of NETGEN Families</h3></a>
+<p>
+We tested two categories : NETGEN-HI and NETGEN-LO. Since NETGEN-HI families have higher capacity than NETGEN-LO, they have less severe capacity constraints. Thus all the codes should run faster for NETGEN-HI families. According to our tests, CS2 is much faster than all the other codes. </p>
+<p>
+For NETGEN-HI families, OLD performs well if nodes < 2048. However, it becomes slower rapidly, and even much worse than other codes when nodes=16384. Our nonscaling premultiplier code, PNS, runs approximately as PS2 initially, but becomes worse when network size grows. Our generic scaling code, PS1, runs not so fast, but the running time does not grow as fast as PNS and OLD for larger networks. The modified scaling code, PS2, is the second fast one for larger networks. Its running time converges better than PS1. </p>
+<p>
+For NETGEN-LO families, all codes run slower except PS1. Interestingly, PS1 runs about twice as fast as its performance for the NETGEN-HI families. PS2 still performs well, it only runs a little slower under this severe capacity constraint. Both PNS and CS2 run about 100% slower. However, CS2 is still the fastest code. OLD and PNS are the slowest. </p>
+<hr>
+<a name="4.3.1"><h3>4.3.1 Sensitivity</h3></a>
+<p>
+We found that PNS and PS1 are more sensitive than other codes. That is, with the same size of networks, their CPU time may vary a lot, especially for larger networks. We tested 50 networks for each family to ensure that we would not draw the wrong conclusions. </p>
+<p>
+PS2, OLD and CS2 perform very consistently for networks with the same size. Figure 4.2 and 4.4 illustrate the CPU time distribution of 50 networks from the 2 different network families with 2 different sizes.</p>
+<hr>
+<a name="4.4"><h3>4.4 GRIDGEN Families</h3></a>
+<p>
+We tested three categories : GRIDGEN-WIDE, GRIDGEN-LONG, and GRIDGEN-SQUARE. They are different in their shapes. </p>
+<p>
+However, all the codes perform approximately the same for these three categories despite their different shapes. Like its performance in NETGEN families, OLD performs well if nodes < 2048, but becomes slower rapidly, and is the slowest one when nodes=16384. PNS runs approximately as PS2 initially, but becomes worse when network size grows. PS1 performs not well for all cases.</p>
+<p>
+PS2 is still the second fast code for larger networks. Still, PNS and PS1 are more sensitive than other codes. It is interesting that there are 2 networks of 16384 nodes in the GRIDGEN-WIDE family made CS2 run twice as slow as its usual performance. However, CS2 is still much faster than all the other codes.</p>
+<center>
+<a name="f4.1">Figure 4.1: plot of CPU time for NETGEN-HI families</a>
+<p><a href="./ps/nhi.eps"><IMG SRC="./gif/nhi.epsi.gif"></A></p>
+<hr>
+<pre><a name="t4.1">Table 4.1: NETGEN-HI family data</a></center>
+------------------------------------------------------------------------------
+<b>#</b>     |      <b>Total Running time (seconds)</b>      |            <b>Normalized time</b>
+<b>nodes</b> |	   <b>PNS     PS1     PS2     OLD   CS2</b>   |   <b>PNS   PS1    PS2    OLD  CS2</b>
+==============================================================================
+512   |    4.37    8.94    3.81    1.51  0.52 |  8.37  17.12   7.30   2.89  1
+1024  |   14.86   28.40   10.61    6.61  1.35 | 11.04  21.10   7.89   4.91  1
+2048  |   48.60   83.66   28.07   31.05  3.28 | 14.80  25.48   8.55   9.45  1
+4096  |  163.35  255.92   78.41  157.93  7.99 | 20.44  32.02   9.81  19.76  1
+8192  |  587.40  900.32  227.88  938.43 19.82 | 29.64  45.42  11.50  47.35  1
+16384 | 2071.33 2629.04  710.71 5607.36 49.76 | 41.63  52.84  14.28 112.70  1
+</pre>
+<hr><center>
+<a name="f4.2">Figure 4.2: CPU time distribution plot for 2 NETGEN-HI families</a>
+<p><a href="./ps/nhi9con.eps"><IMG SRC="./gif/nhi9con.epsi.gif"></A></P>
+<p><a href="./ps/nhi14con.eps"><IMG SRC="./gif/nhi14con.epsi.gif"></A></P>
+<hr>
+<a name="f4.3">Figure 4.3: plot of CPU time for NETGEN-LO families</a>
+<p><a href="./ps/nlo.eps"><IMG SRC="./gif/nlo.epsi.gif"></A></P>
+<hr>
+<pre><a name="t4.2">Table 4.2: NETGEN-LO family data</a></center>
+------------------------------------------------------------------------------
+<b>#</b>     |      <b>Total Running time (seconds)</b>      |            <b>Normalized time</b>
+<b>nodes</b> |	   <b>PNS     PS1     PS2     OLD   CS2</b>   |   <b>PNS   PS1    PS2    OLD  CS2</b>
+==============================================================================
+512   |    6.24    6.24    4.02    3.40   0.69 |  9.06   9.07   5.84   4.94  1
+1024  |   22.80   16.61   10.58   13.14   1.93 | 11.78   8.59   5.47   6.79  1
+2048  |   79.81   43.84   28.57   53.38   5.11 | 15.62   8.58   5.59  10.45  1
+4096  |  332.97  131.38   83.44  230.09  13.60 | 24.48   9.66   6.13  16.92  1
+8192  | 1352.41  412.51  259.79 1113.29  36.44 | 37.12  11.32   7.13  30.55  1
+16384 | 5254.80 1335.42  888.33 5639.26 100.99 | 52.03  13.22   8.80  55.84  1
+</pre>
+<hr><center>
+<a name="f4.4">Figure 4.4: CPU time distribution plot for 2 NETGEN-LO families</a>
+<p><a href="./ps/nlo9con.eps"><IMG SRC="./gif/nlo9con.epsi.gif"></A></P>
+<p><a href="./ps/nlo14con.eps"><IMG SRC="./gif/nlo14con.epsi.gif"></A></P>
+<hr>
+<a name="f4.5">Figure 4.5: plot of CPU time for GRIDGEN-WIDE families</a>
+<p><a href="./ps/gwi.eps"><IMG SRC="./gif/gwi.epsi.gif"></A></P>
+<hr>
+<pre><a name="t4.3">Table 4.3: GRIDGEN-WIDE family data</a></center>
+------------------------------------------------------------------------------
+<b>#</b>     |      <b>Total Running time (seconds)</b>      |            <b>Normalized time</b>
+<b>nodes</b> |	   <b>PNS     PS1     PS2     OLD   CS2</b>   |   <b>PNS   PS1    PS2    OLD  CS2</b>
+==============================================================================
+512   |    4.41   12.13    4.67    1.72   0.63 |  7.05  19.37   7.46   2.75  1
+1024  |   15.55   36.91   12.60    7.58   1.57 |  9.26  23.51   8.03   4.83  1
+2048  |   53.47  129.47   34.57   37.86   3.83 | 13.96  33.81   9.03   9.89  1
+4096  |  204.55  419.23   99.85  193.36   9.50 | 21.53  44.13  10.51  20.35  1
+8192  |  727.51 1456.30  326.41 1064.86  24.01 | 30.30  60.66  13.60  44.35  1
+16384 | 2381.14 4621.69 1184.17 5927.51  56.85 | 41.89  81.30  20.83 104.27  1
+</pre>
+<hr><center>
+<a name="f4.6">Figure 4.6: CPU time distribution plot for 2 GRIDGEN-WIDE families</a>
+<p><a href="./ps/gwi9con.eps"><IMG SRC="./gif/gwi9con.epsi.gif"></A></P>
+<p><a href="./ps/gwi14con.eps"><IMG SRC="./gif/gwi14con.epsi.gif"></A></P>
+<hr>
+<a name="f4.7">Figure 4.7: plot of CPU time for GRIDGEN-LONG families</a>
+<p><a href="./ps/glo.eps"><IMG SRC="./gif/glo.epsi.gif"></A></P>
+<hr>
+<pre><a name="t4.4">Table 4.4: GRIDGEN-LONG family data</a></center>
+------------------------------------------------------------------------------
+<b>#</b>     |      <b>Total Running time (seconds)</b>      |            <b>Normalized time</b>
+<b>nodes</b> |	   <b>PNS     PS1     PS2     OLD   CS2</b>   |   <b>PNS   PS1    PS2    OLD  CS2</b>
+==============================================================================
+512   |    3.99   10.27    4.00    1.56   0.56 |  7.06  18.19   7.08   2.77  1
+1024  |   14.10   30.33   10.83    6.70   1.37 | 10.30  22.14   7.90   4.89  1
+2048  |   49.48   99.84   29.42   34.68   3.38 | 14.62  29.50   8.69  10.25  1
+4096  |  179.60  364.55   85.37  179.60   8.38 | 21.42  43.48  10.18  21.42  1
+8192  |  665.86 1175.68  279.86  998.58  21.86 | 30.45  53.77  12.80  45.67  1
+16384 | 2450.25 4575.34 1139.21 5784.77  53.52 | 45.79  85.50  21.29 108.10  1
+</pre>
+<hr><center>
+<a name="f4.8">Figure 4.8: CPU time distribution plot for 2 GRIDGEN-LONG families</a>
+<p><a href="./ps/glo9con.eps"><IMG SRC="./gif/glo9con.epsi.gif"></A></P>
+<p><a href="./ps/glo14con.eps"><IMG SRC="./gif/glo14con.epsi.gif"></A></P>
+<hr>
+<a name="f4.9">Figure 4.9: plot of CPU time for GRIDGEN-SQUARE families</a>
+<p><a href="./ps/gsq.eps"><IMG SRC="./gif/gsq.epsi.gif"></A></P>
+<hr>
+<pre><a name="t4.5">Table 4.5: GRIDGEN-SQUARE family data</a></center>
+------------------------------------------------------------------------------
+<b>#</b>     |      <b>Total Running time (seconds)</b>      |            <b>Normalized time</b>
+<b>nodes</b> |	   <b>PNS     PS1     PS2     OLD   CS2</b>   |   <b>PNS   PS1    PS2    OLD  CS2</b>
+==============================================================================
+512   |    4.07    9.57    3.90    1.75   0.56 |  7.30  17.18   7.00   3.15  1
+1024  |   13.02   31.06   10.72    6.72   1.38 |  9.41  22.45   7.75   4.86  1
+2048  |   45.88   94.50   28.77   38.81   3.49 | 13.14  27.07   8.24  11.12  1
+4096  |  180.01  312.67   85.66  166.00   8.41 | 21.41  37.18  10.19  19.74  1
+8192  |  697.51 1141.43  281.83 1141.66  21.47 | 32.49  53.18  13.13  53.19  1
+16384 | 2210.58 4569.12 1174.56 5793.68  52.51 | 42.10  87.02  22.37 110.34  1
+</pre>
+<hr><center>
+<a name="f4.10">Figure 4.10: CPU time distribution plot for 2 GRIDGEN-SQUARE families</a>
+<p><a href="./ps/gsq9con.eps"><IMG SRC="./gif/gsq9con.epsi.gif"></A></P>
+<p><a href="./ps/gsq14con.eps"><IMG SRC="./gif/gsq14con.epsi.gif"></A></P>
+
+</center>
+
+
+<hr><img src="./gif/rainbow.gif"><hr>
+
+<h4>
+    Previous: Return <a href="chap3.html#chap3"> Chapter 3 </a><br>
+    Next: Go to <a href="chap5.html#chap4"> Chapter 5 </a><br>
+    Go to <a href="toprograms.html" target="content"> Premultiplier C Codes </a>
+</h4>
+</BODY>
+
+</html>

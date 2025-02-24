@@ -1,0 +1,17 @@
+A:link {
+	text-decoration: none;
+	color: #0000FF;
+};
+A:visited {
+	text-decoration: none;
+	color: #00008B;
+};
+A:hover {text-decoration: none};
+body {
+	font-family:"Arial", "Helvetica", "sans-serif";
+	font-size:12pt;
+	line-height: normal;
+	background: #D9D9F3 url(./gif/blbk1.gif) repeat;
+	font-style: normal;
+	text-decoration: none;
+} 

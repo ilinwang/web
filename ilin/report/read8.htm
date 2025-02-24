@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Algorithms For routing in a Linear Lightwave Network.</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<H4 ALIGN=CENTER><B><I><FONT COLOR="#000000"><FONT SIZE=+1>Reports of Several
+Papers</FONT></FONT></I></B></H4>
+
+<H4><B><I><FONT COLOR="#000000"><FONT SIZE=+1>Contents:</FONT></FONT></I></B></H4>
+
+<UL>
+<LI><B><A HREF="#1">WDM-Based Local Lightwave Networks PartII:Multihop
+Systems(II)</A></B></LI>
+
+<LI><A HREF="#2"><B>Topological Optimization Studies</B> </A></LI>
+
+<LI><B><A HREF="#3">Regular Structures</A></B></LI>
+
+<LI><A HREF="#4"><B>ShuffleNet=Hypercube x Ring and Embedding shuffleNet
+on Mesh Network</B> </A></LI>
+
+<LI><B><A HREF="#5">ShuffleNet: An Application of Generalized Perfect Shuffles
+to Multihop Lightwave Networks</A></B></LI>
+</UL>
+
+<H4 ALIGN=CENTER><I><FONT COLOR="#006400">This page was updated by <SCRIPT language="LiveScript">  <!--  hide script from old browsers
+
+    document.writeln(document.lastModified+'<br>')
+
+  // end hiding contents -->
+
+ document.writeln('Please '+'<b><font color=black>reload</font></b> often to get the updated information');
+ </SCRIPT></FONT></I></H4>
+
+<P>
+<HR></P>
+<B><FONT SIZE=+1></FONT></B>
+<P><A NAME="1"></A><FONT SIZE=+1><B>Title: WDM-Based Local Lightwave Networks
+PartII:Multihop Systems(II)</B> </FONT></P>
+
+<P><FONT SIZE=+1><B>Author</B>: Biswanath Mukherjee </FONT></P>
+
+<P><B>Abstract</B>: </P>
+
+<OL>
+<LI>Introduction of Multihop Systems for WDM network. Introduction of several
+network topologies such as Shuffle Net, de Bruijn Graph, Torus(MSN), Token
+Grid, and Hypercube. </LI>
+
+<LI>Also discuss some heuristics such as Flow-Based Heuristics, Delay-Based
+Heuristics .they propose routing algorithms to set up calls on a circuit-switched
+basis in LLN(linear lightwave network). </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<OL>
+<LI>a local lightwave network can be constructed by exploiting the capabilities
+of emerging optical technology, i.e., dense WDM and tunable optical transceivers.
+</LI>
+
+<LI>The system can be configured as a broadcast-and-select network in which
+all of the inputs from various nodes are combined in a WDM star coupler
+and the mixed optical information is broadcast to all outputs. </LI>
+
+<LI>In general, the physical topology, instead of being a star, can be
+a linear bus or a tree.Thus, given any physical network topology, the fact
+that the input lasers or the output filters can be made tunable opens up
+a multitude of possible virtual network configuration. </LI>
+
+<LI>2 classes of architectures--single-hop and multihop. </LI>
+</OL>
+
+<P>(1)single hop: </P>
+
+<UL>
+<P>(a)the nodes must communicate with one another in one hop. This requires
+a significant amount of dynamic coordination between the nodes. </P>
+
+<P>(b)in order to have better efficiency, the transceivers must be very
+agile(rapidly tunable). Given that the tuning ranges of current optical
+transceivers are limited, and that their current tuning times are significantly
+long, the challenge is to develop protocols for performing the proper transmission
+coordination in an efficient fashion. </P>
+</UL>
+
+<P>(2)multi hop: </P>
+
+<UL>
+<P>(a)the channel is relatively static, and this assignment normally is
+not expected to change except when a new global assignment of all transceivers
+is deemed to be more beneficial. </P>
+
+<P>(b)it's unlikely that there will be a direct path between every node
+pair. So,a packet from a source to a destination may have to hop through
+0 or more intermediate nodes. </P>
+
+<LI>It's hard to say which one is better for single-hop and multi-hop.
+</LI>
+
+<LI>Transceiver tuning times play a vital role in determining the performance
+and characteristics of single-hop systems, but they have little impact
+on multihop systems since the multihop virtual topology is static. </LI>
+
+<LI>2 important issues to address when we design a good multihop system:
+</LI>
+</UL>
+
+<P>(a)the virtual structure chosen must be close to optimal </P>
+
+<P>e.g., the avg hop distance between nodes must be small </P>
+
+<P>or the avg packet delay must be minimal </P>
+
+<P>or the max. flow on any link in the virtual structure must be minimal
+</P>
+
+<P>(b)the nodal processing complexity must be small because the high-speed
+environment allows very little processing time. So, simple routing mechanisms
+must be employed. </P>
+
+<OL>
+<LI>A routing-related subproblem is the buffering strategies at the intermediate
+nodes. many paper advocate the use of deflection routing under which, a
+packet may be intentionally misrouted, but still reach its destination
+over a slightly longer (but all optical)path, instead of being (electronically)
+buffered at an intermediate node. </LI>
+
+<LI>Irregular multihop structures address the optimality criterion directly,
+but the routing complexity can be large since they lack any structural
+connectivity pattern. </LI>
+
+<LI>Regular structures have simplified routing schemes, but their regularity
+also constrains the set of solutions in addressing the optimality problem.
+</LI>
+
+<LI>the offered loads by the various nodes may not necessarily be symmetric.
+</LI>
+
+<LI>Regular structures generally are amenable to uniform loading patterns,
+irregular structures can be optimized for arbitrary work-loads. </LI>
+
+<LI>Finally, whether to employ dedicated or shared channels must be mindful.
+</LI>
+</OL>
+
+<P>for dedicated channels, each virtual link employs a dedicated wavelength
+channel. However, since internode traffic may be bursty, the traffic on
+an arbitrary link is expected to be burst , too. Therefore results in some
+of the links' utilizations being low. So, the shared channel mechanism
+advocates the use of 2 or more virtual links to share the same channel
+in order to improve the channel utilization. </P>
+
+<P>
+<HR></P>
+
+<CENTER><P><A NAME="2"></A><FONT SIZE=+1><B>Topological Optimization Studies</B>
+</FONT>
+<HR></P></CENTER>
+
+<P><B>Flow-Based Optimization:</B> </P>
+
+<P>Problem: </P>
+
+<P>N nodes, each node has T transmitters and T receivers; <BR>
+Capacity of each channel is C units(b/s) <BR>
+Traffic matrix {<FONT FACE="Symbol">l</FONT><SUB>sd</SUB>}, <FONT FACE="Symbol">l</FONT><SUB>sd
+</SUB>is the traffic flow from s to d <BR>
+f<SUB>ij</SUB>: flow in link ij; <BR>
+f<SUP>sd</SUP><SUB>ij</SUB>: fraction of flow <FONT FACE="Symbol">l</FONT><SUB>sd</SUB>
+passing through link ij <BR>
+Z<SUB>ij</SUB>: no. of directed channels from i to j <BR>
+C<SUB>ij</SUB>=Z<SUB>ij</SUB>C: capacity of link ij <BR>
+f<SUB>ij</SUB>/C<SUB>ij</SUB> : fraction of the capacity which is utilized
+on link ij </P>
+
+<P>the max. utilization of an arbitrary topology is <IMG SRC="./gif/img00046.gif" HEIGHT=46 WIDTH=64 ALIGN=CENTER>
+</P>
+
+<P>Among various alternative topologies that are possible, the one that
+minimizes the above quantity is chosen to be the optimal interconnection
+pattern. </P>
+
+<P>FWA(flow and wavelength assignment) problem can be set up as a mixed
+integer optimization problem, with a min-max objective function subject
+to a set of linear constraints. </P>
+
+<P>Characteristics of this problem: </P>
+
+<UL>
+<LI>it allows the traffic matrix to scale up by the max amount before its
+most heavily loaded link saturates </LI>
+
+<LI>only need to know the node-to-node traffic intensities, the solution
+is independent of the traffic type(either circuit- or packet-switched type)(either
+datagram-based or virtual-circuit-based) </LI>
+
+<LI>search space for the connectivity diagram grows rapidly with increasing
+N </LI>
+</UL>
+
+<P>So, [36] proposes a suboptimal and iterative algorithm: </P>
+
+<P>Step1: first determines a heuristic initial solution </P>
+
+<P>Step2: then applies branch-exchange operations iteratively to improve
+the solution. </P>
+
+<UL>
+<LI>In Step1,they heuristically tries to maximize the one-hop path traffic(i.e.try
+to connect nodes which has more traffic in one hop)==&gt; this can be solved
+by a special simplex algorithm. </LI>
+
+<LI>Step2 is the routing problem, which can be formulated as a multicommodity
+flow problem with a nonlinear, nondifferentiable, convex objective function;
+and can be solved by using the flow deviation method.???[23] </LI>
+
+<LI>Iterative improvement is performed by considering a no. of least-utilized
+branches(say, K) 2 at a time. A branch-exchange operations is performed
+by <BR>
+(1)swapping the transmitters(or receivers) of the 2 least-utilized branches
+<BR>
+(2)resolving the routing problem on the new connectivity diagram <BR>
+(3)accepting the swap if the new topology leads to a lower networkwide
+max. link utilization. </LI>
+</UL>
+
+<P>repeat these steps until no improvement is obtained. <BR>
+
+<HR></P>
+
+<P><B>Delay-Based Optimization: </B></P>
+
+<P>One of the objectives in designing an optimal virtual topology is to
+minimize the mean networkwide packet delay. </P>
+
+<LI>There are 2 kinds of packet delays </LI>
+
+<P>(1)propagation delays encountered by the packet as it hops from the
+source through intermediate nodes to the final destination <BR>
+(2)queuing at the intermediate nodes </P>
+
+<P>For a high-speed network which the channel capacity is large, the queuing
+delay can be ignorable compared to the propagation delay which directly
+depends on the glass distance between nodes. </P>
+
+<P>Thus, this optimization also need to know the distance matrix {d<SUB>ij</SUB>},
+is the glass distance from i to j per the underlying physical topology.??
+</P>
+
+<LI>the mean networkwide packet delay: <IMG SRC="./gif/img00047.gif" HEIGHT=49 WIDTH=125 ALIGN=CENTER>
+</LI>
+
+<P><FONT FACE="Symbol">n</FONT> :velocity of light in a fiber <BR>
+<FONT FACE="Symbol">g</FONT> =<IMG SRC="./gif/img00048.gif" HEIGHT=46 WIDTH=60 ALIGN=CENTER>=
+total offered load to the network <BR>
+<IMG SRC="./gif/bdelta.gif" HEIGHT=18 WIDTH=17 ALIGN=CENTER>: nodal queuing
+delay component </P>
+
+<LI>The optimization can be stated as follows: <BR>
+<BR>
+<B>Given</B>: Traffic matrix; Distance matrix <BR>
+<B>Objective</B>: Minimize mean packet delay <BR>
+<B>Design variables</B>: Virtual topology; Link flows <BR>
+<B>Constraints</B>: Flow conservation Nodal connectivity(including the
+no. of transmitters &amp; receivers per node)<BR>
+
+<HR></LI>
+
+<P><A NAME="3"></A><FONT SIZE=+1><B>Regular Structures:</B> </FONT></P>
+
+<P><B>ShuffleNet:</B> </P>
+
+<OL>
+<LI>from any tagged node in any column, note that p nodes can be reached
+in 1 hop, another p*p nodes in 2 hops, and so on, until all remaining p^k-1
+nodes in the 1st column are visited. call this the 1st pass. In the 2nd
+pass, all nodes which were not visited in the first pass can now be visited.
+</LI>
+
+<LI>the shuffleNet structure's diameter equals 2k-1. The diameter for any
+multihop structure is defined to be the ma. hop distance between any 2
+nodes. </LI>
+
+<LI>due to multihopping, only a fraction of a link's capacity actually
+is being utilized for carrying direct traffic between the 2 specific nodes
+connected by a link, while the remaining link capacity is used for forwarding
+of multihop traffic. </LI>
+
+<LI>Adaptive and Deflection Routing Strategies in ShuffleNet: </LI>
+</OL>
+
+<P>Objective: to ensure that packets avoid congestion or hot spots in the
+network. </P>
+
+<P>When a packet is more than k hops away from its destination in a (p,k)
+ShuffleNet, the packet is routed on the outgoing link with the least no.
+of queued packets. Sometimes, even if a packet is fewer than k hops away
+from its destination(i.e. a single shortest path to the destination exists),
+the packet may be routed to one or the remaining and least congested (p-1)
+outgoing links if the no. of packets queued for the preferred link exceeds
+a certain threshold, while the queue size on the least-congested link is
+below a different and much smaller threshold. </P>
+
+<OL>
+<LI><B>advantages</B> of employing deflection routing in a (p,k) ShuffleNet
+is that, if a packet at an intermediate node is more than p hops away from
+its destination, then multiple shortest paths exist between the intermediate
+node and the destination. </LI>
+
+<LI>The intermediate node can therefore be considered a &quot;don't care&quot;
+node, and all p outgoing links are equally suitable. A large network(with
+a large p) has a large no. of &quot;don't care&quot; nodes for an arbitrary
+path, and hence there are fewer contentions for preferred paths. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><A NAME="4"></A><FONT SIZE=+1><B>Title: ShuffleNet=Hypercube x Ring
+and Embedding shuffleNet on Mesh Network</B> </FONT></P>
+
+<P><FONT SIZE=+1><B>Author</B>: Duanyang Guo, Wei Guo and A.S. Acampora
+</FONT></P>
+
+<OL>
+<LI>a ShuffleNet uses a small, fixed no. of transceivers per network access
+node and provides nearly optimal throughput. (that's why it has long been
+proposed as an ideal optical connectivity) </LI>
+
+<LI>But building multihop networks using ShuffleNets requires either a
+large no. of fibers or a large no. of wavelengths. </LI>
+
+<LI>a multihop WDM network is characterized by its optical connectivity,
+which is independent of the underlying fiber topology. </LI>
+
+<LI>ShuffleNet is advocated as an ideal optical connectivity for building
+high-throughput multihop lightwave networks. Because </LI>
+</OL>
+
+<P>(a)a ShuffleNet uses a small, fixed no. of transceivers per network
+access node, and provides nearly optimal throughput. </P>
+
+<P>(b)because of its symmetry and regularity, it has simple and efficient
+routing schemes. </P>
+
+<OL>
+<LI>for bus and star fiber topologies, while the layouts on the fiber layer
+are simple, they demand an excessive no. of wavelengths. various schemes
+are proposed to avoid the problems by sharing one wavelength among multiple
+optical connections. This brings a multiple access problem which results
+in complexity and inefficiency, especially for bursty traffic. But, this
+still needs many wavelengths. </LI>
+
+<LI>The difficulty is embedding a ShuffleNet on other simple topologies
+with optimal wavelength assignment is a very hard problem. </LI>
+
+<LI>ShuffleNet is the multiplication of hypercube and ring. </LI>
+
+<LI>With 7, we can embed ShuffleNet on mesh network using a small no. of
+fiber buses and an even smaller no. of wavelengths </LI>
+
+<LI>They conclude that mesh-based ShuffleNet is suited for high-speed LAN
+or metropolitan-area networks and practical for implementation. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><A NAME="5"></A><FONT SIZE=+1><B>Title: ShuffleNet: An Application of
+Generalized Perfect Shuffles to Multihop Lightwave Networks.</B> </FONT></P>
+
+<P><FONT SIZE=+1><B>Author</B>: Michael G. Hluchyj; Mark J. Karol </FONT></P>
+
+<OL>
+<LI>They propose ShuffleNet for achieving concurrency in distributed lightwave
+networks. </LI>
+
+<LI>A ShuffleNet can be configured with each user having as few as 1 fixed-wavelength
+transmitter and 1 fixed-wavelength receiver, avoiding both wavelength-agility
+and pretransmission-coordination problems. </LI>
+
+<LI>It can achieve at least 40% of the max efficiency possible with wavelength-agile
+transmitters and receivers. </LI>
+
+<LI>ShuffleNet achieves high efficiency for uniform traffic loads. </LI>
+</OL>
+
+<P><B>ShuffleNet Connectivity:</B> </P>
+
+<OL>
+<LI>increasing no. of columns, k, will increase the expected no. of wavelengths
+a packet must use to reach its destination in ShuffleNet. Thus, decreases
+the channel efficency. </LI>
+
+<LI>From their test in fig6, it is best to keep k=2, and increase N=kp<SUP>k</SUP>
+by increasing p. However, for the shared channel ShuffleNet with a single
+transmitter and single receiver per user, p is equal to the no. of users
+sharing a common wavelength. Hence, increasing p decrases the max. througput
+per user. </LI>
+
+<LI>if one desires a higher user throughput without going to multiple transmitters
+and receivers, or the concentration of multiple users, this can be achieved
+by selecting a larger k. The decrease in channel efficiency with increasing
+k is compensated by an increased no. of channels in the network. </LI>
+
+<LI>for high-speed packet networks, delay is generally dominated by fixed
+propagation delays. </LI>
+
+<LI>k=1 row corresponds to the connectivity achieved with a single-channel
+broadcast bus; p=1 column corresponds to the connectivity achieved in a
+ring network. For p and k greater than 1, ShuffleNet combines the shared
+channel feature of a broadcast bus with the multihop feature of a ring.
+</LI>
+</OL>
+
+<P><B>ShuffleNet Routing to achive load-balanced channels</B> </P>
+
+<OL>
+<LI>They present a routing algorithm for the single-transmitter, single-receiver-per-user
+ShuffleNet with shared channels. They show that algorithm delivers packets
+from any give source to any given destination in the min no. of hops possible
+for the source/destination pair. </LI>
+</OL>
+
+<P>the algorithm also loads all WDM channels with the same average traffic
+when the distribution of source and destination addresses is uniform. </P>
+
+</BODY>
+</HTML>

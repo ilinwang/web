@@ -1,0 +1,77 @@
+
+Obj: 1. To delete as more fiber as possible
+     2. To make the used ratio of fibers as higher as possible
+     3. To make the demand's path as shorter as possible
+
+
+Comment:
+
+1.When we delete fibers, and rerouting the affected demands, we will ALWAYS
+  increase the "average used ratio".
+
+2.How to define "average used ratio" may be difficult
+
+3.It is no doubt that we will always want to rerout the demand with shorter
+  path since the "average used ratio" will always be higher anyway.
+-->So, I will prefer make the shorter path with higher priority than the
+   higher used ratio.
+-->I feel that it does not make much sense to make cost to be something
+   related with used ratio, and then the cost of the path will be something
+   about sum(used ratio of each link on the path) or product(...)
+
+4.Define the used ratio for the wavelength j of link i : 
+	r(i,j)=a(i,j)/Max{a(i,j)}
+  	0<r(i,j)<=1
+
+More Details:
+
+1. Building path database, 1 unit of demand==> 1 path
+   record its wavelength, hops, used ratio(max{r(i,j)} for wavelength i, 
+	j is the link on the path
+   for each arc in the wavelength network, build a stack to record which unit 
+     has passed this arc
+-->so, it will be easy to find out affected units of demand when we cut out
+   1 fiber.
+{3 days}
+
+2. Building physical arc database, record used ratio of each wavelength 
+   associate that arc i
+-->physical arc(i)-> matrix of assigned path in jth network, say, s(j), j=1-8
+   arc(i).s(j) : the # of assigned unit on arc i in the jth wavelength network
+{2 days}
+
+3. when we cut out 1 fiber, build a function to identify the affected 
+   wavelength
+-->if interior[arc(i).s(j)/8] < arc(i).no_fiber 
+	 wavelength j is not affected
+   otherwise
+	 wavelength j is affected.
+		pick up the last arc(i)%s(j) units from the stack for
+		rerouting
+{3 days}  
+
+4. rerouting part:
+   identify ALL the effected demand, and their paths
+   Update network, store the original network for backup use
+       |
+       |==> extract ALL the affected paths out, update related database
+            put All the affected demand on a matrix, sorted it by its occupied
+		hops
+	    pick up the demand with longest path
+            Loops to assign current demand
+		if it can be assigned
+			go to assign the next longest one
+		else
+			exit this loop
+			we can't cut this fiber, we have to 
+				restore the backup network back
+				try to pick up the next expensive fiber for
+				cutting
+
+	     If we can successfully rerout ALL the affected demands
+		we have to recalculate for the real cost of all the fibers
+		again
+{???days}
+
+5. Integration All Parts
+{???days}

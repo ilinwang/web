@@ -1,0 +1,90 @@
+#FIG 3.1
+Landscape
+Center
+Inches
+1200 2
+6 2325 1425 8250 2175
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 2326 1426 8176 1426 8176 2101 2326 2101 2326 1426
+4 0 -1 0 0 0 12 0.0000000 4 165 3810 2476 1651 Build Path database, for each demand unit, record its  \001
+4 0 -1 0 0 0 12 0.0000000 4 180 5595 2476 1939     Path wavelenght, hops, used ratio(max{used ratio for each arc on that path})\001
+-6
+6 4350 525 6150 1050
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 4351 526 6076 526 6076 976 4351 976 4351 526
+4 0 -1 0 0 0 12 0.0000000 4 180 1275 4576 826 Assignment Code\001
+-6
+6 3600 4125 7050 4575
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 3601 4126 6976 4126 6976 4501 3601 4501 3601 4126
+4 0 -1 0 0 0 12 0.0000000 4 180 3090 3751 4351 sort Cost for each link, pick up the max one\001
+-6
+6 3600 6450 7200 7125
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 3601 6451 7126 6451 7126 7051 3601 7051 3601 6451
+4 0 -1 0 0 0 12 0.0000000 4 180 3330 3751 6676 Loops to rerouting the affected unit of demand \001
+4 0 -1 0 0 0 12 0.0000000 4 180 915 3976 6976 Do rerouting\001
+-6
+6 750 6525 3225 7050
+4 0 -1 0 0 0 12 0.0000000 4 180 2025 751 6676 if we can finish assigning all\001
+4 0 -1 0 0 0 12 0.0000000 4 135 2415 751 6976 the affected demands for this fiber\001
+-6
+6 4875 7050 5700 7800
+6 4876 7351 5626 7726
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 4877 7352 5552 7352 5552 7652 4877 7652 4877 7352
+4 0 -1 0 0 0 12 0.0000000 4 135 360 5027 7577 Over\001
+-6
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 2
+	1 1 1.00 60.00 120.00
+	 5176 7051 5176 7351
+-6
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 2
+	1 1 1.00 60.00 120.00
+	 5100 975 5100 1350
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 2
+	1 1 1.00 60.00 120.00
+	 5100 2100 5100 2400
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 2
+	1 1 1.00 60.00 120.00
+	 5175 3750 5175 4125
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 2
+	1 1 1.00 60.00 120.00
+	 5175 4500 5175 4800
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 901 2476 10126 2476 10126 3751 901 3751 901 2476
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 4
+	1 1 1.00 60.00 120.00
+	 3600 6750 450 6750 450 3300 825 3300
+2 2 0 1 -1 7 0 0 -1 0.000 0 0 0 0 0 5
+	 1425 4876 9451 4876 9451 6000 1425 6000 1425 4876
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 4
+	1 1 1.00 60.00 120.00
+	 7125 6600 11475 6600 11475 5100 9450 5100
+2 1 0 1 -1 7 0 0 -1 0.000 0 0 -1 1 0 2
+	1 1 1.00 60.00 120.00
+	 5175 6000 5175 6450
+4 0 -1 0 0 0 12 0.0000000 4 180 6750 1576 5101 delete that fiber, identify the affected units of demand (need information from the path database)\001
+4 0 -1 0 0 0 12 0.0000000 4 180 6450 2776 5626 So that we will always pick up the top fiber for deleting because its used ratio is the lowest.\001
+4 0 -1 0 0 0 12 0.0000000 4 180 6090 2776 5326 here we assume the wavelengths in the physical link will be put "from the bottom up" \001
+4 0 -1 0 0 0 12 0.0000000 4 165 3720 1051 2701 For each link, calculate its real cost for its fiber, I/O :\001
+4 0 -1 0 0 0 12 0.0000000 4 135 2295 1576 3076 here we decide to have 3 modes:\001
+4 0 -1 0 0 0 12 0.0000000 4 180 1455 4051 2926 1. only delete 1 fiber\001
+4 0 -1 0 0 0 12 0.0000000 4 165 5970 4051 3226 2. delete 1 fiber + 1 I/O (if the other I/O board has more than 1 accommodated fiber)\001
+4 0 -1 0 0 0 12 0.0000000 4 180 4920 4051 3526 3. delete 1 fiber + 2 I/O (if the other I/O  also only contains this fiber)\001
+4 0 -1 0 0 0 12 0.0000000 4 180 5520 1576 5851 Identify the affected paths, sort it with descending order of its number of hops\001
+4 0 -1 0 0 0 12 0.0000000 4 180 2925 7950 6525 if can't rerouting all the affected demands\001
+4 0 -1 0 0 0 12 0.0000000 4 180 1140 9900 5025 Pick up the next\001
+4 0 -1 0 0 0 12 0.0000000 4 180 1215 9900 5325 highest cost fiber\001
+4 0 -1 0 0 0 12 0.0000000 4 180 750 900 8250 Rerouting:\001
+4 0 -1 0 0 0 12 0.0000000 4 180 4260 900 8538 Take out all the pathes which the affected demands occupied\001
+4 0 -1 0 0 0 12 0.0000000 4 180 3675 900 8826 Update networks (on each changed arc, capacity++)\001
+4 0 -1 0 0 0 12 0.0000000 4 180 2895 900 9150 Choose the longest demand for rerouting\001
+4 0 -1 0 0 0 12 0.0000000 4 180 3600 5850 9375 2. making the used ratio to be as higher as possible\001
+4 0 -1 0 0 0 12 0.0000000 4 180 3975 5850 9663 3. making the length of path to be as shorter as possible \001
+4 0 -1 0 0 0 12 0.0000000 4 180 3300 5850 9951     (here I use hops to be the length of the path)\001
+4 0 -1 0 0 0 12 0.0000000 4 180 510 5250 9150 Object:\001
+4 0 -1 0 0 0 12 0.0000000 4 180 2610 5850 9150 1. deleting as more fibers as possible\001
+4 0 -1 0 0 0 12 0.0000000 4 135 735 5250 10425 Comment:\001
+4 0 -1 0 0 0 12 0.0000000 4 180 4410 6075 10425 1. when we delete fiber, we will always increase the used ratio\001
+4 0 -1 0 0 0 12 0.0000000 4 180 4515 6075 10650 2. it is hard to define the "used-ratio" when we do the rerouting\001

@@ -1,0 +1,29 @@
+<head>
+<title>GHI - The Greedy Heuristic Inference method for HIPP
+</title>
+</head>
+<body bgcolor="#FFFFCC">
+<p align="center"><b><font color="#800000"><font size=+3>GHI</font></font></b></p>
+<p align="center"><b><font color="#800000"><font size=+2>The Greedy Heuristic Inference method for HIPP problem </font></font></b></p> 
+<p>GHI  is a   program to infer haplotype from genotype data using a heuristic algorithm which selects popular haplotypes that  can resolve more genotypes in a greedy fashion.</p>
+<p><strong><u><font color="#009900">How to use GHI?</font></u></strong> </p>
+<p>The steps for using GHI are as below.</p>
+<ol>
+  <li>Download the <a href="files/Windows/GHI.exe" target="_blank">executable file for Windows</a> or download the <a href="files/Linux/GHI.exe" target="_blank">executable file for Unix/Linux</a> (compiled under Cygwin using g++ compiler).</li>
+  <li>Usage: GHI <em>inputfile</em>, for example, GHI b2ar.txt </li>
+</ol>
+<p><u><strong><font color="#009900">The input file format</font></strong></u></p>
+<p>Input file contains the   genotype data generated in experiment. <BR>
+  The first line specifies the number of genotypes and SNPs, i.e. <em>genotype-number  SNP-number</em>.<BR>
+One genotype is represented by a   consecutive sequence of SNP sites, and each SNP site can be 0 (for homozygous   wild type), 1 (for homozygous mutant), or 2 (for heterozygote). <br>
+<A href="./files/input/b2ar.txt" target="_blank">A sample input file, b2ar.txt</A></p>
+<p><u><strong><font color="#009900">The output file format</font></strong></u></p>
+<p>The inferred configurations for genotypes are output in file <em>GHI_inputfile.sol</em>.<BR>
+The first line contains: The number of selected haplotypes is: <em>haplotype-number</em><BR>
+One haplotype is represented by a consecutive sequence of SNP sites, and each SNP site can be either 0 (for homozygous wild type) or 1 (for homozygous mutant). Then resolutions of the input genotypes are listed.<br>
+The last line specifies the elapsed time for inferring the configurations for genotypes by GHI.<br>
+<A href="./files/output/GHI_b2ar.sol" target="_blank">A sample output file, GHI_b2ar.sol</A></p>
+<p><u><strong><font color="#009900">Reference</font></strong></u></p>
+<p>Wang, I. L. and Yang, H. E. (2006) Haplotyping populations by pure parsimony 
+  based on compatible genotypes submitted to <em>Bioinformatics</em>.</p>
+</body>

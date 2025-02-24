@@ -1,0 +1,520 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Title:		A Heuristic Wavelength Assignment Algorithm for Multihop WDM Networks with Wavelength Routing and Wavelength Re-Use
+</TITLE>
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.01Gold (X11; I; SunOS 5.5 sun4m) [Netscape]">
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#D9D9F3" LINK="#0000FF" VLINK="#00008B">
+
+<P><FONT SIZE=+2><B>Title:</B> <B>A Heuristic Wavelength Assignment Algorithm
+for Multihop WDM Networks with Wavelength Routing and Wavelength Re-Use</B>
+</FONT></P>
+
+<P><B>Author:</B> Zhensheng Zhang, Anthony S. Acampora </P>
+
+<P><B>Purpose:</B> 1.Propose a heuristic wavelength assignment algorithm
+using the shortest path algorithm </P>
+
+<OL>
+<LI>Propose 2 routing schemes to route random calls </LI>
+
+<LI>Test in 2 realistic model with 24 nodes, 10<SUP>6</SUP> calls </LI>
+</OL>
+
+<P><B>Results:</B> 1.They conclude that their model is efficient, but need
+more general range of testing </P>
+
+<OL>
+<LI>Their model has advantage to handle nonuniformalities of traffic demand,
+for a network with known long term demand. If the traffic model changes
+too frequently, one has to consider the trade-off of complexity and efficiency
+of applying this algorithm. </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P><B>Problem:</B> </P>
+
+<P>1.the architecture is based on </P>
+
+<OL>
+<LI>use of high-density WDM </LI>
+
+<OL>
+<LI>use of wavelength to route each signal to its destination(wavelength
+routing) </LI>
+
+<LI>use of multihop switching and multiplexing/demultiplexing </LI>
+</OL>
+</OL>
+
+<OL>
+<LI>the network consists of </LI>
+
+<OL>
+<LI>an all-optical inner portion which contains the wavelength routing
+cross-connection or switching elements. each of them is capable of independently
+routing each of the incident wavelengths. </LI>
+
+<LI>an outer portion which contains user access stations that attach to
+the optical medium and permit a limited # of wavelengths available to it
+to enable full virtual circuit connectivity. </LI>
+</OL>
+
+<OL>
+<LI>the optical connectivity among access stations can be dynamically rearranged
+by utilizing the properties of the wavelength across-connects. </LI>
+
+<LI>since # of transmitters and receivers per access station is limited,
+the optical connectivity among the stations is not full(????) So, most
+of the end-to-end connections will require multiple hops, through a sequence
+of optical channels or lightpaths. These connections are referred to as
+virtual connections in ATM networks. </LI>
+
+<LI>the virtual connectivity(can be full) is provided by using intermediate
+stations as cooperating relay nodes. When a new virtual connection request
+is generated, the job of the admission controller is to decide whether
+to admit or block the request by finding a path capable of handling the
+virtual connection. A virtual connection request is blocked if the controller
+is unable to find or create a path.(then, it won't degrade the quality
+of service enjoyed by other user) </LI>
+</OL>
+</OL>
+
+<P><B>Formulation:</B> </P>
+
+<P><B>Given </B>a physical topology with </P>
+
+<P>N : # of nodes <BR>
+[t<SUB>ij</SUB>] : long term avg traffic demand matrix <BR>
+P : # wavelengths available <BR>
+C : capacity of each wavelength(rate of data it can carry)<BR>
+</P>
+
+<P><B>Obj</B>: <BR>
+find a wavelength assignment algorithm and a routing scheme to minimize
+the call blocking probability </P>
+
+<P><B>subject to.</B> <BR>
+on each fiber link, no 2 virtual connections use a common wavelength ==&gt;
+this problem is conjectured to be NP-hard<BR>
+</P>
+
+<P>They decompose this problem into 2 parts, and provide a heuristic approach
+to solve each: </P>
+
+<UL>
+<LI>Problem I: Find a wavelength assignment algorithm which tends to favor
+the <I>one-optical-hop traffic</I> </LI>
+
+<LI>II: For the resulting optical connection graph, develop routing schemes
+to produce low call blocking probability. </LI>
+</UL>
+
+<P>
+<HR></P>
+
+<P><B>Problem I: wavelength assignment</B> </P>
+
+<P>Some Definition: </P>
+
+<P>connection-link indication matrix [m] : m<SUB>(i,j),(l,m)</SUB> = 1,
+if (i,j), (l,m) use the same link </P>
+
+<UL>
+<UL>
+<UL>
+<UL>
+<UL>
+<UL>
+<P>m<SUB>(i,j),(l,m)</SUB> =0, otherwise </P>
+</UL>
+</UL>
+</UL>
+</UL>
+</UL>
+</UL>
+
+<P>How to get [m]: </P>
+
+<OL>
+<LI>sort all nonzero elements of [t<SUB>ij</SUB>] in descending order (at
+most there are (N<SUP>2</SUP>-N) nonzero elements in [t<SUB>ij</SUB>])
+</LI>
+
+<LI>each sorted nonzero element of [t<SUB>ij</SUB>] corresponds to a column/row
+in [m],apply shortest path algorithm to all the nonzero elements of [t<SUB>ij</SUB>],
+so that we know what arcs each s-d pair will use, and thus we can create
+[m] </LI>
+
+<LI>different path set-up strategies will result in different [m] </LI>
+
+<LI>advantages of using shortest path: the connection will consume the
+least no. of wavelength-selective switches </LI>
+
+<LI>they expect that this strategy will provide near optimal performance.
+</LI>
+</OL>
+
+<UL>
+<LI>max. capacity of optical channel between i &amp; j = <IMG SRC="./gif/img00050.gif" HEIGHT=48 WIDTH=78 ALIGN=CENTER>
+</LI>
+
+<P>max one-optical-hop traffic carried on the optical channel between i
+&amp; j <BR>
+=<IMG SRC="file:/export/home/ilin/doc/Report/www/gif/img00051.gif" HEIGHT=49 WIDTH=136 ALIGN=CENTER>
+<BR>
+if <IMG SRC="./gif/img00052.gif" HEIGHT=49 WIDTH=108 ALIGN=CENTER>, we
+only need to satisfy the demand <BR>
+if <IMG SRC="./gif/img00053.gif" HEIGHT=49 WIDTH=108 ALIGN=CENTER>, we
+can only satisfy the capacity constraints </P>
+
+<LI>formulate problem I such that the one-optical-hop traffic is maximized
+<BR>
+subject to: </LI>
+
+<UL>
+<P>on each optical link, no 2 connections use the same wavelength <BR>
+==&gt;this constraint makes it hard to formulate, and difficult, it's an
+ILP. </P>
+</UL>
+
+<P>CP: <IMG SRC="./gif/img00054.gif" HEIGHT=50 WIDTH=186 ALIGN=CENTER><BR>
+st. <IMG SRC="./gif/img00055.gif" HEIGHT=49 WIDTH=93 ALIGN=CENTER>, <IMG SRC="./gif/img00056.gif" HEIGHT=48 WIDTH=94 ALIGN=CENTER>,
+k=1~P, ij=1~N (2) <BR>
+<IMG SRC="./gif/img00057.gif" HEIGHT=22 WIDTH=210 ALIGN=CENTER>, k=1~P
+(3) <BR>
+Z<SUB>ij</SUB>(k)=0, 1; k=1~P, i,j=1~N</P>
+
+<P>(3) means 2 wavelengths can't share the same link </P>
+</UL>
+
+<P>
+<HR>Q:(2) means there should be at most 1 connection starting from i, and
+at most 1 connection terminating at j, respectively ????? 
+<HR></P>
+
+<UL>
+<LI>CP is a nonlinear integer problem, difficult to solve if N,P are large
+</LI>
+
+<P>introducing additional continuous variable ==&gt; mixed linear integer
+programming <BR>
+if <IMG SRC="./gif/img00058.gif" HEIGHT=21 WIDTH=44 ALIGN=CENTER> ==&gt;
+<IMG SRC="./gif/img00059.gif" HEIGHT=49 WIDTH=220 ALIGN=CENTER>, st. <IMG SRC="./gif/img00060.gif" HEIGHT=49 WIDTH=89 ALIGN=CENTER></P>
+</UL>
+
+<P><BR>
+
+<HR>Q: how?? I only know <IMG SRC="./gif/img00061.gif" HEIGHT=49 WIDTH=193 ALIGN=CENTER>???
+
+<HR></P>
+
+<P>Let <IMG SRC="./gif/img00062.gif" HEIGHT=22 WIDTH=106 ALIGN=CENTER>
+for each <IMG SRC="./gif/img00063.gif" HEIGHT=22 WIDTH=56 ALIGN=CENTER>,
+let <IMG SRC="./gif/img00064.gif" HEIGHT=48 WIDTH=166 ALIGN=CENTER> <BR>
+==&gt;<IMG SRC="./gif/img00065.gif" HEIGHT=49 WIDTH=160 ALIGN=CENTER></P>
+
+<UL>
+<P>Now CP becomes a mixed ILP </P>
+</UL>
+
+<P>CPmix: <IMG SRC="./gif/img00066.gif" HEIGHT=50 WIDTH=194 ALIGN=CENTER>
+</P>
+
+<UL>
+<P>st. </P>
+
+<P><IMG SRC="./gif/img00067.gif" HEIGHT=49 WIDTH=89 ALIGN=CENTER>, if <IMG SRC="./gif/img00068.gif" HEIGHT=22 WIDTH=53 ALIGN=CENTER>
+(4) </P>
+
+<P><IMG SRC="./gif/img00069.gif" HEIGHT=49 WIDTH=160 ALIGN=CENTER>, if
+<IMG SRC="./gif/img00070.gif" HEIGHT=22 WIDTH=56 ALIGN=CENTER> (5) </P>
+
+<P>(6) is the same as (2) </P>
+
+<P>(7) is the same as (3) </P>
+
+<LI>CP and CPmix can be approximately decomposed into P iterative subproblems.
+Each subproblem is a binary linear integer programming problem with P=1
+i.e. a problem of finding the assignment for 1 wavelength </LI>
+</UL>
+
+<P>CP1: <IMG SRC="./gif/img00071.gif" HEIGHT=39 WIDTH=164> </P>
+
+<UL>
+<P>st. <IMG SRC="./gif/img00072.gif" HEIGHT=49 WIDTH=65 ALIGN=CENTER>,
+<IMG SRC="./gif/img00073.gif" HEIGHT=48 WIDTH=66 ALIGN=CENTER>, i,j =1~N
+(8) similar to (2) </P>
+
+<P><IMG SRC="./gif/img00074.gif" HEIGHT=22 WIDTH=162 ALIGN=CENTER> (9)
+similar to (3) </P>
+
+<P>Z<SUB>ij</SUB>=0, 1; i,j=1~N </P>
+</UL>
+
+<P>let Z*<SUB>ij</SUB> be the opt. soln. of CP1 <BR>
+modify [t] as [<IMG SRC="./gif/img00075.gif" HEIGHT=20 WIDTH=16 ALIGN=CENTER>]=max(t<SUB>ij</SUB>-C<IMG SRC="./gif/img00076.gif" HEIGHT=29 WIDTH=25 ALIGN=CENTER>,0)
+(10) </P>
+
+<P>replace t<SUB>ij</SUB> with <IMG SRC="./gif/img00077.gif" HEIGHT=20 WIDTH=16 ALIGN=CENTER>,
+solve CP1; <BR>
+CP can be solved approximately by solving CP1 P times ???? </P>
+
+<P>
+<HR>Q:how?? I don't see it. 
+<HR></P>
+
+<P><B>Heuristic Algorithm for CP1</B> </P>
+
+<OL>
+<LI>greedy allocation algorithm which iteratively attempts to assign each
+wavelength to as many connections as possible without violating the physical
+constraints. (!!i.e. use as fewer wavelengths as possible) </LI>
+
+<LI>objective: maximize the sum of one-optical-hop traffic so, wavelengths
+should be assigned to optical connection between access station pairs with
+the largest traffic demands. </LI>
+
+<LI>(a)sort all the connections in descending order (connections correspond
+to the nonzero entries in the demand matrix) </LI>
+
+<OL>
+<LI>assign wavelength to the optical connection with the largest pairwise
+traffic demand </LI>
+
+<LI>assign to the connections which don't use the links used by the 1st
+assigned connection.(!!because we want to use the same wavelength!!) </LI>
+
+<LI>the algorithm repeats till no more connections can be assigned </LI>
+</OL>
+
+<LI>the connection corresponds to a row/column in m. m is generated according
+to the order of traffic demand. </LI>
+
+<LI>once m is obtained, the algorithm will assign the wavelength to the
+1st column(or row) all columns with 0 elements in the 1st row are candidates
+for the next wavelength assignment; the 1st such column, say, column i,
+i&gt;1, is chosen; then, the wavelength is assigned to the 1st column with
+0 elements in both row 1 and row i. The procedure is repeated till no such
+column can be found.(!!because we want to assign wavelength to those connections
+without same link first. since m is symmetric, so the 1st such column i
+must &gt; 1; assign it to pair(row1), and pair(row i)) </LI>
+</OL>
+
+<P><B>Algorithm:</B> 
+<HR></P>
+
+<P>(1) Generate m as described above <BR>
+(2) Assign the wavelength to connection 1, set k=1 <BR>
+(3) Remove column j with mkj=1, for j=k+1,..,N <BR>
+(4) Assign the wavelength to the 1st column(connection) not removed from
+the matrix in the k-th row, say, connection l, l&gt;k. If no such l exists,
+STOP <BR>
+(5) Set k=l, goto step 3. 
+<HR></P>
+
+<OL>
+<LI>There are N(N-1) possible connections. In the worst case, one has to
+check all O(N<SUP>4</SUP>)elements, which is the complexity. </LI>
+
+<LI>the optical connection graph created by this algorithm may not connected.
+</LI>
+
+<OL>
+<LI>reserve 1 wavelength connecting all the nodes in a circle the remaining
+P-1 wavelengths are assigned using the heuristic algorithm ??? </LI>
+
+<LI>more efficient way: after assigning the 1st P-1 wavelengths using the
+heuristic algorithm, identify the subnets which are not connected, and
+connect all the subnets in a circle(choosing 1 node per subnet) using the
+Pth wavelength. Using the Pth wavelength, assign as many lightpaths as
+possible starting with node pairs with max. traffic between them. ??? </LI>
+</OL>
+
+<P>(except those connections already assigned, the traffic between those
+subnets could be included when computing the max. traffic pairs, if we
+treat each subnet as one node)</P>
+</OL>
+
+<P><BR>
+
+<HR>Q: </P>
+
+<OL>
+<LI>what if no. of wavelength is not enough to be assigned? </LI>
+
+<LI>after we assign the 1st wavelength, then, what do we do next? </LI>
+
+<LI>what do they mean by assigning as many lightpaths as possible ro 2.(b)??
+</LI>
+
+<LI>after we have satisfied all the demand nod pairs, what do we do for
+the remaining wavelengths if there is any? </LI>
+</OL>
+
+<P>
+<HR></P>
+
+<P>
+<HR><B>Problem II: Routing</B>: </P>
+
+<OL>
+<LI>once the optical connection graph is setup, each node can have a virtual
+connection to any other node. Each virtual path travels along a sequence
+of optical channels. </LI>
+
+<LI>Each virtual path travels along a sequence of optical channels. Intermediate
+access stations may serve as relay stations. Virtual paths are created
+and torn down by the network in response to instantaneous user-user calling
+pattern. </LI>
+
+<LI>after we established the optical connection graph </LI>
+
+<OL>
+<LI>for each pair of nodes, first find up to K sets of paths the same set
+of paths has same length(optical hops) </LI>
+
+<LI>the K sets are numbered according to their path lengths in ascending
+order of traffic demand. (K=1 set: min distance paths; K=2 set: all paths
+of a length which is greater than min distance but are of shortest length)
+</LI>
+
+<LI>when a new call request is generated, the controller decides whether
+to admit this call or not by seeking one path capable of handling the call
+from the K sets according to the following 2 schemes </LI>
+</OL>
+</OL>
+
+<P>Scheme 1:(shortest path &gt; min load) </P>
+
+<P>The controller finds the shortest path from among the K sets that can
+accommodate the call. If there are more than 1 candidates with the same
+length, choose the one with min. load. if none of the paths in the K sets
+is available, the call is blocked. </P>
+
+<P>Scheme 2:(min load &gt; shortest path) </P>
+
+<P>The controller finds one path from the K sets which can accommodate
+the call with min. load. if none of the paths in the k sets is available,
+the call is blocked ??? </P>
+
+<OL>
+<LI>load on each optical link is the bandwidth allocated to existing connections
+passing through the optical link. load on a path is the max. link-load
+among all the links on the path </LI>
+
+<LI>when K=1, these 2 schemes are the same. </LI>
+</OL>
+
+<P>
+<HR>Q:1. What do they mean by &quot;none of the paths in the k sets is
+available&quot;? Once we assign a call for that path, it will become not
+available? ? If so, when will it become available? 
+<HR>
+<HR><B>Testing Models</B>: </P>
+
+<OL>
+<LI>to evaluate the call blocking probability, they assume the fiber layout
+of the network is fixed. And get T of 1995/2003, with 24-node network.
+</LI>
+
+<LI>generate calls randomly </LI>
+
+<LI>assume the capacity of all optical channels is C (data rate), capacity
+of each access node is an integral multiple of C. <BR>
+The node capacity should be <IMG SRC="./gif/se.gif" HEIGHT=16 WIDTH=14 ALIGN=CENTER>
+no. of wavelengths available. </LI>
+
+<LI>they impose an access node capacity to determine whether the blocking
+is due to access node or the links inside the network. </LI>
+</OL>
+
+<P><B>The Traffic model:</B> </P>
+
+<UL>
+<LI>calls at i are generated independently of originating nodes by a Poisson
+process with rate <IMG SRC="./gif/img00079.gif" HEIGHT=50 WIDTH=45 ALIGN=CENTER>
+; probability to be destined to j = <IMG SRC="./gif/img00080.gif" HEIGHT=42 WIDTH=49 ALIGN=CENTER>.
+assume call duration is independent and identically governed by exponential
+distribution with mean 1/<FONT FACE="Symbol">m</FONT> assume all calls
+have same bandwidth b (units of C) </LI>
+
+<LI>call granularity g: no. of calls supported on 1 wavelength for 1 optical
+channel <BR>
+g=(capacity per wavelength)/(bandwidth required per call)=C/b (11)<BR>
+define</LI>
+
+<UL>
+<P>n<SUB>ij</SUB>: no. of ongoing calls between i,j when a new call arrives
+<BR>
+n<SUB>c</SUB> : access node capacity (units of C) <BR>
+<IMG SRC="./gif/img00081.gif" HEIGHT=18 WIDTH=68>: generally, node capacity
+is less than total no. of wavelength </P>
+</UL>
+
+<P>if <IMG SRC="./gif/img00082.gif" HEIGHT=50 WIDTH=197 ALIGN=CENTER> (12)
+<BR>
+and a path with sufficient bandwidth (either by scheme 1 or 2) <BR>
+=&gt; this call can be admitted <BR>
+(12) means, for each node, <BR>
+(1 new call) + (total # of existing call for that node )should be fewer
+than (total # calls it can handle) </P>
+
+<P>offered load: <IMG SRC="./gif/img00083.gif" HEIGHT=71 WIDTH=112 ALIGN=CENTER>
+??? </P>
+
+<P>avg. call blocking probability :P<SUB>Bave</SUB> = (total # of calls
+blocked) / (total # of calls generated) </P>
+
+<LI>They compare their model with the Centralized switch model in which
+there are N input ports, and N output ports. Capacity of each port is n<SUB>c</SUB>C.
+The centralized switch gives the lowest possible call blocking, which can
+only be caused by link, not by switch itself. </LI>
+</UL>
+
+<P>
+<HR></P>
+
+<P><B>Results:</B><BR>
+</P>
+
+<OL>
+<LI>scheme 2 is better than scheme 1 <BR>
+i.e. using min. load for routing is better than using shortest path <BR>
+but using shortest path is easier to implement. </LI>
+
+<LI>when k increases, the blocking probability will decrease (but k=2,
+3 don't differ much)i.e. when k increases, we will have more candidates
+for routing, so, the blocking probability will decrease </LI>
+
+<LI>if n<SUB>c</SUB>&lt;P, scheme 2 is virtually indistinguishable with
+ideal centralized switch so, they conclude their model is efficient. <BR>
+if n<SUB>c</SUB> =P, blocking will only be due to network congestion, then,
+scheme 2 will be worse than the idealized central switch. </LI>
+
+<LI>this algorithm can take the advantage of nonuniformalities of traffic
+demand, and produces a good optical connection graph, in which the heaviest
+traffic flows are handled by one-hop paths. <BR>
+as traffic pattern changes, the network can be reconfigured so that the
+blocking probability or load can improve. </LI>
+
+<LI>it's better than a fixed regular ShuffleNet virtual connection. (what
+is ShuffleNet???) </LI>
+
+<LI>This model needs to be tested for wider-area models </LI>
+
+<LI>This model doesn't need to be changed frequently, when the long-term
+avg. traffic pattern have changed. and the basic optical network architecture
+can therefore be scaled to very large configurations. </LI>
+
+<LI>for those traffic patterns which changes frequently, one needs to compute
+the gain in terms of capacity for a given blocking probability requirement.
+It's a trade-off between complexity and efficiency. (complexity of reconfiguration)
+</LI>
+</OL>
+
+</BODY>
+</HTML>
