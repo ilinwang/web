@@ -1,0 +1,95 @@
+WHITE BOARD [09/26, 28; 10/03, 05]
+---------------------Front    Door
+A  B  C
+D  E  F
+G  H  I
+J  K  L
+M  N  O
+P  Q  R
+S  T  U
+V  W  
+----------------------Back     Door
+
+WHITE BOARD [10/12, 17, 19, 26] [10/24 QZ1]
+---------------------Front    Door
+H  I  G  
+K  L  J  
+N  O  M  
+Q  R  P  
+T  U  S  
+   V  W
+B  C  A  
+E  F  D  
+----------------------Back     Door
+
+WHITE BOARD [10/31, 11/02, 07, 09]
+---------------------Front    Door
+O  M  N  
+R  P  Q  
+U  S  T  
+   W  V  
+C  A  B  
+F  D  E  
+I  G  H  
+L  J  K  
+----------------------Back     Door
+
+WHITE BOARD [11/14, 11/16, 21, 23]
+---------------------Front    Door
+S  T  U
+W  V  
+A  B  C
+D  E  F
+G  H  I
+J  K  L
+M  N  O
+P  Q  R
+----------------------Back     Door
+
+WHITE BOARD [11/28] [11/30 TA, 12/05 QZ2, 12/07 TA] [12/12, 14, 19, 21]
+---------------------Front    Door
+   W  V  
+C  A  B  
+F  D  E  
+I  G  H  
+L  J  K  
+O  M  N  
+R  P  Q  
+U  S  T  
+----------------------Back     Door
+
+WHITE BOARD [12/26, 28; 01/03, 05, 10, 12] 
+---------------------Front    Door
+N  O  M  
+B  C  A  
+Q  R  P  
+E  F  D  
+T  U  S  
+K  L  J  
+   V  W 
+H  I  G  
+----------------------Back     Door
+
+A 周國強 林鈺婷 孫妤瑄
+B 陳柏瑋 李欣穎 吳欣儒
+C 陳瑾樺 簡宥箴 劉心鈺
+D 趙庭君 邱綉雅 沈郁恩
+E 鍾孟璇 黃翌     賴靖玟
+F 王丹楓 陳昱安 蔡函璇
+G 黃懿     林佳妤 黃朝琬
+H 黃瀚陞 蘇威誠 游登淵
+I 林彥廷 林啟祐 吳家媛
+J 廖彥童 鄭翔月 徐威銓
+K 趙新宜 馮郁恬 陳昱威
+L 陳郁晴 許嘉純 李若穎
+M 林嵩瑋 賴昀佐 鄧宇翔
+N 張勝雄 林冠宇 賴學邦
+O 林粲耘 沈昱佐 曹育榕
+P 陳琬臻 陳泓碩 陳建鳴
+Q 洪偉庭 曾順傑 杜承龍
+R 陳祈安 胡郁淇 何雄博
+S 黃冠庭 洪元倉 陳育婷
+T 賴敬傑 陳位旭 張庭嘉
+U 林典呈 陳孝壽 羅可瑄
+V 白家鴻 吳昇翰 何秉峵
+W 何承恩 曾弘慶 裴伯儀

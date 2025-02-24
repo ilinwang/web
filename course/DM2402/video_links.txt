@@ -1,0 +1,16 @@
+==========
+Chap2: Sets, Relation, Function 
+Antisymmetric Relation & Partial Order Relation (p.17-18)
+Based on Discrete Mathematics, by Dossey, Otto, Spence, Vanden Eynde
+==========
+
+
+
+DM_Chap2_p.14-16: Congruence (p.14-16) & brief review (p.1-13)
+https://youtu.be/j38CdiKHWDw
+
+DM_Chap2_p.17-18: Antisymmetric Relation & Partial Order Relation (p.17-18)
+https://youtu.be/AVmAx3gr7-o
+
+
+

@@ -1,0 +1,27 @@
+Please write a python code that can do the following:
+
+1.  Read a text file (the filename is inputted by the user), e.g., hw1_input.txt, which contains 2 lines where the first line is an integer n, and the second line contains n+1 real numbers (e.g., a[0], a[1],..., a[n]) as coefficients. In particular, a[i] is the coefficient associated with x^i. For example, n=5, a=[2.2 -1.8 0 4 7 -1.03] defines f(x)= 2.2 - 1.8 x + 4 x^3 + 7 x^4 - 1.03 x^5
+
+2. Print out the f(x) like the following f(x)= 2.2 - 1.8 x + 4 x^3 + 7 x^4 - 1.03 x^5 the format should be :
+
+2.1 do not print out 0 terms
+2.2 leave a space before/after an operator (+ or -)
+2.3 leave a space between the x term and its associated coefficient 
+2.4 the power of x should be printed out like x^2 (i.e., no space inside the term)
+
+3. Then, keep asking the user to input the value of x (can be a real number), say, b, then print out the value of f(b). Repeat this step, unless the user input 0 (i.e., if b=0, then this program print out a[0] and STOP)
+
+
+
+in the beginning of your python code, insert the following comments:
+-------------------------
+This code can run without problem.
+
+How to run: 
+1. input the file that contains 2 lines, where line 1 is an integer n; and line 2 contains n+1 real numbers a[0], a[1],..., a[n]
+2. it will print out a text like f(x)= a[0] + a[1] x^1 + a[2] x^2 + ... + a[n] x^n 
+3. it will ask the user to input a value of x, say, b. Then it calculates and outputs f(b)
+4. it repeats step 3, unless b=0, which prints out f(0) and STOP
+
+This code is written by 王大頭, email XXX@gs.ncku.edu.tw, on 2021/09/18
+-------------------------
