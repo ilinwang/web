@@ -1,1 +1,137 @@
-
+<HTML><HEAD><TITLE>coding assignment 1: min, max, sum, and product of n integers</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="http://ilin.iim.ncku.edu.tw/course/DS2501/hw/" target="content" />
+	<link href="../../../../ilin/ilin1.css" rel="stylesheet" type="text/css" />
+</head>
+<body background="../../../../ilin/gif/blbk1.gif" bgcolor="#D9D9F3" style="cursor: auto;">
+<DIV align=left>
+<TABLE width=560 align=center border=0>
+  <TBODY>
+  <TR>
+    <TH>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=100>&nbsp;</TD>
+          <TD>
+            <TABLE width=166 align=center border=1>
+              <TBODY>
+              <TR vAlign=center align=middle bgColor=#ffc0cb>
+                        <TH vAlign=center noWrap align=middle><p><FONT size=+1>1st 
+                            coding assignment</FONT><br>
+                            <font color="#FF0000">Due 2025/09/23 09:00</font></p>
+                          </TH>
+                      </TR></TBODY></TABLE></TD>
+          <TD width=100>
+            <DIV align=right><I></I></DIV></TD></TR></TBODY></TABLE>
+          <I><FONT 
+      face="Arial, Helvetica, sans-serif" color=#006400 size=-1></FONT></I> 
+          <HR>
+    </TH></TR>
+  <TR>
+    <TD align=center>
+      <TABLE width="100%" border=0 align="center">
+        <TBODY>
+          <TR> 
+            <TD  rowSpan=11 vAlign=top><p>You are asked to write a program 
+              which can</p>
+              <ul>
+                <li>Step 1: read a nonnegative integer number <font color="#0000FF"><strong>n </strong></font>that is larger than 4 <br>
+                  (e.g. keyin &quot;5&quot;)</li>
+                <li>Step 2: ask the user to input these n integers <br>
+                  (separated by space, e.g. keyin &quot;2 4 -1 5 6&quot;)</li>
+                <li>Step 3.1: if <font color="#0000FF"><strong>n</strong></font> is larger than 4, then print out these <font color="#0000FF"><strong>n </strong></font>numbers one by one and report their 
+                  <ul>
+                    <li>min, 2nd min (i.e. the 2nd smallest), max, 2nd max (i.e. the 2nd largest), sum, and product </li>
+                    </ul>
+                  </li>
+                <li>Step 3.2: if <font color="#0000FF"><strong>n</strong></font> is smaller than or equal to 4, then print out warning message and ask the user to input an integer at least 5, and GOTO Step 2</li>
+                <li>for example, the correct output may look like the following</li>
+                </ul>
+              <blockquote>
+                <p><font color="#0000FF"><strong>                      Among the 5 integers: 2 4 -1 5 6<br>
+                  min= -1  ; 2nd_min= 2 ; max= 6 ; 2nd_max= 5; sum= 16 ; product= -240            </strong></font></p>
+                </blockquote>
+              <p>example: suppose your code is named as <em><strong>sf1</strong></em>, 
+                then when you execute <em><strong>sf1</strong></em> in command line (e.g. keyin &quot;
+                ./sf1&quot;), you 
+                should see:</p>
+              <blockquote> 
+                <p><strong><font color="#FF0000">Please input a positive integer n larger than 4: </font></strong>(then you may input, say, 3, then 
+                  press enter)</p>
+                </blockquote>
+              <p>then you should see the following message on the screen, 
+                say,</p>
+              <blockquote>
+                <p><strong><font color="#FF0000">!!Warning!! 3 is NOT larger than 4! <br>
+                  Please input a positive integer n larger than 4: </font></strong>(then you may input, say, 5, then 
+                  press enter)                  </p>
+                </blockquote>
+              <p>then you should see the following message on the screen, 
+                say,</p>
+              <blockquote> 
+                <p><strong><font color="#FF0000">Please input 5 integers: </font></strong>(then you input, say, 2 4 -1 5 6, then 
+                  press enter)</p>
+                </blockquote>
+              <p>Finally, your code should print out</p>
+              <blockquote>
+                <p><strong><font color="#FF0000"><strong>Among the 5 integers: 2 4 -1 5 6<br>
+                  min= -1 ; 2nd_min= 2 ; max= 6 ; 2nd_max= 5; sum= 16 ; product= -240  </strong></font></strong></p>
+                </blockquote>
+              <hr> 
+              <p><strong><font color="#330099">!!Special notice!!</font></strong>:</p>
+              <ol>
+                <li><strong>Since you do not know how large n is, you should dynamically allocate memory for a give n.</strong> In other words, if you set n as a very large fixed number, you will <font color=red><strong>receive minus points!!</strong></font></li>
+                <li>You DO NOT HAVE TO take care of any other 
+                  invalid input (e.g. if someone input a real number, or a 
+                  character/string, your code does not need to detect these 
+                  invalid input, even if the output is invalid.) </li>
+                <li>Whatever compiler you use, you must make sure your code 
+                  can be compiled and run in unix environment (i.e. cygwin 
+                  or SUN).</li>
+                <li>Your code HAS TO follow the instruction as requested 
+                  in <a href="https://reurl.cc/ReLLjD" target="_blank">programming.html</a>. More 
+                  specifically, you should try to follow the instruction to 
+                  write the comments in the very beginning of your code.</li>
+                <li>You have to submit your code electronically to our moodle 
+                  website in time (0900 am).                    </li>
+                </ol>
+              <hr>
+              About turn-in the code electronically:</p> <ol>
+                <li>you have to create a directory named <font color="#0000FF"><strong>h3890123_hw1</strong></font> 
+                  (where you should replace <font color="#0000FF">h3890123</font> 
+                  to be <font color="#0000FF">your student id</font>), </li>
+                <li>then 
+                  put your source code(s), with filename like <font color="#0000FF"><strong>h3890123_hw1.cpp</strong></font>; together with an output file named <font color="#0000FF"><strong>h3890123_hw1.pdf </strong></font>(or <font color="#0000FF"><strong>.txt</strong></font>), where the output file should record the output of your codes on the screen, for 3 cases. You may just copy/paste the text output, or capture the scrren and copy/paste the image to this file. </li>
+                <li>DO NOT put the executable binary file,</li>
+                <li>Go up one level, zip the entire directory by the following command in cygwin<br>
+                  <font color="#0000FF"><strong>zip -r h3890123_hw1.zip h3890123_hw1</strong></font><br>
+                  then upload that <font color="#0000FF"><strong>h3890123_hw1.zip</strong></font> file to the moodle website. <br>
+                  (the zip command can be used in cygwin. of course you may use some software like 7-zip or winrar, if you wish.)</li>
+                <li>Note that any late turn-in after <font color="#FF0000">2025/09/23 
+                  09:00 </font>will NOT be allowed, unless you have a very 
+                  good reason. So, please turn-in as early as possible. Thanks.</li>
+              </ol></TD>
+            </TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          <TR></TR>
+          </TBODY>
+        </TABLE>
+      <HR>
+    </TD></TR>
+  <tr>
+    <td><div align="center"><a href="../syllabus_DS2401.pdf">[Syllabus</a>][<a href="rules.html">Grading rules</a>][<a href="programming.html">Programming rules</a>][Course materials]</div></td>
+  </tr>
+  <tr>
+    <td><div align="center">[Course Main Page]</div></td>
+  </tr>
+  </TBODY>
+</TABLE></DIV></BODY></HTML>
