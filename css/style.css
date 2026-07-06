@@ -1,0 +1,144 @@
+/* I-Lin Wang — personal site. Palette inherited from the original ilin.iim.ncku.edu.tw
+   design: grey page (#DDDDDD), dark-grey bars (#646464) with yellow (#FFFF00) accents,
+   white content panel, daffodil banner, blue links with green hover. */
+:root{
+  --pagebg:#d9d9d9;          /* old body background #DDDDDD */
+  --bar:#646464;             /* old menu_box / heading bars */
+  --bar-d:#4f4f4f;
+  --yellow:#ffe800;          /* old #FFFF00, slightly tamed */
+  --yellow-soft:#fff9d0;
+  --yellow-edge:#e3c400;
+  --ink:#474747;             /* old text #5C5C5C, darkened for contrast */
+  --muted:#6e6e6e;
+  --line:#dedede;
+  --soft:#f4f4f2;
+  --link:#1a3fc4;            /* old link blue #0000FF, tamed */
+  --linkhover:#009933;       /* old hover green, kept verbatim */
+  --maxw:1010px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; padding:0; background:var(--pagebg); color:var(--ink);
+  font-family:Verdana,-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+  font-size:15px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.page{max-width:var(--maxw); margin:0 auto; background:#fff;
+  border-left:1px solid #8f8f8f; border-right:1px solid #8f8f8f;
+  box-shadow:0 0 18px rgba(0,0,0,.22); min-height:100vh;
+  display:flex; flex-direction:column}
+main{flex:1}
+.wrap{padding:0 30px}
+a{color:var(--link); text-decoration:none}
+a:hover{color:var(--linkhover); text-decoration:underline}
+
+/* daffodil banner (old header_image.jpg) */
+.banner{height:118px; display:flex; align-items:center;
+  background:#fff url(../images/banner.jpg) right center/cover no-repeat;
+  border-bottom:1px solid #b5b5b5}
+.brand{display:flex; align-items:baseline; gap:10px; padding:0 30px}
+.brand:hover{text-decoration:none}
+.brand-en{font-family:Georgia,"Times New Roman",serif; font-size:1.85rem; font-weight:700;
+  color:#4a4a4a; letter-spacing:.5px; text-shadow:0 1px 0 #fff, 0 0 12px #fff}
+.brand-zh{font-size:1.15rem; color:#5c5c5c; font-weight:700; text-shadow:0 1px 0 #fff, 0 0 10px #fff}
+
+/* nav — old menu_box: dark grey bar with thin yellow top/bottom borders */
+.navbar{position:sticky; top:0; z-index:50; background:var(--bar);
+  border-top:1px solid var(--yellow); border-bottom:1px solid var(--yellow);
+  display:flex; align-items:center; padding:0 18px}
+.site-nav{display:flex; flex-wrap:wrap}
+.site-nav a{padding:9px 16px; color:#fff; font-size:.92rem; font-weight:700}
+.site-nav a:hover{color:var(--yellow); text-decoration:underline}
+.site-nav a.active{color:var(--yellow)}
+.navtoggle,.navbtn{display:none}
+
+/* hero */
+.hero{display:grid; grid-template-columns:170px 1fr; gap:30px; align-items:start;
+  padding:32px 0 24px; border-bottom:1px solid var(--line)}
+.hero-photo{width:170px; height:auto; border:1px solid #b5b5b5; padding:3px; background:#fff;
+  box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.hero h1{margin:.05em 0; font-family:Georgia,serif; font-size:1.9rem; line-height:1.15; color:#4a4a4a}
+.hero .zh{font-size:1.3rem; color:var(--muted); font-weight:600; margin-left:.35em}
+.hero .role{margin:.15em 0 .7em; font-size:1.02rem}
+.hero .role .unit{color:var(--muted)}
+.contact{margin:0; padding:0; list-style:none; font-size:.9rem; color:var(--muted); line-height:1.9}
+.contact b{color:var(--ink); font-weight:700}
+.social{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+.social a{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; font-size:.82rem;
+  font-weight:700; color:var(--ink); background:var(--soft); border:1px solid #c8c8c8; border-radius:3px}
+.social a:hover{background:var(--yellow-soft); border-color:var(--yellow-edge);
+  color:var(--ink); text-decoration:none}
+
+/* stats */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:28px 0 4px}
+.stat{background:#fff; border:1px solid #c6c6c6; border-bottom:3px solid var(--yellow);
+  padding:14px 12px; text-align:center}
+.stat .n{font-family:Georgia,serif; font-size:1.75rem; font-weight:700; color:var(--bar); line-height:1}
+.stat .l{font-size:.78rem; color:var(--muted); margin-top:6px; letter-spacing:.02em}
+
+/* sections — headings echo the old dark-grey bars with yellow bold text */
+section{padding:24px 0}
+.sec-h{display:flex; align-items:center; gap:12px; margin:0 0 16px;
+  background:var(--bar); color:var(--yellow);
+  font-family:Verdana,Arial,sans-serif; font-size:.98rem; font-weight:700;
+  padding:7px 12px; border-radius:2px; letter-spacing:.02em}
+.sec-h .count{font-size:.75rem; font-weight:700; color:var(--bar-d);
+  background:var(--yellow); padding:1px 9px; border-radius:10px}
+.lead{color:var(--muted); font-size:.95rem; max-width:75ch}
+h3.sub{font-size:1rem; color:#4a4a4a; margin:26px 0 10px; font-weight:700;
+  border-left:5px solid var(--yellow); padding-left:10px}
+
+.tidy{margin:0 0 6px; padding-left:1.15em}
+.tidy li{margin:.3em 0}
+.tidy li .meta{color:var(--muted); font-size:.88rem}
+
+/* reference / list layout with year chip */
+.reflist,.grantlist{list-style:none; margin:0; padding:0}
+.reflist>li,.grantlist>li{display:grid; grid-template-columns:62px 1fr; gap:14px;
+  padding:10px 0; border-bottom:1px solid var(--line); align-items:start}
+.reflist>li:last-child,.grantlist>li:last-child{border-bottom:none}
+.yr{font-family:Georgia,serif; font-weight:700; font-size:.84rem; color:#6b5900;
+  background:var(--yellow-soft); border:1px solid var(--yellow-edge); border-radius:3px;
+  text-align:center; padding:2px 4px; white-space:nowrap}
+.reflist.studentlist>li{grid-template-columns:122px 1fr}
+.studentlist .yr{font-size:.72rem; letter-spacing:0}
+.cite{font-size:.92rem}
+.grant-title{font-weight:700; color:var(--ink)}
+.grant-det{color:var(--muted); font-size:.86rem; margin-top:2px}
+
+.subnav{display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 22px}
+.subnav a{font-size:.84rem; font-weight:700; padding:6px 13px; border-radius:3px;
+  background:var(--soft); border:1px solid #c8c8c8; color:var(--ink)}
+.subnav a:hover{background:var(--yellow-soft); border-color:var(--yellow-edge); text-decoration:none}
+
+.callout{background:var(--soft); border:1px solid #d2d2d2; border-left:5px solid var(--yellow);
+  border-radius:3px; padding:14px 20px; margin:8px 0}
+.callout p{margin:.4em 0}
+.btn-dl{display:inline-block; margin-top:6px; padding:8px 16px; font-weight:700; font-size:.9rem;
+  color:#3d3d3d; background:var(--yellow); border:1px solid var(--yellow-edge); border-radius:3px}
+.btn-dl:hover{background:#fff176; color:#000; text-decoration:none}
+
+/* footer — dark bar like the old site */
+.site-footer{margin-top:36px; background:var(--bar); color:#e8e8e8;
+  border-top:1px solid var(--yellow); padding:18px 30px}
+.site-footer p{margin:.2em 0; font-size:.82rem}
+.site-footer .muted{color:#bdbdbd}
+.muted{color:var(--muted)}
+
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .banner{height:86px}
+  .brand{padding:0 16px}
+  .brand-en{font-size:1.4rem}
+  .navbar{flex-wrap:wrap; padding:0 10px}
+  .navbtn{display:block; font-size:1.4rem; cursor:pointer; color:var(--yellow); padding:6px 10px; line-height:1}
+  .site-nav{display:none; width:100%; flex-direction:column; padding:2px 0 8px}
+  .navtoggle:checked ~ .site-nav{display:flex}
+  .hero{grid-template-columns:1fr; gap:18px}
+  .hero-photo{width:140px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .reflist>li,.grantlist>li{grid-template-columns:52px 1fr; gap:10px}
+  .reflist.studentlist>li{grid-template-columns:1fr}
+  .studentlist .yr{justify-self:start; padding:2px 10px}
+  .site-footer{padding:16px}
+}
