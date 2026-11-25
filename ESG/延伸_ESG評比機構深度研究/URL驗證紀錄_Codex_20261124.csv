@@ -1,0 +1,123 @@
+﻿序號,網址,HTTP 狀態（curl，瀏覽器 UA，跟隨轉址）,最終網址（若有轉址）,是否與引用相符,處理方式,備註
+1,https://www.mdpi.com/2071-1050/10/4/897,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，題名作者與引用相符
+2,https://www.mdpi.com/2076-3387/11/3/89,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，題名作者與引用相符
+3,https://journals.sagepub.com/doi/full/10.1089/ees.2010.0282,403,,是,保留（記錄為擋爬蟲／403）,出版者擋爬蟲／逾時；Crossref 書目相符
+4,https://www.worldbenchmarkingalliance.org/documentation/user-guide,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+5,https://sfs.bloomberg.com/api/document/esg_scores_methodology/Bloomberg%20ESG%20Scores%20Methodology.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+6,https://taiwanindex.com.tw/news/433,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+7,https://www.tejwin.com/news/tesg-%E6%B0%B8%E7%BA%8C%E7%99%BC%E5%B1%95%E6%8C%87%E6%A8%99%E4%BB%8B%E7%B4%B9/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+8,https://www.tejwin.com/qa-category/esg%E6%B0%B8%E7%BA%8C/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+9,https://wwwc.twse.com.tw/staticFiles/news/news/tsecnews/8a8216d69dbea9fd019ddc7e847400cc.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+10,https://cgc.twse.com.tw/pressReleases/promoteNewsArticleCh/4537,200,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，115 年度第一屆 ESG 評鑑 75 項指標，與引用相符
+11,https://www.msci.com/data-and-analytics/sustainability-solutions/esg-ratings,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+12,https://www.msci.com/documents/1296102/34424357/MSCI%2BESG%2BRatings%2BModel%2BUpdate%2BHistory.pdf,404,,否,刪除網址，原句標「未查證」,MSCI 模型改版紀錄 PDF 404
+13,https://www.msci.com/documents/1296102/34424357/MSCI%2BESG%2BRatings%2BMethodology.pdf,200,https://www.msci.com/downloads/documents/access/sustainability-and-climate-resources-and-disclosures/msci-sustainability-and-climate-methodologies/esg-ratings/core-methodologies/esg-ratings-methodology.pdf,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+14,https://www.msci.com/documents/1296102/34424357/MSCI%2BESG%2BRatings%2BMethodology%2B-%2BProcess.pdf/820e4152-4804-fe33-0a67-8ee4c6a8fd7d?t=1666300410683,200,https://www.msci.com/downloads/documents/access/sustainability-and-climate-resources-and-disclosures/msci-sustainability-and-climate-methodologies/esg-ratings/core-methodologies/msci-esg-ratings-process.pdf?t=1666300410683,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+15,https://www.sustainalytics.com/esg-news/news-details/2018/09/11/sustainalytics-launches-its-esg-risk-ratings,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+16,https://connect.sustainalytics.com/hubfs/INV/ESG%20Risk%20Ratings/ESG%20Risk%20Ratings%20Methodology%20Abstract.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+17,https://www.sustainalytics.com/docs/knowledgehublibraries/archive/morningstar-sustainalytics---data-validation-guidance.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+18,https://connect.sustainalytics.com/hubfs/INV/Ebooks/ESG%20Risk%20Ratings%20-%20360%20Report%20eBook/MS_ESG_RR_360_Review_Ebook_Final.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+19,https://www.spglobal.com/spdji/en/documents/methodologies/methodology-dj-sustainability-indices.pdf,403,,否,刪除網址，原句標「未查證」,S&P DJSI 方法書：curl 403、WebFetch 404
+20,https://portal.s1.spglobal.com/survey/documents/spglobal_esg_scores_methodology.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+21,https://www.spglobal.com/esg/perspectives/csa-companion-2021_220307.pdf,403,,否,刪除網址，原句標「未查證」,S&P CSA Companion 2021：curl 403、WebFetch 404
+22,https://www.spglobal.com/sustainable1/en/csa/results/djbici-annual-review,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，DJSI 更名 Best-in-Class 日期相符
+23,https://press.spglobal.com/2026-04-23-S-P-Dow-Jones-Indices-Announces-Dow-Jones-Best-in-Class-Indices-2026-Review-Results,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+24,https://www.esade.edu/itemsweb/biblioteca/bbdd/inbbdd/archivos/Thomson_Reuters_ESG_Scores.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+25,https://www.lseg.com/content/dam/marketing/en_us/documents/methodology/refinitiv-esg-scores-methodology.pdf,200,https://www.lseg.com/en/ftse-russell,否,刪除網址，原句標「未查證」,轉址至 FTSE Russell 首頁，內容不符
+26,https://www.lseg.com/en/data-analytics/products/workspace/updates/lseg-launches-sustainability-ratings-and-data-to-enhance-transparency-for-global-markets,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+27,https://www.lseg.com/content/dam/data-analytics/en_us/documents/methodology/lseg-esg-scores-plus-methodology.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+28,https://cwrrr.org/interviews/the-architecture-of-esg/,連線失敗,,是,保留（記錄為擋爬蟲／403）,curl 連線重置；WebFetch 開啟，Bloomberg ESG Disclosure Score 訪談相符
+29,https://www.prnewswire.com/news-releases/bloomberg-launches-proprietary-esg-scores-301109999.html,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+30,https://professional.bloomberg.com/products/bloomberg-terminal/sustainable-finance/scores/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+31,https://www.cashmarket.deutsche-boerse.com/resource/blob/1456338/3c5f6f6d4e37d0de42eb5f2a5aa7ef21/Panel-3_Lorenz-St-r_Oekom-data.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+32,https://spowidget.iss-corporate.com/icsspoapp/file/documents/spo/spo-20220802-bkb.pdf,連線失敗,,是,保留,改用 HTTP/1.1 重試為 200
+33,https://iss-stoxx.s3.amazonaws.com/prod/wp-content/uploads/methodology-corporate-rating-summary.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+34,https://insight.factset.com/resources/at-a-glance-iss-esg-corporate-rating?hs_amp=true,404,,否,刪除網址，原句標「未查證」,FactSet 頁面 404
+35,https://eirisfoundation.org/eiris-foundation-welcomes-moodys-investors-service-as-the-new-majority-shareholder-in-vigeo-eiris/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+36,https://ir.moodys.com/press-releases/news-details/2019/Moodys-Acquires-Majority-Stake-in-Vigeo-Eiris-a-Global-Leader-in-ESG-Assessments/default.aspx,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+37,https://www.moodys.com/web/en/us/hosted-assets/spo-2020-0429-vigeoeiris-spo-hhi-final-clean-v2.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+38,https://ma.moodys.com/rs/961-KCJ-308/images/FAQ_Moodys%20ESG%20Assessment_July%202022.pdf,200,,是,保留,PDF 為外框字，轉圖檢視第 2 頁為 Moody’s ESG Assessment 企業問答，相符
+39,https://ir.moodys.com/press-releases/news-details/2024/Moodys-and-MSCI-Announce-a-Strategic-Partnership-to-Enhance-Transparency-and-Deliver-Data-Driven-Risk-Solutions/default.aspx,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+40,https://revfin.org/aggregate-confusion-the-divergence-of-esg-ratings/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+41,https://www.lseg.com/content/dam/ftse-russell/en_us/documents/research/ftse4good-20th-anniversary.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+42,https://www.lseg.com/content/dam/ftse-russell/en_us/documents/policy-documents/ftse-russell-esg-data-model-methodology.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+43,https://www.lseg.com/content/dam/ftse-russell/en_us/documents/ground-rules/ftse4good-index-series-ground-rules.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+44,https://taiwanindex.com.tw/news/74,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+45,https://cdn.cdp.net/cdp-production/comfy/cms/files/files/000/008/572/original/Looking_to_the_future_-_19_October.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+46,https://help.cdp.net/en-US/knowledgebase/article/KA-01160,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+47,https://www.cdp.net/en/disclosure-2026,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+48,https://cdn.cdp.net/cdp-production/cms/guidance_docs/pdfs/000/005/685/original/CDP_Full_Corporate_Questionnaire_Overview_2025.pdf?1749497898=,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+49,https://ecovadis.com/about-us/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+50,https://support.ecovadis.com/hc/en-us/articles/115002531507-What-is-the-EcoVadis-methodology,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，EcoVadis 方法說明相符
+51,https://ecovadis.com/wp-content/uploads/2026/04/EcoVadis-Sustainability-Rating-Methodology-disclosure-document-for-the-public-rating-users-and-rated-items.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+52,https://support.ecovadis.com/hc/en-us/articles/115003780808-How-to-read-my-company-s-scorecard-and-work-on-improvements,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，計分卡說明相符
+53,https://assets.worldbenchmarkingalliance.org/app/uploads/2020/09/WBA-Press-release-24-Sep.pdf,301,https://awkwardconversation.org/2020/09/WBA-Press-release-24-Sep.pdf,否,刪除網址，原句標「未查證」,網域轉址至無關網站 awkwardconversation.org
+54,https://www.worldbenchmarkingalliance.org/90-worlds-2000-most-influential-companies-failing-ensure-human-rights-decent-work-and-ethical,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+55,https://www.worldbenchmarkingalliance.org/latest/methodology-2026-social-benchmark,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+56,https://www.worldbenchmarkingalliance.org/sites/default/files/2025-12/WBA-Scoring-approach-for-2026-benchmarks.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+57,https://www.worldbenchmarkingalliance.org/sites/default/files/2025-11/2026SocialBenchmarkMethodology_20Nov24.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+58,https://www.worldbenchmarkingalliance.org/benchmarking-process/company-engagement-process,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+59,https://www.worldbenchmarkingalliance.org/benchmarks/2026-benchmark-hub,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+60,https://corporateknights.com/wp-content/uploads/2026/01/2026-01-05-2026_CK_Ratings_methodology.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+61,https://corporateknights.com/rankings/global-100-rankings/2026-global-100/the-2026-global-100-puts-speed-in-the-spotlight/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+62,https://corporateknights.com/rankings/global-100-rankings/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+63,https://cdn.statcdn.com/rankings/20191118_Methodology_Americas-Most-Responsible-Companies.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+64,https://cdn.statista-rankings.com/climate-and-sustainability/rankings/csr-us-2026/methodology-newsweek-most-responsible-companies-america-2026.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+65,https://www.globalreporting.org/media/b15hggfc/gri-25-years-history.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+66,https://www.globalreporting.org/media/ejfoioqh/new-gri-timeline.pdf,200,,是,保留,PDF 為圖像，轉圖檢視為 GRI 時間表（1997、2000、2016 等），相符
+67,https://www.globalreporting.org/publications/documents/english/gri-1-foundation-2021/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+68,https://www.globalreporting.org/standards/standards-development/universal-standards/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+69,https://www.globalreporting.org/pdf.ashx?id=12024,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+70,https://www.globalreporting.org/news/news-center/new-climate-standards-can-unlock-actionable-and-streamlined-reporting-on-impacts/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+71,https://www.ifrs.org/issued-standards/sasb-standards/sasb-history/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+72,https://www.ifrs.org/groups/international-sustainability-standards-board/issb-frequently-asked-questions/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+73,https://www.ifrs.org/content/dam/ifrs/project/general-sustainability-related-disclosures/feedback-statement.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+74,https://www.ifrs.org/supporting-implementation/supporting-materials-for-ifrs-sustainability-disclosure-standards/ifrs-s1/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+75,https://www.ifrs.org/issued-standards/ifrs-sustainability-standards-navigator/ifrs-s2-climate-related-disclosures/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+76,https://www.ifrs.org/content/dam/ifrs/supporting-implementation/issb-standards/issb-industry-based-guidance-applying-issb-standards.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+77,https://www.twse.com.tw/market_insights/zh/detail/8a8216d69e6379f4019e67512b770023,307,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，2014 起辦理、E/S/G 權重 21%/31%/48%，與引用相符
+78,https://www.twse.com.tw/market_insights/zh/detail/8a8216d69642659a01965c8de093005e,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+79,https://cgc.twse.com.tw/evaluationCorp/listCh,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+80,https://cgc.twse.com.tw/static/20260107/8a828e179b9664ed019b984afb200001_ESG%E8%A9%95%E9%91%91%E5%AE%A3%E5%B0%8E%E6%9C%83_2026ESG%E8%A9%95%E9%91%91%E4%BB%8B%E7%B4%B9.pdf,200,,未能確認,保留（記錄為擋爬蟲／403）,證交所伺服器回「安全性考量」阻擋頁，未能確認內容
+81,https://cgc.twse.com.tw/pressReleases/promoteNewsArticleCh/4642,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+82,https://www.tejwin.com/solution/esg-solution/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+83,https://www.tejwin.com/news/tesg%E6%B0%B8%E7%BA%8C%E7%99%BC%E5%B1%95%E6%8C%87%E6%A8%99-2026%E5%B9%B4%E6%9C%80%E6%96%B0%E7%AD%89%E7%B4%9A%E7%99%BC%E5%B8%83/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+84,https://csr.cw.com.tw/survey/2026ESG/guidebook.pdf,403,,未能確認,保留（記錄為擋爬蟲／403）,天下伺服器擋爬蟲且 WebFetch 逾時，未能確認內容
+85,https://web.cw.com.tw/aboutus/index.html,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，1996、2007 等沿革相符
+86,https://www.cw.com.tw/index.php/article/5143058,403,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，2026 天下永續公民獎評選說明相符
+87,https://www.gvm.com.tw/activity/2026_ESGonline,202,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，2026 第 22 屆說明會頁面相符
+88,https://event.gvm.com.tw/esg/2026ESG_presentation.pdf,404,,否（404）,替換為 https://event.gvm.com.tw/esg/2027ESG_presentation.pdf（HTTP 200，已確認為 2027 第 23 屆徵件說明會簡報）,原 2026 版簡報網址已失效
+89,https://www.gvm.com.tw/article/129957,202,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，142 家、239 件、86 家入圍等數字相符
+90,https://event.gvm.com.tw/esg/award.html,202,,是,保留（記錄為擋爬蟲／403）,WebFetch 開啟，歷屆榜單頁存在（榜單為動態載入）
+91,https://tcsaward.org.tw/tw/news/index/607,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+92,https://tcsaward.org.tw/tw/about/selection/TCSA,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+93,https://tcsaward.org.tw/uploads/images/2026_tcsa.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+94,https://tcsaward.org.tw/tw/award/award_by_award_item,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+95,https://www.crif.com/media/0qlcn3ai/crif-csr-report-2021-english-version.pdf,404,,否,刪除網址，原句標「未查證」,CRIF 2021 報告 PDF 404
+96,https://events.taiwantrade.com/CRIF114/CMS/CRIF114,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+97,https://www.credit.com.tw/NEWcreditonline/Synesgy/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+98,https://www.synesgy.com/synesgy-the-esg-platform/what-we-do/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+99,https://www.esgbureau.com.tw/esg-database/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+100,https://www.tcc-corp.com/pdf/ESG-BUREAU.pdf,200,,是,保留,PDF 為圖像，轉圖檢視為 Taiwan ESG Bureau 證書，有效期 2024/11–2025/11，相符
+101,https://taiwanindex.com.tw/indexes/F4GTTE,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+102,https://cms-carrier.ntpu.edu.tw/uploads/291_8d960fc3e5.pdf,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+103,https://cms-carrier.ntpu.edu.tw/uploads/109_3_4_76219455a1.pdf,404,,否,刪除網址，原句標「未查證」,臺北大學 SEED PDF 404
+104,https://irengage.taiwanindex.com.tw/ESGData/Rating,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+105,https://doi.org/10.3390/su10040897,403,https://www.mdpi.com/2071-1050/10/4/897,是,保留（記錄為擋爬蟲／403）,DOI 指向 MDPI 同篇；Crossref 逐欄相符
+106,https://doi.org/10.3390/admsci11030089,403,https://www.mdpi.com/2076-3387/11/3/89,是,保留（記錄為擋爬蟲／403）,DOI 指向 MDPI 同篇；Crossref 逐欄相符
+107,https://citeseerx.ist.psu.edu/document?doi=6149f7a2dc03114102d297c2100b359efcff524d&repid=rep1&type=pdf,301,https://web.archive.org/web/20251230112235/https://citeseerx.ist.psu.edu//document?doi=6149f7a2dc03114102d297c2100b359efcff524d&repid=rep1&type=pdf,否,刪除網址（已有 DOI 與 RePEc 頁）,轉址至 web.archive.org，無法直接開啟
+108,https://ideas.repec.org/a/eee/aosoci/v33y2008i4-5p303-327.html,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+109,https://doi.org/10.1016/j.aos.2007.05.003,200,https://linkinghub.elsevier.com/retrieve/pii/S0361368207000451,是,保留,DOI 轉址 Elsevier；Crossref 逐欄相符
+110,https://ntut.elsevierpure.com/en/publications/an-evaluation-framework-for-scoring-corporate-sustainability-repo/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+111,https://doi.org/10.1089/ees.2010.0282,403,https://journals.sagepub.com/doi/full/10.1089/ees.2010.0282,是,保留（記錄為擋爬蟲／403）,出版者擋爬蟲；Crossref 逐欄相符
+112,https://ora.ox.ac.uk/objects/uuid%3Ab2d17f2f-7099-41e6-b7b3-91d37f313828/files/sn009w3991,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+113,https://www.globalreporting.org/publications/documents/english/gri-305-emissions-2016/,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+114,https://doi.org/10.1016/j.frl.2022.102776,200,https://linkinghub.elsevier.com/retrieve/pii/S1544612322000897,是,保留,DOI 轉址 Elsevier；Crossref 逐欄相符
+115,https://www.researchgate.net/publication/360800553_Aggregate_Confusion_The_Divergence_of_ESG_Rating,403,,未能確認,保留（記錄為擋爬蟲／403）,ResearchGate 擋爬蟲，未能開啟全文
+116,https://doi.org/10.1093/rof/rfac033,403,https://academic.oup.com/rof/article/26/6/1315/6590670,是,保留（記錄為擋爬蟲／403）,出版者擋爬蟲；Crossref 逐欄相符
+117,https://www.cht.com.tw/home/cht/-/media/web/pdf/sustainability/csr-report-download/csr/2023/2023esgc20240919.pdf?sc_lang=zh-tw,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+118,https://www.cht.com.tw/home/cht/-/media/web/pdf/sustainability/csr-report-download/csr/2024/2024-esg-report-ch.pdf?sc_lang=zh-tw,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+119,https://wwwc.twse.com.tw/market_insights/zh/detail/8a8216d69734b5c301975d2644f500ef,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+120,https://twse-regulation.twse.com.tw/m/LawContent.aspx?FID=FL075209,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+121,https://cgc.twse.com.tw/corpSocialResponsibility/chPage?max=30&offset=0,200,,是,保留,HTTP 200；以頁面標題與引用句關鍵年份、名稱比對相符
+122,https://event.gvm.com.tw/esg/2027ESG_presentation.pdf,200,,是,新增（替換第 88 筆）,2027 第 23 屆遠見 ESG 企業永續獎徵件說明會簡報

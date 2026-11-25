@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>遠見 ESG 企業永續獎怎麼評</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#22262b; --muted:#5d6670; --line:#dcd8cf;
+  --accent:#0f5c63; --accent-soft:#e2eeee; --warn:#8a4b0a; --warn-soft:#fbf0de;
+  --g:#3f5f8a; --e:#3c7a52; --s:#a8652a; --h:#7a5a8c;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16191c; --card:#1e2226; --ink:#e6e8ea; --muted:#9aa4ad; --line:#333a41;
+    --accent:#6fc3c9; --accent-soft:#1d3336; --warn:#e8b56a; --warn-soft:#33291a;
+    --g:#7fa3d6; --e:#79c093; --s:#dba06a; --h:#b79acb;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+  font-size:16px;line-height:1.8}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:36px}
+nav{position:sticky;top:0;align-self:start;padding:28px 0;font-size:14px;max-height:100vh;overflow:auto}
+nav .t{font-weight:700;margin-bottom:10px;color:var(--muted);letter-spacing:.05em}
+nav a{display:block;padding:5px 10px;border-left:2px solid var(--line);color:var(--ink);text-decoration:none}
+nav a:hover{border-left-color:var(--accent);color:var(--accent)}
+main{padding:28px 0 80px;min-width:0}
+header h1{font-size:30px;line-height:1.35;margin:0 0 6px}
+header p.sub{color:var(--muted);margin:0 0 20px;font-size:14px}
+h2{font-size:22px;margin:52px 0 12px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:26px 0 8px}
+p{margin:0 0 14px;max-width:46em}
+.lead{font-size:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:14px 0}
+.file{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--card);
+  border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.file:hover{border-color:var(--accent)}
+.file .k{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.file .n{font-weight:700;line-height:1.45}
+.file .d{font-size:14px;color:var(--muted);line-height:1.6}
+.file .p{font-size:12px;color:var(--muted);word-break:break-all;margin-top:auto}
+.scroll{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card)}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;line-height:1.6}
+th{background:var(--accent-soft);white-space:nowrap}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:12px 0 6px;font-size:13px;font-weight:700;color:#fff}
+.bar div{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+@media (prefers-color-scheme: dark){.bar{color:#16191c}}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
+.cols .card h4{margin:0 0 6px;font-size:15px}
+.cols .card p{font-size:14px;margin:0;color:var(--muted);line-height:1.7}
+.note{background:var(--warn-soft);border-left:4px solid var(--warn);border-radius:6px;padding:12px 16px;margin:12px 0;max-width:48em}
+.note b{color:var(--warn)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;font-size:14px}
+.flow span{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.flow i{align-self:center;color:var(--muted);font-style:normal}
+small,.sm{font-size:13px;color:var(--muted)}
+@media (max-width:820px){
+  .wrap{grid-template-columns:1fr;gap:0}
+  nav{position:static;padding:16px 0 0;max-height:none}
+  nav a{display:inline-block;border-left:0;border-bottom:2px solid var(--line);margin:0 4px 6px 0;padding:2px 6px}
+  header h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="t">目錄</div>
+  <a href="#method">這個獎怎麼評</a>
+  <a href="#score">評什麼、怎麼配分</a>
+  <a href="#history">歷屆規模與名單</a>
+  <a href="#read">得獎名單該怎麼讀</a>
+  <a href="#wide">其他 ESG 評比</a>
+  <a href="#caveat">使用資料前要留意</a>
+  <a href="#files">檔案下載</a>
+</nav>
+<main>
+<header>
+  <h1>遠見 ESG 企業永續獎怎麼評：評選方式、歷屆名單，以及它在各種 ESG 評比中的位置</h1>
+  <p class="sub">資料截止日：2026 年 11 月 24 日。依據為《遠見雜誌》官方徵件說明會簡報、官方得獎與入圍頁面及相關報導。</p>
+  <p class="lead">看到一家公司宣稱「榮獲 ESG 獎」時，先要知道那個獎量的是什麼。《遠見雜誌》ESG 企業永續獎是台灣歷史最久的同類獎項之一，它的運作方式是：企業付費報名、在線上填問卷，評審先做書面審查、再做面審，最後以共識選出得獎者。官方公布了各面向的配分，但沒有公布逐題的給分規則，也沒有說明題目與 GRI 等揭露準則的對應。所以它是一場競賽，而不是對全體上市櫃公司的普查式評分；得獎是一種肯定，沒得獎卻多半只代表沒有報名。</p>
+  <p>本頁先說明遠見獎的評選流程與配分，再整理歷屆報名、入圍與得獎的規模，接著把它放回國際與台灣約三十種 ESG 評比裡，看它屬於哪一類。<a href="#files">頁尾</a>提供官方簡報、歷屆名單與兩份評比機構研究報告，都可以下載。</p>
+</header>
+
+<h2 id="method">這個獎怎麼評</h2>
+<p>獎項 2005 年創辦，原名企業社會責任獎，2023 年第 19 屆改稱 ESG 企業永續獎，2026 年是第 22 屆。第 23 屆正在徵件，2027 年 1 月 8 日截止。以下流程取自 2027 年第 23 屆的官方徵件說明會簡報。</p>
+<div class="flow">
+  <span>企業自行報名並繳費<br><small>每件 15,750 元</small></span><i>→</i>
+  <span>線上系統填問卷<br><small>可附圖表、PDF、影片</small></span><i>→</i>
+  <span>初選：書面審查<br><small>選出入圍者</small></span><i>→</i>
+  <span>決選：面審 15 分鐘<br><small>簡報 8 分、問答 7 分</small></span><i>→</i>
+  <span>評審團共識決議<br><small>只公布得獎者</small></span>
+</div>
+<p>有三個特徵決定了它的性質。第一，受評的是自己報名的企業，而且報名綜合績效要近兩年沒有稅後虧損，所以參賽者本來就是有意願也有餘力的公司，不是全體上市櫃公司。第二，評分材料是企業自己填的問卷與佐證，不是公開的永續報告書，主辦單位對參賽資料還負保密義務，外人無從複查。第三，最後是評審團共識決議選出得獎者，不是把分數加總排名；官方只公布入圍與得獎名單，不公布分數，也不公布沒入圍的報名者。</p>
+<p>制度並非一開始就是這樣。2005 年第 1 屆是問卷評鑑制，參考德國 OEKOM 的評分權重，把企業填答結果加權計分、取前 50 名再查核；後來才改成現在的報名制加評審決議。</p>
+
+<h2 id="score">評什麼、怎麼配分</h2>
+<p>獎項分成兩大類，一類評整家公司，一類評單一專案。兩類的意義差很多，讀得獎名單時要先分清楚。</p>
+
+<h3>第一大類：綜合績效（評整家公司）</h3>
+<p>依產業分組，2027 年列出傳統產業、電子科技業、金融保險業、服務業、零售服務業、電信暨資通訊業與外商。問卷共 36 個細項，四個部分的配分如下。</p>
+<div class="bar">
+  <div style="width:30%;background:var(--g)">治理 30%</div>
+  <div style="width:35%;background:var(--e)">環境 35%</div>
+  <div style="width:27%;background:var(--s)">社會 27%</div>
+  <div style="width:8%;background:var(--h)">亮點 8%</div>
+</div>
+<div class="cols">
+  <div class="card"><h4>治理面・10 項</h4><p>財務績效、永續治理組織、董事會運作、內控機制與準則、風險管理、資訊揭露、重大性議題與營運持續管理、資訊安全與數位治理、法規遵循、供應鏈管理</p></div>
+  <div class="card"><h4>環境面・14 項</h4><p>環境管理系統、原物料與採購、低碳營運、溫室氣體盤查、碳定價機制與因應、淨零目標、再生能源、氣候治理與倡議、水資源管理、廢棄物管理、環境績效管考、資源生產力、生物多樣性、綠色金融／綠色消費</p></div>
+  <div class="card"><h4>社會面・8 項</h4><p>連結 SDG、社會參與、人才培育與留任、員工關懷與勞資關係、待遇與福祉、職場健康與安全、性別平權與多元包容、客戶服務與權益</p></div>
+  <div class="card"><h4>ESG 亮點・4 項</h4><p>國內外傑出表現、公司治理亮點、環境績效亮點、社會績效亮點</p></div>
+</div>
+<p>值得注意的是，「資訊揭露」只是治理面十項中的一項，其餘多數細項問的是制度與成果。也就是說，遠見沒有把「有沒有揭露」和「做得好不好」分開評。細項之下每題滿分多少、怎麼分級給分，官方沒有公開；整份 87 頁簡報也沒有提到 GRI、SASB 或其他揭露準則，自然也沒有細項與準則的對照表。</p>
+
+<h3>第二大類：傑出方案（評單一專案）</h3>
+<p>2027 年分七組：人才福祉、低碳營運、環境友善、教育推廣、公益推動、樂齡友善、社會創新。四個構面的配分是議題關聯度與重大性 20%、企劃與執行力 25%、成果與影響力 30%、外部連結與未來發展性 25%。方案須在 2026 年內執行過，一家公司可以報多件。因為評的是一個專案，某公司拿到方案獎並不表示它整體的 ESG 表現好。</p>
+
+<h2 id="history">歷屆規模與名單</h2>
+<p>下表整理自官方得獎頁、入圍頁與報導。空白處是公開資料查不到，不是零。最右兩欄是本頁提供下載的<a href="#files">名單檔</a>實際收錄的筆數，可以對照官方說法看出哪些年度不完整。</p>
+<div class="scroll">
+<table>
+<tr><th>年</th><th>屆</th><th>報名家數</th><th>報名件數</th><th>入圍</th><th>得獎情形（官方說法）</th><th>名單檔得獎筆數</th><th>名單檔入圍筆數</th></tr>
+<tr><td>2005</td><td>1</td><td class="num">352（問卷填答）</td><td></td><td>25 家</td><td>7 家</td><td class="num">7</td><td class="num">25</td></tr>
+<tr><td>2006–2014</td><td>2–10</td><td></td><td></td><td></td><td>未查得完整名單</td><td class="num">0</td><td></td></tr>
+<tr><td>2015</td><td>11</td><td>上百家</td><td class="num">245</td><td></td><td>19 個獎項</td><td class="num">19</td><td></td></tr>
+<tr><td>2016</td><td>12</td><td class="num">131</td><td class="num">282</td><td>47 案進第二輪</td><td>26 個得獎</td><td class="num">5（不完整）</td><td></td></tr>
+<tr><td>2017</td><td>13</td><td class="num">118</td><td class="num">248</td><td></td><td>25 件</td><td class="num">25</td><td></td></tr>
+<tr><td>2018</td><td>14</td><td class="num">138</td><td class="num">219</td><td></td><td>33 件（可能含社企之星）</td><td class="num">25</td><td></td></tr>
+<tr><td>2019</td><td>15</td><td></td><td></td><td></td><td></td><td class="num">28</td><td></td></tr>
+<tr><td>2020</td><td>16</td><td></td><td class="num">188</td><td></td><td>28 座，勝出率 14.8%</td><td class="num">35</td><td></td></tr>
+<tr><td>2021</td><td>17</td><td class="num">131</td><td class="num">236</td><td></td><td>40 座，16.9%</td><td class="num">42</td><td class="num">33</td></tr>
+<tr><td>2022</td><td>18</td><td class="num">123</td><td class="num">228</td><td></td><td>46 項</td><td class="num">48</td><td class="num">76</td></tr>
+<tr><td>2023</td><td>19</td><td></td><td class="num">236</td><td></td><td>46 座，19.5%</td><td class="num">47</td><td class="num">83</td></tr>
+<tr><td>2024</td><td>20</td><td class="num">192</td><td class="num">319</td><td>116 件（36.4%）</td><td>46 家 64 獎，20.1%</td><td class="num">64</td><td class="num">116</td></tr>
+<tr><td>2025</td><td>21</td><td class="num">150</td><td class="num">231</td><td>83 家 116 件（50.2%）</td><td>56 家 75 件，32.5%</td><td class="num">77</td><td class="num">116</td></tr>
+<tr><td>2026</td><td>22</td><td class="num">142</td><td class="num">239</td><td>86 家 129 件（54%）</td><td>57 家 81 件，33.9%</td><td class="num">81</td><td class="num">129</td></tr>
+<tr><td>2027</td><td>23</td><td colspan="6">徵件中，尚未頒獎</td></tr>
+</table>
+</div>
+<p>名單檔的得獎紀錄涉及 227 個公司名稱（同一家公司不同年份可能以全稱或簡稱出現，未合併）。在已蒐集的年度裡出現次數最多的是台灣大哥大 17 次、信義房屋與中華電信各 16 次、國泰金控與遠東新世紀各 15 次、統一超商與玉山金控各 14 次，其次是台灣水泥、全家便利商店各 11 次與台達電子 10 次。由於 2006 到 2014 年缺資料、2016 年只有 5 筆，這個次數不能當成 22 屆的完整統計。</p>
+
+<h2 id="read">得獎名單該怎麼讀</h2>
+<p>從上面的流程與規模，可以整理出四個讀名單時容易誤會的地方。</p>
+<p>其一，每屆報名的只有一百多家，而台灣上市櫃公司有一千八百家左右，所以「沒得獎」絕大多數時候只是「沒報名」，不能解讀成表現差。官方又不公布未入圍的報名者，因此外界連「報名了但沒入圍」和「根本沒報名」都分不出來。</p>
+<p>其二，不同年度的「得獎」份量不一樣。獲獎率在 2024 年以前約一到兩成，2025 年起跳到三成以上，原因是那年起在首獎與楷模獎之外增設績優獎，2024 年起各組又增設中小企業獎。獎變多了，跨年比較時要把這點算進去。</p>
+<p>其三，常勝公司在某些年度「消失」不一定是退步。連續三年拿綜合績效首獎的公司會列入年度榮譽榜，其後三屆免參加綜合績效競賽。</p>
+<p>其四，綜合績效獎與傑出方案獎不能混為一談。前者評整家公司，後者只評一個專案；一家公司靠一個公益專案拿到方案獎，和它的整體治理、環境與社會表現是兩回事。</p>
+<p>把這幾點合起來看，遠見的得獎紀錄適合當作參照，例如觀察某種評分下的高分公司是否也常得獎；但它和其他評比的受評母體、資料來源與評分機制都不同，兩者結果不一致時，並不構成任何一方有誤的證據。</p>
+
+<h2 id="wide">其他 ESG 評比：遠見獎屬於哪一類</h2>
+<p>市面上的 ESG 評比性質差異很大。本頁提供的兩份研究報告各自盤點了約三十種做法，包括國際商業評等（MSCI、Sustainalytics、S&amp;P CSA、LSEG、Bloomberg、ISS、FTSE Russell 等）、問卷與非營利標竿（CDP、EcoVadis、WBA）、台灣的評鑑與獎項（證交所 ESG 評鑑、TEJ TESG、TIP 台灣永續評鑑、天下、遠見、TCSA、CRIF），以及學術上的揭露指數研究，並逐一說明資料從哪裡來、是否逐題計分、與 GRI 的關係、能取得什麼跨年資料。兩份報告分別以不同的 AI 研究工具彙整，引用的網址都逐筆驗證過，驗證紀錄一併提供。</p>
+<p>兩份報告在遠見的定位上結論一致：遠見、天下、TCSA 同屬報名制的民間獎項，衡量的是標竿實踐與專案成果，樣本有明顯的自我選擇，外部無法重現分數，跨年只有上榜名單而沒有連續的分數。如果想要的是「拿公開的永續報告書、逐項核對 GRI 揭露」這種外人可以複查的評分，最接近的做法不是任何一個獎，而是學界的 GRI 揭露指數研究與台灣的 TIP 台灣永續評鑑（原臺北大學 SEED）。</p>
+<div class="cols">
+  <div class="card"><h4>Codex 版報告的重點</h4><p>寫法保守，查不到的就標「未查證」。它指出逐項核對 GRI 的先例有 Tarquinio 等人（2018）對 134 家公司的單年研究，以及 Posadas 與 Tarquinio（2021）對 66 家公司跨年、跨準則版本的比較；台灣有 Hu 等人（2011）以 16 份報告示範的加權評分。另以中華電信 GRI 305-1 兩年的數字示範：兩年都「有揭露」，排放量卻上升，所以揭露分數與績效值應該分開看。</p></div>
+  <div class="card"><h4>Gemini 版報告的重點</h4><p>涵蓋面較廣，附三張圖。第五節討論以 GRI 逐項核對報告書這類做法的五個限制：揭露完整不等於實質績效；2025 年強制編製範圍擴大使樣本組成前後不同；只用有或無計分會讓大公司集體接近滿分；跨產業比較時分母怎麼定；GRI 2016 版到 2021 版改版造成的斷層。並提出分層給分、納入確信層級與裁罰紀錄、建立版本對照表等對應建議。</p></div>
+</div>
+<p>網址驗證的結果如下。Codex 版 122 筆中 109 筆與引用相符，查不到或已失效的 8 筆刪除網址並在原句標「未查證」。Gemini 版列了 228 筆參考來源，其中 101 筆沒有被內文引用；被引用的 127 筆裡，71 筆支持、23 筆部分支持、3 筆對不上、30 筆因網站擋爬蟲或動態載入而無法判讀。</p>
+
+<h2 id="caveat">使用這些資料前要留意</h2>
+<p>各檔之間、以及各檔與官方簡報之間，有幾處不一致或容易誤用的地方，引用前請先看一下。</p>
+<div class="note"><b>配分與細項只代表 2027 年第 23 屆。</b>可取得的官方文件只有這一屆的簡報，先前各屆的配分是否相同沒有查證，不宜往前套用到歷屆得獎名單。</div>
+<div class="note"><b>名單檔有缺口。</b>2006 到 2014 年沒有資料，2016 年只收到 5 筆（官方說有 26 個得獎）。每筆都附來源網址，查不到的年度留空、沒有補猜。公司名稱照原文抄錄，同一家公司有全稱與簡稱並存，要和其他資料配對前須先統一名稱或補上股票代號。</div>
+<div class="note"><b>Gemini 版對遠見的描述有幾句查無官方依據。</b>它說遠見的評選標準「結合 DJSI、CDP、GRI、TNFD、SASB 理念」，但 87 頁官方簡報的文字層裡完全沒有出現這些名稱（無文字層的頁面是得獎統計與雜誌報導翻拍）。它寫的綜合績效六組、傑出方案八組是較早屆次的分法，2027 年簡報是七個產業組別（含外商）與七個方案組。遠見的事實請以官方簡報為準。</div>
+<div class="note"><b>評選方法摘要的組別名稱混了舊屆。</b>它列的傑出方案組別還有「職場共融、人才發展」，2027 年已合併為「人才福祉」；綜合績效分組漏了 2027 年簡報列出的「電信暨資通訊業」。配分與 36 細項則與簡報第 18、19 頁一致。</div>
+<div class="note"><b>兩份研究報告的查證深度有限。</b>網址驗證是自動比對關鍵詞與數字，不是逐句人工核對；Gemini 版的期刊文獻欄位未逐欄核對，Codex 版標「未查證」的地方就是公開資料不足。要寫進正式文稿的文獻與數字，請回到原始來源再確認一次。</div>
+
+<h2 id="files">檔案下載</h2>
+<p>點卡片即可開啟或下載。評選方法摘要與兩份研究報告是網頁，PDF 會直接在瀏覽器開啟，Excel 與 CSV 會下載後交給電腦上的對應程式。</p>
+<div class="files">
+  <a class="file" href="遠見2027ESG獎徵件說明會簡報_2027ESG_presentation.pdf">
+    <span class="k">官方原始資料・PDF・87 頁</span>
+    <span class="n">2027 第 23 屆徵件說明會簡報</span>
+    <span class="d">《遠見雜誌》官方文件。第 18 頁是綜合績效 36 細項與配分，第 19 頁是傑出方案四構面配分，第 46 頁是評選流程。</span>
+    <span class="p">遠見2027ESG獎徵件說明會簡報_2027ESG_presentation.pdf</span>
+  </a>
+  <a class="file" href="遠見ESG企業永續獎評選方法_20261124.html">
+    <span class="k">評選方法摘要・網頁</span>
+    <span class="n">評選方法摘要</span>
+    <span class="d">把官方簡報、官網與報導中關於性質、流程、資料來源、指標架構與配分的說法整理成幾頁文字，附來源網址。</span>
+    <span class="p">遠見ESG企業永續獎評選方法_20261124.html</span>
+  </a>
+  <a class="file" href="遠見ESG企業永續獎_歷屆得獎與入圍名單_20261124.xlsx">
+    <span class="k">歷屆名單・Excel・四個工作表</span>
+    <span class="n">歷屆得獎與入圍名單</span>
+    <span class="d">得獎 503 筆、入圍 578 筆，每筆附來源網址。「屆數」表是各屆報名與入圍規模，「說明」表交代缺口與查證情形。</span>
+    <span class="p">遠見ESG企業永續獎_歷屆得獎與入圍名單_20261124.xlsx</span>
+  </a>
+  <a class="file" href="延伸_ESG評比機構深度研究/ESG評比機構深度研究_Codex_20261124.html">
+    <span class="k">評比機構研究・網頁</span>
+    <span class="n">ESG 評比機構深度研究（Codex 版）</span>
+    <span class="d">國際 15、台灣 8、學術 6 種做法逐一說明，寫法保守，查不到的就標「未查證」。2.4 節談遠見。</span>
+    <span class="p">延伸_ESG評比機構深度研究/ESG評比機構深度研究_Codex_20261124.html</span>
+  </a>
+  <a class="file" href="延伸_ESG評比機構深度研究/ESG評比機構深度研究_Gemini_20261124.html">
+    <span class="k">評比機構研究・網頁・含 3 張圖</span>
+    <span class="n">ESG 評比機構深度研究（Gemini 版）</span>
+    <span class="d">涵蓋面較廣，含評比體系演進時間軸與評等分歧成因的圖。第五節討論以 GRI 逐項核對報告書的限制與建議。</span>
+    <span class="p">延伸_ESG評比機構深度研究/ESG評比機構深度研究_Gemini_20261124.html</span>
+  </a>
+  <a class="file" href="延伸_ESG評比機構深度研究/URL驗證紀錄_Codex_20261124.csv">
+    <span class="k">查證紀錄・CSV・122 筆</span>
+    <span class="n">Codex 版的網址驗證紀錄</span>
+    <span class="d">每個引用網址的連線狀態、是否與引用相符、最後如何處理（保留、刪除、替換）。</span>
+    <span class="p">延伸_ESG評比機構深度研究/URL驗證紀錄_Codex_20261124.csv</span>
+  </a>
+  <a class="file" href="延伸_ESG評比機構深度研究/URL驗證紀錄_Gemini_20261124.csv">
+    <span class="k">查證紀錄・CSV・228 筆</span>
+    <span class="n">Gemini 版的網址驗證紀錄</span>
+    <span class="d">每筆參考來源的連線狀態、頁面標題、內容是否支持引用它的那句話。</span>
+    <span class="p">延伸_ESG評比機構深度研究/URL驗證紀錄_Gemini_20261124.csv</span>
+  </a>
+</div>
+<p class="sm">官方網站：<a href="https://event.gvm.com.tw/esg/">event.gvm.com.tw/esg</a>。本頁內容整理自上列檔案；遠見獎的制度每屆略有調整，最新規定請以官方公告為準。</p>
+</main>
+</div>
+</body>
+</html>
